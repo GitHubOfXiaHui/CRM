@@ -6,14 +6,16 @@
 <hibernate-mapping>
 	<class name="com.airwxtx.user.entity.User" table="user">
 		<!-- 映射ID -->
-		<id name="id" column="id" type="integer">
+		<id name="id" column="用户编号" type="integer">
 			<!-- 主键采用MySQL的自增长策略 -->
 			<generator class="identity" />
 		</id>
+		
 		<!-- 映射普通属性 -->
-		<property name="username" />
-		<property name="password" />
-		<property name="role" />
+		<property name="username" column="用户名" unique="true" />
+		<property name="password" column="密码" />
+		<property name="role" column="角色" />
+		
 		<!-- 映射关联属性 -->
 	</class>
 </hibernate-mapping>

@@ -7,7 +7,7 @@
 	<package name="login" extends="struts-default">
 		<action name="*Action" class="loginAction"
 			method="{1}">
-			<result name="login">/WEB-INF/pages/login/login.jsp</result>
+			<result name="input">/WEB-INF/pages/login/login.jsp</result>
 			<result>/WEB-INF/pages/home/index.jsp</result>
 			<allowed-methods>preLogin,login</allowed-methods>
 		</action>

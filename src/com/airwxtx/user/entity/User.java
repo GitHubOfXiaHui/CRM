@@ -1,5 +1,10 @@
 package com.airwxtx.user.entity;
 
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
+
+import com.airwxtx.utils.MD5Encoder;
+
 public class User implements Role{
 	// ÓÃ»§ID
 	private Integer id;
@@ -31,7 +36,11 @@ public class User implements Role{
 	}
 	
 	public void setPassword(String password) {
-		this.password = password;
+		try {
+			this.password = MD5Encoder.encode(password);
+		} catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
+			this.password = "";
+		}
 	}
 	
 	public String getRole() {
