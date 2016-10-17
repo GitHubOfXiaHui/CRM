@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-<script type="text/javascript" src="../js/jquery-3.1.1.js"></script>
+<script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
 <script type="text/javascript">
 	// 点击设置按钮显示/隐藏设置菜单
 	$(function() {
