@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript" src="jquery-3.1.1.js"></script>
+<script type="text/javascript">
+$(function(){
+  var $li = $("#header li");
+  $li.hover(function(){
+    $(this).addClass("highlight");
+  }, function(){
+    $(this).removeClass("highlight");
+  });
+});
+
+$(function(){
+  $("#settings").click(function(){
+    $(this).next().toggleClass("hidden");
+  });
+});
+</script>
+
+<link href="home.css" rel="stylesheet" type="text/css">
+<link href="home-header.css" rel="stylesheet" type="text/css">
+<link href="home-main.css" rel="stylesheet" type="text/css">
+<link href="home-footer.css" rel="stylesheet" type="text/css">
+
+<title>登陆</title>
+</head>
+<body>
+	<div id="wrapper">
+    <div id="header">
+      <div>AIRWXTX</div>
+      <div>
+        <button id="settings">设置</button>
+        <ul class="hidden">
+          <li><a href="http://www.baidu.com">个人信息</a></li>
+          <li><a href="http://www.baidu.com">修改密码</a></li>
+          <li><a href="http://www.baidu.com">安全退出</a></li>
+        </ul>
+      </div>
+    </div>
+		<div id="main"></div>
+    <div id="footer">&copy;2016&nbsp;<a href="http://www.airwxtx.com">airwxtx</a></div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,55 @@
+#header {
+  position: relative;
+  height: 40px;
+  background-color: #dadada;
+}
+
+#header div:first-child {
+  position: absolute;
+  bottom: 5px;
+  left: 5px;
+  font-size: 25px;
+}
+
+#header div:last-child {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+
+#header button {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 60px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+#header ul {
+  position: absolute;
+  top: -16px;
+  right: 0;
+  width: 85px;
+  padding: 0;
+  font-size: 16px;
+  background-color: white;
+  border-right: 1px solid #dadada;
+  border-bottom: 1px solid #dadada;
+  border-left: 1px solid #dadada;
+  list-style-type: none;
+}
+
+#header li {
+  padding: 5px 10px;
+}
+
+#header li.highlight {
+  background-color: #dadada;
+}
+
+#header a {
+  color: black;
+  text-decoration: none;
+}
