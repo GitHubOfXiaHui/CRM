@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+	"http://struts.apache.org/dtds/struts-2.5.dtd">
+
+<struts>
+	<package name="settings" namespace="/settings" extends="airwxtx-default">
+		<action name="*Action" class="settingsAction" method="{1}">
+			<result name="profile">/WEB-INF/pages/settings/profile.jsp</result>
+			<result name="changePassword">/WEB-INF/pages/settings/changePassword.jsp
+			</result>
+			<result name="exit">/WEB-INF/pages/settings/exit.jsp</result>
+			<allowed-methods>profile</allowed-methods>
+		</action>
+	</package>
+</struts>

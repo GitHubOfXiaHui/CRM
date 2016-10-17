@@ -4,9 +4,8 @@
 	"http://struts.apache.org/dtds/struts-2.5.dtd">
 
 <struts>
-	<package name="login" extends="struts-default">
-		<action name="*Action" class="loginAction"
-			method="{1}">
+	<package name="login" namespace="/login" extends="airwxtx-default">
+		<action name="*Action" class="loginAction" method="{1}">
 			<result name="input">/WEB-INF/pages/login/login.jsp</result>
 			<result>/WEB-INF/pages/home/index.jsp</result>
 			<allowed-methods>preLogin,login</allowed-methods>

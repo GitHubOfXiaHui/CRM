@@ -7,8 +7,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-<script type="text/javascript" src="js/jquery-3.1.1.js"></script>
-<script type="text/javascript" src="js/jQuery.md5.js"></script>
+<script type="text/javascript" src="../js/jquery-3.1.1.js"></script>
+<script type="text/javascript" src="../js/jQuery.md5.js"></script>
 <script type="text/javascript">
 	//表单提交时对密码进行md5加密
 	$(function() {
@@ -31,7 +31,7 @@
 	});
 </script>
 
-<link href="css/login.css" rel="stylesheet" type="text/css">
+<link href="../css/login.css" rel="stylesheet" type="text/css">
 <s:head />
 <title>登陆</title>
 </head>

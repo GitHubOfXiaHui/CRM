@@ -17,5 +17,18 @@
 	<constant name="struts.objectFactory"
 		value="org.apache.struts2.spring.StrutsSpringObjectFactory" />
 
+	<package name="airwxtx-default" abstract="true" extends="struts-default">
+		<!-- 定义拦截器/拦截器栈 -->
+		<interceptors>
+			<!-- 拦截器栈 -->
+			<interceptor-stack name="airwxtxDefaultStack">
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
+		</interceptors>
+		<!-- 配置默认拦截器栈 -->
+		<default-interceptor-ref name="airwxtxDefaultStack" />
+	</package>
+
 	<include file="com/airwxtx/login/action/login.action.xml" />
+	<include file="com/airwxtx/settings/action/settings.action.xml" />
 </struts>
