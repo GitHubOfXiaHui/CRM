@@ -42,6 +42,7 @@
 		<property name="mappingResources">
 			<list>
 				<value>com/airwxtx/user/entity/User.hbm.xml</value>
+				<value>com/airwxtx/client/entity/Client.hbm.xml</value>
 			</list>
 		</property>
 	</bean>

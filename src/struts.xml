@@ -31,4 +31,5 @@
 
 	<include file="com/airwxtx/login/action/login.action.xml" />
 	<include file="com/airwxtx/settings/action/settings.action.xml" />
+	<include file="com/airwxtx/client/action/client.action.xml" />
 </struts>
