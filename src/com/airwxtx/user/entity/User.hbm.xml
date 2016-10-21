@@ -15,7 +15,7 @@
 		<property name="username" column="用户名" unique="true" />
 		<property name="password" column="密码" />
 		<property name="role" column="角色" />
-		
+		<property name="authority" column="权限" />
 		<!-- 映射关联属性 -->
 	</class>
 </hibernate-mapping>

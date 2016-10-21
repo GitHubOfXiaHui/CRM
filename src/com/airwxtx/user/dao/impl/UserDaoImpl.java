@@ -19,4 +19,22 @@ public class UserDaoImpl extends BaseDaoSupport implements UserDao {
 		return (List<User>) this.getHibernateTemplate().findByNamedParam(hql, "username", username);
 	}
 
+	@Override
+	public Integer saveUser(User user) {
+		// TODO Auto-generated method stub
+		return (Integer) this.getHibernateTemplate().save(user);
+	}
+
+	@Override
+	public void updateUser(User user) {
+		// TODO Auto-generated method stub
+		this.getHibernateTemplate().update(user);
+	}
+
+	@Override
+	public User userDetials(Integer userId) {
+		// TODO Auto-generated method stub
+		return this.getHibernateTemplate().load(User.class, userId);
+	}
+
 }

@@ -9,6 +9,16 @@ public class User implements Role {
 	private String password;
 	// 用户身份
 	private String role;
+	//权限 默认是没有任何权限
+	private Long authority = 0l;
+
+	public Long getAuthority() {
+		return authority;
+	}
+
+	public void setAuthority(Long authority) {
+		this.authority = authority;
+	}
 
 	public Integer getId() {
 		return id;
