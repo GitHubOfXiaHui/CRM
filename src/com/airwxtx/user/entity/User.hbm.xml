@@ -6,16 +6,21 @@
 <hibernate-mapping>
 	<class name="com.airwxtx.user.entity.User" table="用户表">
 		<!-- 映射ID -->
-		<id name="id" column="用户编号" type="integer">
+		<id name="id" column="用户ID" type="integer">
 			<!-- 主键采用MySQL的自增长策略 -->
 			<generator class="identity" />
 		</id>
-		
+
 		<!-- 映射普通属性 -->
 		<property name="username" column="用户名" unique="true" />
 		<property name="password" column="密码" />
 		<property name="role" column="角色" />
 		<property name="authority" column="权限" />
+
 		<!-- 映射关联属性 -->
+		<set name="recodes" inverse="true">
+			<key column="操作员" />
+			<one-to-many class="com.airwxtx.recode.entity.Recode" />
+		</set>
 	</class>
 </hibernate-mapping>

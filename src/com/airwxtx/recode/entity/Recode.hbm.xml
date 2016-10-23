@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.airwxtx.recode.entity.Recode" table="消费记录表">
+		<!-- 映射ID -->
+		<id name="id" column="消费记录ID" type="integer">
+			<!-- 主键采用MySQL的自增长策略 -->
+			<generator class="identity" />
+		</id>
+
+		<!-- 映射普通属性 -->
+		<property name="fltNo" column="航班号" />
+		<property name="origin" column="航程起点" />
+		<property name="destination" column="航程终点" />
+		<property name="flightDate" column="航程日期" type="date" />
+		<property name="bookingDate" column="订票日期" type="date" />
+		<property name="consumption" column="消费金额" />
+		<property name="comment" column="备注" />
+
+		<!-- 映射关联属性 -->
+		<many-to-one name="client" column="会员"
+			class="com.airwxtx.client.entity.Client" />
+		<many-to-one name="card" column="会员卡"
+			class="com.airwxtx.card.entity.Card" />
+		<many-to-one name="user" column="操作员"
+			class="com.airwxtx.user.entity.User" />
+	</class>
+</hibernate-mapping>

@@ -1,60 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2016-10-20 9:51:54 by Hibernate Tools 3.5.0.Final -->
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
 <hibernate-mapping>
-    <class name="com.airwxtx.client.entity.Client" table="会员表">
-        <id name="clientId" type="java.lang.Integer">
-            <column name="会员ID" />
-            <!-- 主键采用MySQL的自增长策略 -->
+	<class name="com.airwxtx.client.entity.Client" table="会员表">
+		<!-- 映射ID -->
+		<id name="clientId" column="会员ID" type="integer">
+			<!-- 主键采用MySQL的自增长策略 -->
 			<generator class="identity" />
-        </id>
-        <property name="clientName" type="java.lang.String">
-            <column name="会员姓名" />
-        </property>
-        <property name="clientEnglishName" type="java.lang.String">
-            <column name="会员英文名" />
-        </property>
-        <property name="mobilePhoneNumber" type="java.lang.String">
-            <column name="会员手机号" />
-        </property>
-        <property name="company" type="java.lang.String">
-            <column name="会员单位" />
-        </property>
-        <property name="title" type="java.lang.String">
-            <column name="职称" />
-        </property>
-        <property name="address" type="java.lang.String">
-            <column name="地址" />
-        </property>
-        <property name="IDNumber" type="java.lang.String">
-            <column name="身份证号" />
-        </property>
-        <property name="passportNumber" type="java.lang.String">
-            <column name="护照号" />
-        </property>
-        <property name="accessNumber" type="java.lang.String">
-            <column name="通行证号" />
-        </property>
-        <property name="passportValidTime" type="java.util.Date">
-            <column name="护照有效期" />
-        </property>
-        <property name="accsessValidTime" type="java.util.Date">
-            <column name="通行证有效期" />
-        </property>
-        <property name="preferSeat" type="java.lang.String">
-            <column name="座位喜好" />
-        </property>
-        <property name="recommend" type="java.lang.String">
-            <column name="推荐客户来源" />
-        </property>
-        <property name="like" type="java.lang.String">
-            <column name="特别喜好" />
-        </property>
-        <many-to-one name="frequentFlyer" class="com.airwxtx.client.entity.Client" column="常旅客" />
-        <set name="frequentFlyers" inverse="true">
-            <key column="常旅客" />
-            <one-to-many class="com.airwxtx.client.entity.Client" />
-        </set>
-    </class>
+		</id>
+
+		<!-- 映射普通属性 -->
+		<property name="clientName" column="中文名" />
+		<property name="clientEnglishName" column="英文名" />
+		<property name="mobilePhoneNumber" column="手机号" />
+		<property name="company" column="单位" />
+		<property name="title" column="职称" />
+		<property name="address" column="地址" />
+		<property name="idNumber" column="身份证号" />
+		<property name="passportNumber" column="护照号" />
+		<property name="accessNumber" column="通行证号" />
+		<property name="passportValidTime" column="护照有效期" type="date" />
+		<property name="accsessValidTime" column="通行证有效期" type="date" />
+		<property name="preferSeat" column="座位喜好" />
+		<property name="recommend" column="推荐客户来源" />
+		<property name="like" column="特别喜好" />
+		<set name="frequentFlyers" table="常旅客表">
+			<key column="会员ID" not-null="true" />
+			<element column="常旅客" type="string" not-null="true" />
+		</set>
+
+		<!-- 映射关联属性 -->
+		<set name="cards" inverse="true">
+			<key column="会员" />
+			<one-to-many class="com.airwxtx.card.entity.Card" />
+		</set>
+		<set name="recodes" inverse="true">
+			<key column="会员" />
+			<one-to-many class="com.airwxtx.recode.entity.Recode" />
+		</set>
+	</class>
 </hibernate-mapping>

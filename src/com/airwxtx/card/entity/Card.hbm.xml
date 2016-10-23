@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.airwxtx.card.entity.Card" table="会员卡表">
+		<!-- 映射ID -->
+		<id name="id" column="会员卡ID" type="integer">
+			<!-- 主键采用MySQL的自增长策略 -->
+			<generator class="identity" />
+		</id>
+
+		<!-- 映射普通属性 -->
+		<property name="cardNo" column="卡号" />
+		<property name="status" column="状态" />
+		<property name="balance" column="余额" />
+
+		<!-- 映射关联属性 -->
+		<many-to-one name="client" column="会员"
+			class="com.airwxtx.client.entity.Client" />
+		<set name="recodes" inverse="true">
+			<key column="会员卡" />
+			<one-to-many class="com.airwxtx.recode.entity.Recode" />
+		</set>
+	</class>
+</hibernate-mapping>

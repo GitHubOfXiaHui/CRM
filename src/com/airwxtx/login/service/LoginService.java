@@ -6,6 +6,7 @@ public interface LoginService {
 
 	/**
 	 * 验证用户是否合法
+	 * 
 	 * @param user
 	 * @return
 	 */

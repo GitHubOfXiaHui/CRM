@@ -7,10 +7,13 @@
 	<package name="settings" namespace="/settings" extends="airwxtx-default">
 		<action name="*Action" class="settingsAction" method="{1}">
 			<result name="profile">/WEB-INF/pages/settings/profile.jsp</result>
-			<result name="changePassword">/WEB-INF/pages/settings/changePassword.jsp
+			<result name="input">/WEB-INF/pages/settings/preChangePassword.jsp
 			</result>
-			<result name="exit">/WEB-INF/pages/settings/exit.jsp</result>
-			<allowed-methods>profile</allowed-methods>
+			<result name="changePassword" type="json">
+				<param name="root">jsonResult</param>
+			</result>
+			<result name="exit">/WEB-INF/pages/login/login.jsp</result>
+			<allowed-methods>profile,preChangePassword,changePassword,exit</allowed-methods>
 		</action>
 	</package>
 </struts>

@@ -23,10 +23,10 @@ public interface UserAction {
 	public String updateUser() throws Exception;
 	
 	/**
-	 * 列出所有用户
+	 * 列出用户（分页）
 	 * @return
 	 * @throws Exception
 	 */
-	public String listAllUsers() throws Exception;
+	public String listUser() throws Exception;
 
 }

@@ -1,5 +1,6 @@
 #main {
-	width: 960px;
-	margin: 0 auto;
-	padding-bottom: 70px; /*等于footer的高度*/
+  width: 960px;
+  height: 100%;
+  margin: 0 auto;
+  padding-bottom: 70px;/*等于footer的高度*/
 }

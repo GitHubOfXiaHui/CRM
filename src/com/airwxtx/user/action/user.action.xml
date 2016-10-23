@@ -8,7 +8,8 @@
 		<action name="*Action" class="userAction" method="{1}">
 			<result>/WEB-INF/pages/client/success.jsp</result>
 			<result name="input">/WEB-INF/pages/user/saveUser.jsp</result>
-			<allowed-methods></allowed-methods>
+			<result name="list">/WEB-INF/pages/user/listUser.jsp</result>
+			<allowed-methods>listUser</allowed-methods>
 		</action>
 	</package>
 </struts>

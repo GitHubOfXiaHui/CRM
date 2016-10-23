@@ -16,7 +16,7 @@ public class ClientDaoImpl extends BaseDaoSupport implements ClientDao {
 	@Override
 	public List<Client> searchClientByClientname(String clientname) {
 		// TODO Auto-generated method stub
-		String hql = "FROM Client c WHERE c.clientname = :clientname";
+		String hql = "FROM Client c WHERE c.clientName = :clientname";
 		return (List<Client>) this.getHibernateTemplate().findByNamedParam(hql, "clientname", clientname);
 	}
 

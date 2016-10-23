@@ -1,18 +1,18 @@
-<?xml version="1.0"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2016-10-21 14:56:55 by Hibernate Tools 3.5.0.Final -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
 <hibernate-mapping>
-    <class name="com.airwxtx.authority.entity.Authority" table="权限表">
-        <id name="authorityId" type="java.lang.Integer">
-            <column name="权限ID" />
-            <generator class="identity" />
-        </id>
-        <property name="authorityNumber" type="java.lang.Long">
-            <column name="权限编号" />
-        </property>
-        <property name="description" type="java.lang.String">
-            <column name="权限描述" />
-        </property>
-    </class>
+	<class name="com.airwxtx.authority.entity.Authority" table="权限表">
+		<!-- 映射ID -->
+		<id name="authorityId" column="权限ID" type="integer">
+			<!-- 主键采用MySQL的自增长策略 -->
+			<generator class="identity" />
+		</id>
+		
+		<!-- 映射普通属性 -->
+		<property name="authorityNumber" column="权限编号" />
+		<property name="description" column="权限描述" />
+	</class>
 </hibernate-mapping>

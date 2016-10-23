@@ -17,19 +17,36 @@
 	<constant name="struts.objectFactory"
 		value="org.apache.struts2.spring.StrutsSpringObjectFactory" />
 
-	<package name="airwxtx-default" abstract="true" extends="struts-default">
+	<package name="airwxtx-default" abstract="true" extends="json-default">
 		<!-- 定义拦截器/拦截器栈 -->
 		<interceptors>
+			<!-- 定义拦截器 -->
+			<interceptor name="loginInterceptor" class="com.airwxtx.interceptor.LoginInterceptor" />
+			<interceptor name="authorityInterceptor" class="com.airwxtx.interceptor.AuthorityInterceptor" />
+			
 			<!-- 拦截器栈 -->
 			<interceptor-stack name="airwxtxDefaultStack">
+				<interceptor-ref name="loginInterceptor" />
+				<interceptor-ref name="authorityInterceptor" />
+				<interceptor-ref name="json" />
 				<interceptor-ref name="defaultStack" />
 			</interceptor-stack>
 		</interceptors>
 		<!-- 配置默认拦截器栈 -->
 		<default-interceptor-ref name="airwxtxDefaultStack" />
+
+		<global-results>
+			<result name="login">/WEB-INF/pages/login/login.jsp</result>
+			<result name="error">/WEB-INF/pages/error/error.jsp</result>
+		</global-results>
+		
+		<global-exception-mappings>
+			<exception-mapping result="error" exception="java.lang.Exception" />
+		</global-exception-mappings>
 	</package>
 
 	<include file="com/airwxtx/login/action/login.action.xml" />
 	<include file="com/airwxtx/settings/action/settings.action.xml" />
 	<include file="com/airwxtx/client/action/client.action.xml" />
+	<include file="com/airwxtx/user/action/user.action.xml" />
 </struts>

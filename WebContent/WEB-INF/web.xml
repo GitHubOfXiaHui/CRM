@@ -8,7 +8,9 @@
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
-			/WEB-INF/springForHibernate.xml,/WEB-INF/springForStruts.xml
+			/WEB-INF/spring.xml,
+			/WEB-INF/springForHibernate.xml,
+			/WEB-INF/springForQuartz.xml
 		</param-value>
 	</context-param>
 	<!-- 使用ContextLoaderListener初始化spring容器 -->

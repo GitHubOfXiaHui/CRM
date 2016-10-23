@@ -6,9 +6,18 @@ public interface SettingsService {
 
 	/**
 	 * 根据用户名查找用户
+	 * 
 	 * @param username
 	 * @return
 	 */
 	User findUser(String username);
+
+	/**
+	 * 修改密码
+	 * 
+	 * @param username
+	 * @param newPassword
+	 */
+	void changePassword(String username, String newPassword);
 
 }
