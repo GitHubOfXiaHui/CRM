@@ -37,6 +37,10 @@ public class UserServiceImpl implements UserService {
 		user.setAuthority(authority);
 		this.userDao.updateUser(user);
 	}
+	
+	public void updateUser(User user){
+		this.userDao.updateUser(user);
+	}
 
 	@Override
 	@Transactional(readOnly = true)
@@ -65,6 +69,12 @@ public class UserServiceImpl implements UserService {
 
 	public void setUserDao(UserDao userDao) {
 		this.userDao = userDao;
+	}
+
+	@Override
+	public List<User> listAllUsers() {
+		// TODO Auto-generated method stub
+		return this.userDao.listAllUsers();
 	}
 
 }

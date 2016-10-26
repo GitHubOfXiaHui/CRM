@@ -67,4 +67,10 @@ public class UserDaoImpl extends BaseDaoSupport implements UserDao {
 		return Integer.parseInt(ans.get(0).toString());
 	}
 
+	@Override
+	public List<User> listAllUsers() {
+		// TODO Auto-generated method stub
+		return this.getHibernateTemplate().loadAll(User.class);
+	}
+
 }

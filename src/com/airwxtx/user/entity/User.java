@@ -17,7 +17,7 @@ public class User implements Role {
 	private String role;
 	// 权限 默认是没有任何权限
 	private Long authority = 0l;
-
+	private Integer freezeAuthority = 2;
 	/* 关联属性 */
 	private Set<Recode> recodes;
 
@@ -67,6 +67,14 @@ public class User implements Role {
 
 	public void setRecodes(Set<Recode> recodes) {
 		this.recodes = recodes;
+	}
+
+	public Integer getFreezeAuthority() {
+		return freezeAuthority;
+	}
+
+	public void setFreezeAuthority(Integer freezeAuthority) {
+		this.freezeAuthority = freezeAuthority;
 	}
 
 }

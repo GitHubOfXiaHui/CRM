@@ -20,6 +20,12 @@ public interface UserService {
 	 * @param autorities
 	 */
 	void updateUser(User user, List<Long> authorities);
+	
+	/**
+	 * 修改用户
+	 * @param user
+	 */
+	void updateUser(User user);
 
 	/**
 	 * 根据用户名，查找用户
@@ -44,5 +50,11 @@ public interface UserService {
 	 * @return
 	 */
 	int countMaxPage(int pageSize);
+	
+	/**
+	 * 列出所有用户
+	 * @return
+	 */
+	List<User> listAllUsers();
 
 }

@@ -19,7 +19,7 @@ public interface ClientService {
 	 * @param 
 	 * @return
 	 */
-	List<Client> listAllClients();
+	List<Client> listAllClients(int page,int pageSize);
 	
 	/**
 	 * 加载客户详情

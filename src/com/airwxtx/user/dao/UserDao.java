@@ -51,5 +51,11 @@ public interface UserDao {
 	 * @return
 	 */
 	int countUser();
+	
+	/**
+	 * 列出所有用户
+	 * @return
+	 */
+	List<User> listAllUsers();
 
 }

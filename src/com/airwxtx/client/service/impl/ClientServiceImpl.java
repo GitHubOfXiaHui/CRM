@@ -52,9 +52,9 @@ public class ClientServiceImpl implements ClientService{
 	}
 
 	@Override
-	public List<Client> listAllClients() {
+	public List<Client> listAllClients(int page,int pageSize) {
 		// TODO Auto-generated method stub
-		return this.clientDao.listAllClients();
+		return this.clientDao.listAllClients(page,pageSize);
 	}
 
 	@Override

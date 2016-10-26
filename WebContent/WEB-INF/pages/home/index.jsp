@@ -4,7 +4,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
+<!-- CDN -->
+<link href="http://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+<script src="http://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+<script src="http://cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <!-- jQuery分页插件 -->
 <link href="/CRM/css/jqpagination.css" rel="stylesheet" type="text/css">
 
@@ -30,6 +33,7 @@
 	});
 	
 	$(function(){
+		//ajax跳转
 		$("#nav-first a").each(function(){
 			var url = $(this).attr("href");
 			$(this).click(function(){
@@ -59,7 +63,7 @@
 			<div>AIRWXTX</div>
 			<div>
 				<ul id="nav-first">
-					<li><a href="#">会员管理</a></li>
+					<li><a href="/CRM/client/listAllClientsAction">会员管理</a></li>
 					<li><a href="#">会员卡管理</a></li>
 					<li><a href="#">消费记录</a></li>
 					<li><a href="/CRM/user/listUserAction">用户管理</a></li>

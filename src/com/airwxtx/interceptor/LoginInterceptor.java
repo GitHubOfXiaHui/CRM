@@ -14,7 +14,6 @@ public class LoginInterceptor extends AbstractInterceptor {
 		} else {
 			return LOGIN;
 		}
-
 	}
 
 	private static final String LOGIN = "login";
