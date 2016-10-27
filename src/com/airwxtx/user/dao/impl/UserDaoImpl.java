@@ -2,14 +2,10 @@ package com.airwxtx.user.dao.impl;
 
 import java.util.List;
 
-import org.hibernate.HibernateException;
-import org.hibernate.Query;
-import org.hibernate.Session;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
-import org.springframework.orm.hibernate4.HibernateCallback;
 import org.springframework.stereotype.Repository;
 
 import com.airwxtx.user.dao.UserDao;
@@ -73,4 +69,5 @@ public class UserDaoImpl extends BaseDaoSupport implements UserDao {
 		}
 		return query;
 	}
+	
 }

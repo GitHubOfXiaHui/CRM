@@ -29,6 +29,7 @@ public class AuthorityInterceptor extends AbstractInterceptor {
 		Map<String, Set<String>> authority = (Map<String, Set<String>>) invocation.getInvocationContext()
 				.getApplication().getOrDefault("authority", new HashMap<>());
 		String username = (String) invocation.getInvocationContext().getSession().get("user");
+		//全局权限表是否包含当前用户
 		if (!authority.containsKey(username)) {
 			Set<String> userAuthority = getUserAuthority(username);
 			authority.put(username, userAuthority);
@@ -43,7 +44,7 @@ public class AuthorityInterceptor extends AbstractInterceptor {
 		Set<String> authority = new HashSet<>();
 		Field[] fields = AuthorityNumber.class.getFields();
 		for (Field field : fields) {
-			if ((user.getAuthority() | field.getLong(null)) != 0) {
+			if ((user.getAuthority() & field.getLong(null)) != 0) {
 				authority.add(field.getName());
 			}
 		}

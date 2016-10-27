@@ -37,6 +37,10 @@ public class UserServiceImpl implements UserService {
 		user.setAuthority(authority);
 		this.userDao.updateUser(user);
 	}
+	
+	public void updateUser(User user){
+		this.userDao.updateUser(user);
+	}
 
 	@Override
 	@Transactional(readOnly = true)

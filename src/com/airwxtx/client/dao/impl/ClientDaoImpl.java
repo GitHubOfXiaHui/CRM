@@ -2,6 +2,10 @@ package com.airwxtx.client.dao.impl;
 
 import java.util.List;
 
+import org.hibernate.HibernateException;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.springframework.orm.hibernate4.HibernateCallback;
 import org.springframework.stereotype.Repository;
 
 import com.airwxtx.client.dao.ClientDao;
@@ -29,9 +33,17 @@ public class ClientDaoImpl extends BaseDaoSupport implements ClientDao {
 	}
 
 	@Override
-	public List<Client> listAllClients() {
+	public List<Client> listAllClients(int page,int pageSize) {
 		// TODO Auto-generated method stub
-		return (List<Client>) this.getHibernateTemplate().loadAll(Client.class);
+		return this.getHibernateTemplate().execute(new HibernateCallback<List<Client>>() {
+			@SuppressWarnings("unchecked")
+			public List<Client> doInHibernate(Session session) throws HibernateException{
+				Query query = session.createQuery("FROM Client");
+				query.setFirstResult((page - 1) * pageSize);
+				query.setMaxResults(pageSize);
+				return (List<Client>) query.list();
+			}
+		});
 	}
 
 	@Override

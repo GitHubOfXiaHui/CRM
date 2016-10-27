@@ -20,6 +20,12 @@ public interface UserService {
 	 * @param autorities
 	 */
 	void updateUser(User user, List<Long> authorities);
+	
+	/**
+	 * 修改用户
+	 * @param user
+	 */
+	void updateUser(User user);
 
 	/**
 	 * 根据用户名，查找用户

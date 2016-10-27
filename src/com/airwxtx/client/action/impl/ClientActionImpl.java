@@ -19,6 +19,14 @@ public class ClientActionImpl extends ActionSupport implements ClientAction{
 	private Client client;
 	private List<Client> clients;
 	private Integer clientId;
+	private Integer page;
+	
+	public Integer getPage() {
+		return page;
+	}
+	public void setPage(Integer page) {
+		this.page = page;
+	}
 	public Integer getClientId() {
 		return clientId;
 	}
@@ -82,8 +90,8 @@ public class ClientActionImpl extends ActionSupport implements ClientAction{
 	@Override
 	public String listAllClients() throws Exception {
 		// TODO Auto-generated method stub
-		clients = this.clientService.listAllClients();
-		return ALLCLIENTS;
+		clients = this.clientService.listAllClients(page,PAGE_SIZE);
+		return ALL_CLIENTS;
 	}
 	@Override
 	public String showClientDetails() throws Exception {
@@ -92,6 +100,8 @@ public class ClientActionImpl extends ActionSupport implements ClientAction{
 		return DETAILS;
 	}
 	
+
 	private static final String DETAILS = "details";
-	private static final String ALLCLIENTS = "allClients";
+	private static final String ALL_CLIENTS = "allClients";
+	private static final int PAGE_SIZE = 10;
 }

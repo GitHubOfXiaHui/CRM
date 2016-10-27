@@ -27,7 +27,7 @@ public interface ClientDao {
 	 * 
 	 * @return List<Client> 客户列表
 	 */
-	public List<Client> listAllClients();
+	public List<Client> listAllClients(int page,int pageSize);
 
 	/**
 	 * 更新客户信息
