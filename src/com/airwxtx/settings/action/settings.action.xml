@@ -9,8 +9,7 @@
 			<result name="profile">/WEB-INF/pages/settings/profile.jsp</result>
 			<result name="input">/WEB-INF/pages/settings/preChangePassword.jsp
 			</result>
-			<result name="changePassword" type="json">
-				<param name="root">jsonResult</param>
+			<result name="changePassword">/WEB-INF/pages/settings/preChangePassword.jsp
 			</result>
 			<result name="exit">/WEB-INF/pages/login/login.jsp</result>
 			<allowed-methods>profile,preChangePassword,changePassword,exit</allowed-methods>
