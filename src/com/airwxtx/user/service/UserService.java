@@ -30,19 +30,23 @@ public interface UserService {
 	User findUserByName(String username);
 
 	/**
-	 * 查找用户（分页）
+	 * 按用户名或密码分页查询用户
 	 * 
+	 * @param username
+	 * @param role
 	 * @param page
 	 * @param pageSize
 	 * @return
 	 */
-	List<User> findUserWithPage(int page, int pageSize);
+	List<User> findUserByNameOrRoleWithPage(String username, String role, int page, int pageSize);
 
 	/**
-	 * 统计用户数量
+	 * 统计拥有特定用户名或角色的用户数量
 	 * 
+	 * @param username
+	 * @param role
 	 * @return
 	 */
-	int countMaxPage(int pageSize);
+	public int countUserWithNameOrRole(String username, String role);
 
 }

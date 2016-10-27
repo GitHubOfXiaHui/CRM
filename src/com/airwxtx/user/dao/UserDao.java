@@ -37,19 +37,21 @@ public interface UserDao {
 	User userDetials(Integer userId);
 
 	/**
-	 * 查找用户（分页）
+	 * 按用户名或密码分页查询用户
 	 * 
+	 * @param username
+	 * @param role
 	 * @param page
 	 * @param pageSize
 	 * @return
 	 */
-	List<User> findUserWithPage(int page, int pageSize);
+	List<User> findUserByNameOrRoleWithPage(String username, String role, int page, int pageSize);
 
 	/**
 	 * 统计用户数量
 	 * 
 	 * @return
 	 */
-	int countUser();
+	public int countUserWithNameOrRole(String username, String role);
 
 }

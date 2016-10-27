@@ -56,14 +56,15 @@ public class UserActionImpl extends ActionSupport implements UserAction {
 	}
 
 	@Override
-	public String listUser() throws Exception {
+	public String searchUser() throws Exception {
 		// TODO Auto-generated method stub
-		users = userService.findUserWithPage(page, PAGE_SIZE);
+		users = userService.findUserByNameOrRoleWithPage(username, role, page, PAGE_SIZE);
 		return LIST;
 	}
 	
 	public int getMaxPage() {
-		return userService.countMaxPage(PAGE_SIZE);
+		int count = userService.countUserWithNameOrRole(username, role);
+		return (count - 1) / PAGE_SIZE + 1;
 	}
 
 	public List<String> getRoles() throws IllegalArgumentException, IllegalAccessException{

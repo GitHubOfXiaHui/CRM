@@ -27,6 +27,6 @@ public interface UserAction {
 	 * @return
 	 * @throws Exception
 	 */
-	public String listUser() throws Exception;
+	public String searchUser() throws Exception;
 
 }

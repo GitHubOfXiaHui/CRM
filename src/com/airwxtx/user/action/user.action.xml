@@ -9,7 +9,7 @@
 			<result>/WEB-INF/pages/client/success.jsp</result>
 			<result name="input">/WEB-INF/pages/user/saveUser.jsp</result>
 			<result name="list">/WEB-INF/pages/user/listUser.jsp</result>
-			<allowed-methods>listUser</allowed-methods>
+			<allowed-methods>searchUser</allowed-methods>
 		</action>
 	</package>
 </struts>

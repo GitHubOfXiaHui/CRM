@@ -2,33 +2,47 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
+<title>登录</title>
+<meta charset="UTF-8">
 <s:head />
-<link rel="stylesheet" href="/CRM/css/login.css">
-
-<script src="/CRM/js/jquery-3.1.1.min.js" type="text/javascript"></script>
+<link rel="stylesheet"
+	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script
+	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <script src="/CRM/js/jQuery.md5.js" type="text/javascript"></script>
 <script src="/CRM/js/encryptPassword.js" type="text/javascript"></script>
-
-<title>登陆</title>
 </head>
 <body>
-	<div id="wrapper">
-		<div id="logo">AIRWXTX</div>
-		<form action="/CRM/login/loginAction" method="POST">
+	<div class="container text-center"
+		style="padding-top: 100px; padding-left: 20%; padding-right: 30%;">
+		<h1>AIRWXTX</h1>
+		<form class="form-horizontal" action="/CRM/login/loginAction"
+			method="post">
 			<s:fielderror />
-			<div>
-				<label>用户名：</label><input name="user.username" type="text"
-					value="<s:property value='user.name'/>">
+			<div class="form-group">
+				<label class="col-md-4 control-label" for="username">用户名：</label>
+				<div class="col-md-8">
+					<input class="form-control" id="username" name="user.username"
+						type="text" placeholder="Enter username">
+				</div>
 			</div>
-			<div>
-				<label>密码：</label><input name="user.password" type="password">
+			<div class="form-group">
+				<label class="col-md-4 control-label" for="password">密码：</label>
+				<div class="col-md-8">
+					<input class="form-control" id="password" name="user.password"
+						type="password" placeholder="Enter password">
+				</div>
 			</div>
-			<input type="submit" value="登录">
+			<div class="form-group">
+				<div class="col-md-offset-4 col-md-4">
+					<input class="btn btn-success btn-block" type="submit" value="登录">
+				</div>
+			</div>
 		</form>
 	</div>
 </body>

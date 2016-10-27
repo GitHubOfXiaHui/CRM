@@ -47,15 +47,15 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-	public List<User> findUserWithPage(int page, int pageSize) {
+	public List<User> findUserByNameOrRoleWithPage(String username, String role, int page, int pageSize) {
 		// TODO Auto-generated method stub
-		return userDao.findUserWithPage(page, pageSize);
+		return userDao.findUserByNameOrRoleWithPage(username, role, page, pageSize);
 	}
 	
 	@Override
-	public int countMaxPage(int pageSize) {
+	public int countUserWithNameOrRole(String username, String role) {
 		// TODO Auto-generated method stub
-		return (userDao.countUser() - 1) / pageSize + 1;
+		return userDao.countUserWithNameOrRole(username, role);
 	}
 
 

@@ -5,6 +5,10 @@ import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.orm.hibernate4.HibernateCallback;
 import org.springframework.stereotype.Repository;
 
@@ -41,30 +45,32 @@ public class UserDaoImpl extends BaseDaoSupport implements UserDao {
 		return this.getHibernateTemplate().load(User.class, userId);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public List<User> findUserWithPage(int page, int pageSize) {
+	public List<User> findUserByNameOrRoleWithPage(String username, String role, int page, int pageSize) {
 		// TODO Auto-generated method stub
-		return this.getHibernateTemplate().execute(new HibernateCallback<List<User>>() {
-
-			@SuppressWarnings("unchecked")
-			@Override
-			public List<User> doInHibernate(Session session) throws HibernateException {
-				// TODO Auto-generated method stub
-				Query query = session.createQuery("FROM User");
-				query.setFirstResult((page - 1) * pageSize);
-				query.setMaxResults(pageSize);
-				return (List<User>) query.list();
-			}
-		});
+		DetachedCriteria query = createDetachedCriteriaWithUsernameOrRole(username, role);
+		return (List<User>) this.getHibernateTemplate().findByCriteria(query, (page - 1) * pageSize, pageSize);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public int countUser() {
+	public int countUserWithNameOrRole(String username, String role) {
 		// TODO Auto-generated method stub
-		String hql = "SELECT COUNT(*) FROM User";
-		List<Object> ans = (List<Object>) this.getHibernateTemplate().find(hql);
+		DetachedCriteria query = createDetachedCriteriaWithUsernameOrRole(username, role)
+				.setProjection(Projections.rowCount());
+		List<Object> ans = (List<Object>) this.getHibernateTemplate().findByCriteria(query);
 		return Integer.parseInt(ans.get(0).toString());
 	}
 
+	private DetachedCriteria createDetachedCriteriaWithUsernameOrRole(String username, String role) {
+		DetachedCriteria query = DetachedCriteria.forClass(User.class);
+		if (username != null && !username.equals("")) {
+			query.add(Restrictions.ilike("username", username, MatchMode.ANYWHERE));
+		}
+		if (role != null && !role.equals("")) {
+			query.add(Restrictions.ilike("role", role, MatchMode.EXACT));
+		}
+		return query;
+	}
 }
