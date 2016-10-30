@@ -12,7 +12,7 @@
 		</id>
 		
 		<!-- 映射普通属性 -->
-		<property name="authorityNumber" column="权限编号" />
+		<property name="authorityNumber" column="权限编号" unique="true" />
 		<property name="description" column="权限描述" />
 	</class>
 </hibernate-mapping>

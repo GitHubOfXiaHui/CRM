@@ -12,32 +12,17 @@ public interface UserDao {
 	 * @param username
 	 * @return
 	 */
-	List<User> findByUsername(String username);
+	public List<User> findUserByName(String username);
 
 	/**
 	 * 创建用户
 	 * 
 	 * @param user
 	 */
-	Integer saveUser(User user);
+	public void saveOrUpdateUser(User user);
 
 	/**
-	 * 更新用户
-	 * 
-	 * @param user
-	 */
-	void updateUser(User user);
-
-	/**
-	 * 通过用户id加载用户
-	 * 
-	 * @param userId
-	 * @return
-	 */
-	User userDetials(Integer userId);
-
-	/**
-	 * 按用户名或密码分页查询用户
+	 * 按用户名或角色分页查询用户
 	 * 
 	 * @param username
 	 * @param role
@@ -45,7 +30,7 @@ public interface UserDao {
 	 * @param pageSize
 	 * @return
 	 */
-	List<User> findUserByNameOrRoleWithPage(String username, String role, int page, int pageSize);
+	public List<User> findUserByNameOrRoleWithPage(String username, String role, int page, int pageSize);
 
 	/**
 	 * 统计用户数量
@@ -53,5 +38,17 @@ public interface UserDao {
 	 * @return
 	 */
 	public int countUserWithNameOrRole(String username, String role);
+
+	/**
+	 * 刷新冻结权限
+	 */
+	public void refreshFreeze();
+
+	/**
+	 * 重置对应用户的密码
+	 * 
+	 * @param username
+	 */
+	public void resetPasswordByName(String username);
 
 }

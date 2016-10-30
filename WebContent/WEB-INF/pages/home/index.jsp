@@ -6,6 +6,8 @@
 <head>
 <title>主页</title>
 <meta charset="UTF-8">
+
+<!-- Bootstrap样式 -->
 <link rel="stylesheet"
 	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 <script
@@ -52,20 +54,64 @@ footer {
 }
 </style>
 
+<!-- Loading插件 -->
+<link href="/CRM/css/waitMe.min.css" rel="stylesheet">
+<script src="/CRM/js/waitMe.min.js"></script>
 <!-- jQuery分页插件 -->
 <link href="/CRM/css/jqpagination.css" rel="stylesheet" type="text/css">
 <script src="/CRM/js/jquery.jqpagination.min.js" type="text/javascript"></script>
 <script type="text/javascript">
-	// 加载第1页到#main，同时初始化分页插件
-	function load(url, params) {
+	// 初始化Loading插件
+	function runWaitMe(target){
+	    $(target).waitMe({
+	
+		    //none, rotateplane, stretch, orbit, roundBounce, win8, 
+		    //win8_linear, ios, facebook, rotation, timer, pulse, 
+		    //progressBar, bouncePulse or img
+		    effect: 'bounce',
+		
+		    //place text under the effect (string).
+		    text: '加载中...',
+		
+		    //background for container (string).
+		    bg: '',
+		
+		    //color for background animation and text (string).
+		    color: '#9c6',
+		
+		    //change width for elem animation (string).
+		    sizeW: '',
+		
+		    //change height for elem animation (string).
+		    sizeH: '',
+		
+		    // url to image
+		    source: ''
+	
+	    });
+  	}
+	
+	function onsearch(url, params) {
+		// 显示Loading画面
+		runWaitMe("#main");
+		// 加载第1页到#main
 		params.page = 1;
-		$("#main").load(url, params, function() {
+		$("#main").load(url, params, function(){
+			// 隐藏Loading
+			$("#main").waitMe("hide");
+			// 初始化分页插件
 			$(".pagination").jqPagination({
 				page_string : "第 {current_page} / {max_page} 页",
+				// 点击翻页按钮回调
 				paged : function(page) {
-					// do something with the page variable
+					// 显示Loading画面
+					runWaitMe();
+					// 刷新table
 					params.page = page;
-					$("table").load(url + " thead,tbody", params);
+					$("table").load(url + " thead,tbody", params, function(){
+						// 隐藏Loading
+						$("#main").waitMe("hide");
+					});
 				}
 			});
 		});
@@ -76,8 +122,8 @@ footer {
 		$("#nav a").each(function() {
 			var url = $(this).attr("href");
 			$(this).click(function() {
-				load(url, {});
-
+				onsearch(url, {});
+				
 				$(this).parent("li").addClass("active") // 父li元素添加active属性
 				.siblings("li").removeClass("active"); // 父li元素同级的li元素移除active属性
 				
@@ -86,7 +132,19 @@ footer {
 			});
 		});
 	});
+	
+	// 模拟点击导航按钮
+	$(function(){
+		var url = $("#nav li.active a").attr("href");
+		
+		onsearch(url, {});
+	}); 
 </script>
+
+<!-- 弹窗插件 -->
+<link href="/CRM/css/my-dialog.css" rel="stylesheet">
+<script src="/CRM/js/my-dialog.js"></script>
+
 </head>
 <body>
 	<div id="wrapper">
@@ -96,16 +154,17 @@ footer {
 					<a class="navbar-brand" href="#">AIRWXTX</a>
 				</div>
 				<ul class="nav navbar-nav" id="nav">
-					<li class="active"><a href="#">会员管理</a></li>
+					<li><a href="#">会员管理</a></li>
 					<li><a href="#">会员卡管理</a></li>
-					<li><a href="#">消费记录</a></li>
+					<li class="active"><a href="/CRM/recode/searchRecodeAction">消费记录</a></li>
 					<li><a href="/CRM/user/searchUserAction">用户管理</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					<li class="dropdown"><a class="dropdown-toggle"
 						data-toggle="dropdown" href="#">设置<span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="/CRM/settings/profileAction">个人信息</a></li>
+							<li><a href="/CRM/settings/profileAction"
+								target="_blank">用户信息</a></li>
 							<li><a href="/CRM/settings/preChangePasswordAction"
 								target="_blank">修改密码</a></li>
 							<li><a href="/CRM/settings/exitAction">安全退出</a></li>
@@ -114,7 +173,8 @@ footer {
 				</ul>
 			</div>
 		</nav>
-		<div id="main"></div>
+		<!-- 调整main-div的高度，使Loading动画显示在页面中央 -->
+		<div id="main" style="height: 500px;"></div>
 		<footer class="container-fluid bg-footer text-center">
 			<p>
 				Copyright &copy; 2016 <a href="http://www.airwxtx.com">airwxtx.com</a>

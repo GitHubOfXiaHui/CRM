@@ -11,34 +11,29 @@ import org.springframework.stereotype.Repository;
 import com.airwxtx.user.dao.UserDao;
 import com.airwxtx.user.entity.User;
 import com.airwxtx.utils.BaseDaoSupport;
+import com.airwxtx.utils.Constants;
 
 @Repository
 public class UserDaoImpl extends BaseDaoSupport implements UserDao {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<User> findByUsername(String username) {
+	public List<User> findUserByName(String username) {
 		// TODO Auto-generated method stub
 		String hql = "FROM User u WHERE u.username = :username";
 		return (List<User>) this.getHibernateTemplate().findByNamedParam(hql, "username", username);
 	}
 
 	@Override
-	public Integer saveUser(User user) {
+	public void saveOrUpdateUser(User user) {
 		// TODO Auto-generated method stub
-		return (Integer) this.getHibernateTemplate().save(user);
+		this.getHibernateTemplate().saveOrUpdate(user);
 	}
 
 	@Override
-	public void updateUser(User user) {
-		// TODO Auto-generated method stub
-		this.getHibernateTemplate().update(user);
-	}
-
-	@Override
-	public User userDetials(Integer userId) {
-		// TODO Auto-generated method stub
-		return this.getHibernateTemplate().load(User.class, userId);
+	public void resetPasswordByName(String username) {
+		String hql = "UPDATE User SET password = ? WHERE username = ?";
+		this.getHibernateTemplate().bulkUpdate(hql, Constants.PASSWORD, username);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -69,5 +64,12 @@ public class UserDaoImpl extends BaseDaoSupport implements UserDao {
 		}
 		return query;
 	}
-	
+
+	@Override
+	public void refreshFreeze() {
+		// TODO Auto-generated method stub
+		String hql = "UPDATE User SET freezeCount = 0";
+		this.getHibernateTemplate().bulkUpdate(hql);
+	}
+
 }

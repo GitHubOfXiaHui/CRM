@@ -6,6 +6,8 @@
 <struts>
 	<!-- 配置开发模式 -->
 	<constant name="struts.devMode" value="true" />
+	<!-- 指定全局国际化资源文件 -->
+	<constant name="struts.custom.i18n.resources" value="mess" />
 	<!-- 配置字符编码为UTF-8 -->
 	<constant name="struts.i18n.encoding" value="UTF-8" />
 	<!-- 设置浏览器是否缓存静态内容,默认值为true(生产环境下使用),开发阶段最好关闭 -->
@@ -49,4 +51,5 @@
 	<include file="com/airwxtx/settings/action/settings.action.xml" />
 	<include file="com/airwxtx/client/action/client.action.xml" />
 	<include file="com/airwxtx/user/action/user.action.xml" />
+	<include file="com/airwxtx/recode/action/recode.action.xml" />
 </struts>

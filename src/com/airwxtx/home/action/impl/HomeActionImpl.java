@@ -11,4 +11,7 @@ import com.opensymphony.xwork2.ActionSupport;
 @Scope("prototype")
 public class HomeActionImpl extends ActionSupport implements HomeAction {
 
+	public String home() throws Exception {
+		return SUCCESS;
+	}
 }

@@ -9,6 +9,8 @@ import com.airwxtx.recode.entity.Recode;
 public class Client {
 	// 客户id
 	private Integer clientId;
+	
+	/* 普通属性 */
 	// 客户中文姓名
 	private String clientName;
 	// 客户英文姓名

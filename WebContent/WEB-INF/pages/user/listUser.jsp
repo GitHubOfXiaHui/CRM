@@ -8,21 +8,22 @@
 		<div class="form-group">
 			<label for="username">用户名：</label>
 			<input class="form-control" id="username" type="text" value="<s:property value='username' />">
-			<input class="param" name="username" type="hidden" data-target="#username">
+			<input class="param" name="username" type="hidden" data-target="#username" value="<s:property value='username' />">
 		</div>
 		<div class="form-group">
-			<label for="username">角色：</label>
+			<label for="role">角色：</label>
 			<select class="form-control" id="role">
-				<s:iterator value="roles">
-					<option value="<s:property />"><s:property /></option>
+				<option value="">请选择</option>
+				<s:iterator value="allRoles" var="role">
+					<option value="<s:property value='#role' />" <s:if test="role == #role">selected</s:if>><s:property value="#role" /></option>
 				</s:iterator>
 			</select>
-			<input class="param" name="role" type="hidden" data-target="#role">
+			<input class="param" name="role" type="hidden" data-target="#role" value="<s:property value='role' />">
 		</div>
 		<button class="btn btn-primary" type="submit">
 			<span class="glyphicon glyphicon-search"></span> 搜索
 		</button>
-		<a class="btn btn-success" href="#" target="_blank">
+		<a class="btn btn-success" href="/CRM/user/preCreateUserAction" target="_blank">
 			<span class="glyphicon glyphicon-plus"></span> 添加
 		</a>
 	</form>
@@ -42,8 +43,8 @@
 					<td><s:property value="username" /></td>
 					<td><s:property value="role" /></td>
 					<td>
-						<a href="#" target="_blank">修改</a>
-						&nbsp;/&nbsp;<a href="#" target="_blank">重置密码</a>
+						<a href="/CRM/user/preEditUserAction?user.username=<s:property value='username' />" target="_blank">编辑</a>
+						&nbsp;/&nbsp;<a href="/CRM/user/resetPasswordAction?user.username=<s:property value='username' />" data-id="reset-password">重置密码</a>
 					</td>
 				</tr>
 			</s:iterator>
@@ -57,18 +58,33 @@
 		<a href="#" class="last" data-action="last">&raquo;</a>
 	</div>
 	<script type="text/javascript">
-		// 拦截搜索动作
 		$(function(){
+			// 拦截搜索动作
 			$("form").submit(function(){
 				$(".param").each(function(){
 					$(this).val($($(this).attr("data-target")).val());
 				});
 				var url = $(this).attr("action");
-				var params = $(this).serialize();
-				load(url, params);
-				
+				var params = {
+					username: $("[data-target='#username']").val(),
+					role: $("[data-target='#role']").val()
+				};
+				onsearch(url, params);
+						
 				// 阻止表单默认提交
 				return false;
+			});
+					
+			// 拦截重置密码
+			$("[data-id='reset-password']").each(function(){
+				$(this).click(function(){
+					$.getJSON($(this).attr("href"), function(data){
+						showDialog(data.resultInfo);
+					});
+							
+					// 阻止默认提交
+					return false;
+				});
 			});
 		});
 	</script>

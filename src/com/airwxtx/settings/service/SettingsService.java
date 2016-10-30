@@ -10,7 +10,7 @@ public interface SettingsService {
 	 * @param username
 	 * @return
 	 */
-	User findUser(String username);
+	public User findUser(String username);
 
 	/**
 	 * ĞŞ¸ÄÃÜÂë
@@ -18,6 +18,6 @@ public interface SettingsService {
 	 * @param username
 	 * @param newPassword
 	 */
-	void changePassword(String username, String newPassword);
+	public void changePassword(String username, String newPassword);
 
 }

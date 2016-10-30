@@ -1,9 +1,12 @@
 package com.airwxtx.settings.action.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.airwxtx.authority.service.AuthorityService;
 import com.airwxtx.settings.action.SettingsAction;
 import com.airwxtx.settings.service.SettingsService;
 import com.airwxtx.user.entity.User;
@@ -29,6 +32,9 @@ public class SettingsActionImpl extends ActionSupport implements SettingsAction 
 	@Autowired
 	private SettingsService settingsService;
 
+	@Autowired
+	private AuthorityService authorityService;
+
 	@Override
 	public String profile() throws Exception {
 		// TODO Auto-generated method stub
@@ -48,7 +54,6 @@ public class SettingsActionImpl extends ActionSupport implements SettingsAction 
 		User user = settingsService.findUser(username);
 		if (!oldPassword.equals(user.getPassword())) {
 			this.addFieldError("oldPassword", "‘≠√‹¬Î¥ÌŒÛ");
-			this.resetPassword();
 		}
 	}
 
@@ -59,15 +64,7 @@ public class SettingsActionImpl extends ActionSupport implements SettingsAction 
 		settingsService.changePassword(username, newPassword);
 		result = "success";
 		resultInfo = "√‹¬Î–ﬁ∏ƒ≥…π¶°£";
-		this.resetPassword();
 		return CHANGE_PASSWORD;
-	}
-	
-	// «Âø’ ‰»Î√‹¬ÎøÚ
-	private void resetPassword() {
-		oldPassword = "";
-		newPassword = "";
-		confirmPassword = "";
 	}
 
 	@Override
@@ -79,20 +76,16 @@ public class SettingsActionImpl extends ActionSupport implements SettingsAction 
 		return EXIT;
 	}
 
+	public List<String> getDisplayAuthorities() throws IllegalArgumentException, IllegalAccessException {
+		return authorityService.changeToDisplayAuthorities(user.getAuthority());
+	}
+
 	public User getUser() {
 		return user;
 	}
 
 	public void setUser(User user) {
 		this.user = user;
-	}
-
-	public SettingsService getSettingsService() {
-		return settingsService;
-	}
-
-	public void setSettingsService(SettingsService settingsService) {
-		this.settingsService = settingsService;
 	}
 
 	public String getOldPassword() {
@@ -133,6 +126,22 @@ public class SettingsActionImpl extends ActionSupport implements SettingsAction 
 
 	public void setResultInfo(String resultInfo) {
 		this.resultInfo = resultInfo;
+	}
+
+	public SettingsService getSettingsService() {
+		return settingsService;
+	}
+
+	public void setSettingsService(SettingsService settingsService) {
+		this.settingsService = settingsService;
+	}
+
+	public AuthorityService getAuthorityService() {
+		return authorityService;
+	}
+
+	public void setAuthorityService(AuthorityService authorityService) {
+		this.authorityService = authorityService;
 	}
 
 	private static final String PROFILE = "profile";

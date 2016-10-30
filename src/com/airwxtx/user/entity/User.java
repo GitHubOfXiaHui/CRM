@@ -7,7 +7,7 @@ import com.airwxtx.recode.entity.Recode;
 public class User implements Role {
 	// 用户ID
 	private Integer id;
-	
+
 	/* 普通属性 */
 	// 用户名
 	private String username;
@@ -17,7 +17,9 @@ public class User implements Role {
 	private String role;
 	// 权限 默认是没有任何权限
 	private Long authority = 0l;
-	private Integer freezeAuthority = 2;
+	// 冻结权限次数
+	private Integer freezeCount = 0;
+
 	/* 关联属性 */
 	private Set<Recode> recodes;
 
@@ -69,12 +71,12 @@ public class User implements Role {
 		this.recodes = recodes;
 	}
 
-	public Integer getFreezeAuthority() {
-		return freezeAuthority;
+	public Integer getFreezeCount() {
+		return freezeCount;
 	}
 
-	public void setFreezeAuthority(Integer freezeAuthority) {
-		this.freezeAuthority = freezeAuthority;
+	public void setFreezeCount(Integer freezeCount) {
+		this.freezeCount = freezeCount;
 	}
 
 }

@@ -1,0 +1,96 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="s" uri="/struts-tags"%>
+
+<div class="container text-center">
+	<form class="form-inline" action="/CRM/recode/searchRecodeAction" method="post"
+		 style="padding-top:10px;padding-bottom:10px;">
+		<div class="form-group">
+			<label for="company">单位：</label>
+			<input class="form-control" id="company" type="text" value="<s:property value='company' />">
+			<input class="param" name="company" type="hidden" data-target="#company" value="<s:property value='company' />">
+		</div>
+		<div class="form-group">
+			<label for="name">姓名：</label>
+			<input class="form-control" id="name" type="text" value="<s:property value='name' />">
+			<input class="param" name="name" type="hidden" data-target="#name" value="<s:property value='name' />">
+		</div>
+		<button class="btn btn-primary" type="submit">
+			<span class="glyphicon glyphicon-search"></span> 搜索
+		</button>
+	</form>
+	<table class="table table-bordered table-striped table-hover">
+		<thead>
+			<tr>
+				<th class="text-center">#</th>
+				<th class="text-center">单位</th>
+				<th class="text-center">中文名</th>
+				<th class="text-center">英文名</th>
+				<th class="text-center">订票日期</th>
+				<th class="text-center">消费金额</th>
+				<th class="text-center">操作</th>
+			</tr>
+		</thead>
+		<tbody>
+			<s:iterator value="recodes" status="st">
+				<tr>
+					<td><s:property value="#st.index + 1" /></td>
+					<td><s:property value="client.company" /></td>
+					<td><s:property value="client.clientName" /></td>
+					<td><s:property value="client.clientEnglishName" /></td>
+					<td><s:date name="bookingDate" format="yyyy-MM-dd" /></td>
+					<td>
+						<s:text name="global.format.money">
+							<s:param value="consumption" />
+						</s:text>
+					</td>
+					<td>
+						<a href="/CRM/recode/detailAction?recodeId=<s:property value='id' />" target="_blank">详情</a>
+						&nbsp;/&nbsp;<a href="/CRM/recode/deleteAction?recodeId=<s:property value='id' />" data-id="delete">删除</a>
+					</td>
+				</tr>
+			</s:iterator>
+		</tbody>
+	</table>
+	<div class="pagination" style="margin-top:-10px;">
+		<a href="#" class="first" data-action="first">&laquo;</a> 
+		<a href="#" class="previous" data-action="previous">&lsaquo;</a>
+		<input type="text" readonly="readonly" data-max-page="<s:property value='maxPage' />">
+		<a href="#" class="next" data-action="next">&rsaquo;</a>
+		<a href="#" class="last" data-action="last">&raquo;</a>
+	</div>
+	<script type="text/javascript">
+		$(function(){
+			// 拦截搜索动作
+			$("form").submit(function(){
+				$(".param").each(function(){
+					$(this).val($($(this).attr("data-target")).val());
+				});
+				var url = $(this).attr("action");
+				var params = {
+					company: $("[data-target='#company']").val(),
+					name: $("[data-target='#name']").val()
+				};
+				onsearch(url, params);
+						
+				// 阻止表单默认提交
+				return false;
+			});
+					
+			// 拦截重置密码
+			$("[data-id='delete']").each(function(){
+				var $this = $(this);
+				$this.click(function(){
+					$.getJSON($this.attr("href"), function(data){
+						showDialog(data.resultInfo, function(){
+							$this.closest("tr").remove();
+						});
+					});
+							
+					// 阻止默认提交
+					return false;
+				});
+			});
+		});
+	</script>
+</div>

@@ -12,9 +12,11 @@
 		</id>
 
 		<!-- 映射普通属性 -->
-		<property name="cardNo" column="卡号" />
+		<property name="cardNo" column="卡号" unique="true" />
 		<property name="status" column="状态" />
 		<property name="balance" column="余额" />
+		<property name="phone" column="手机号" />
+		<property name="checkCode" column="卡校验码" />
 
 		<!-- 映射关联属性 -->
 		<many-to-one name="client" column="会员"
