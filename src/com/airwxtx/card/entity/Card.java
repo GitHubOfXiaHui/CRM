@@ -17,6 +17,10 @@ public class Card implements CardStatus {
 	private String status;
 	// 余额
 	private Double balance;
+	// 手机号
+	private String phone;
+	// 卡校验码
+	private String checkCode;
 	
 	/* 关联属性 */
 	// 持卡人
@@ -56,6 +60,22 @@ public class Card implements CardStatus {
 		this.balance = balance;
 	}
 	
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public String getCheckCode() {
+		return checkCode;
+	}
+
+	public void setCheckCode(String checkCode) {
+		this.checkCode = checkCode;
+	}
+
 	public Client getClient() {
 		return client;
 	}

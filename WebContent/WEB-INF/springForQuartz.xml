@@ -16,15 +16,15 @@
 						<bean class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
 							<!-- 工作bean -->
 							<property name="targetObject">
-								<bean class="com.airwxtx.quartz.RefreshFreezeAuthority" />
+								<bean class="com.airwxtx.quartz.RefreshFreeze" />
 							</property>
 							<property name="targetMethod">
-								<value>refreshFreezeAuthority</value>
+								<value>execute</value>
 							</property>
 						</bean>
 					</property>
 					<!-- 每天9-12点，每分钟执行一次 -->
-					<property name="cronExpression" value="0 0 0 * * ?" />
+					<property name="cronExpression" value="0 40 14 * * ?" />
 				</bean>
 			</list>
 		</property>

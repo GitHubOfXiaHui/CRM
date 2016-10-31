@@ -1,12 +1,12 @@
 package com.airwxtx.settings.action.impl;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.airwxtx.authority.service.AuthorityService;
 import com.airwxtx.settings.action.SettingsAction;
 import com.airwxtx.settings.service.SettingsService;
 import com.airwxtx.user.entity.User;
@@ -26,10 +26,14 @@ public class SettingsActionImpl extends ActionSupport implements SettingsAction 
 	private String newPassword;
 	private String confirmPassword;
 
-	private Map<String, Object> jsonResult = new HashMap<>();
+	private String result;
+	private String resultInfo;
 
 	@Autowired
 	private SettingsService settingsService;
+
+	@Autowired
+	private AuthorityService authorityService;
 
 	@Override
 	public String profile() throws Exception {
@@ -50,9 +54,6 @@ public class SettingsActionImpl extends ActionSupport implements SettingsAction 
 		User user = settingsService.findUser(username);
 		if (!oldPassword.equals(user.getPassword())) {
 			this.addFieldError("oldPassword", "原密码错误");
-			oldPassword = "";
-			newPassword = "";
-			confirmPassword = "";
 		}
 	}
 
@@ -61,7 +62,8 @@ public class SettingsActionImpl extends ActionSupport implements SettingsAction 
 		// TODO Auto-generated method stub
 		String username = (String) ActionContext.getContext().getSession().get("user");
 		settingsService.changePassword(username, newPassword);
-		jsonResult.put("resultInfo", "修改成功");
+		result = "success";
+		resultInfo = "密码修改成功。";
 		return CHANGE_PASSWORD;
 	}
 
@@ -74,20 +76,16 @@ public class SettingsActionImpl extends ActionSupport implements SettingsAction 
 		return EXIT;
 	}
 
+	public List<String> getDisplayAuthorities() throws IllegalArgumentException, IllegalAccessException {
+		return authorityService.changeToDisplayAuthorities(user.getAuthority());
+	}
+
 	public User getUser() {
 		return user;
 	}
 
 	public void setUser(User user) {
 		this.user = user;
-	}
-
-	public SettingsService getSettingsService() {
-		return settingsService;
-	}
-
-	public void setSettingsService(SettingsService settingsService) {
-		this.settingsService = settingsService;
 	}
 
 	public String getOldPassword() {
@@ -114,12 +112,36 @@ public class SettingsActionImpl extends ActionSupport implements SettingsAction 
 		this.confirmPassword = confirmPassword;
 	}
 
-	public Map<String, Object> getJsonResult() {
-		return jsonResult;
+	public String getResult() {
+		return result;
 	}
 
-	public void setJsonResult(Map<String, Object> jsonResult) {
-		this.jsonResult = jsonResult;
+	public void setResult(String result) {
+		this.result = result;
+	}
+
+	public String getResultInfo() {
+		return resultInfo;
+	}
+
+	public void setResultInfo(String resultInfo) {
+		this.resultInfo = resultInfo;
+	}
+
+	public SettingsService getSettingsService() {
+		return settingsService;
+	}
+
+	public void setSettingsService(SettingsService settingsService) {
+		this.settingsService = settingsService;
+	}
+
+	public AuthorityService getAuthorityService() {
+		return authorityService;
+	}
+
+	public void setAuthorityService(AuthorityService authorityService) {
+		this.authorityService = authorityService;
 	}
 
 	private static final String PROFILE = "profile";

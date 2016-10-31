@@ -16,6 +16,7 @@
 		<property name="password" column="密码" />
 		<property name="role" column="角色" />
 		<property name="authority" column="权限" />
+		<property name="freezeCount" column="冻结次数" />
 
 		<!-- 映射关联属性 -->
 		<set name="recodes" inverse="true">

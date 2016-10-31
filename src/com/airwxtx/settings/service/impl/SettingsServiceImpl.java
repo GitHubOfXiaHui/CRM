@@ -20,7 +20,7 @@ public class SettingsServiceImpl implements SettingsService {
 	@Transactional(readOnly = true)
 	public User findUser(String username) {
 		// TODO Auto-generated method stub
-		List<User> usr = userDao.findByUsername(username);
+		List<User> usr = userDao.findUserByName(username);
 		return usr.size() > 0 ? usr.get(0) : null;
 	}
 
@@ -28,7 +28,7 @@ public class SettingsServiceImpl implements SettingsService {
 	@Transactional
 	public void changePassword(String username, String newPassword) {
 		// TODO Auto-generated method stub
-		List<User> usr = userDao.findByUsername(username);
+		List<User> usr = userDao.findUserByName(username);
 		if (usr.size() > 0) {
 			usr.get(0).setPassword(newPassword);
 		}

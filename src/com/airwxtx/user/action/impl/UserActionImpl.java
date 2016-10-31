@@ -2,77 +2,123 @@ package com.airwxtx.user.action.impl;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.airwxtx.authority.entity.Authority;
+import com.airwxtx.authority.service.AuthorityService;
 import com.airwxtx.user.action.UserAction;
 import com.airwxtx.user.entity.Role;
 import com.airwxtx.user.entity.User;
 import com.airwxtx.user.service.UserService;
+import com.airwxtx.utils.Constants;
 import com.opensymphony.xwork2.ActionSupport;
 
 @SuppressWarnings("serial")
 @Controller("userAction")
 @Scope("prototype")
 public class UserActionImpl extends ActionSupport implements UserAction {
-	
+
 	private User user;
-	
+
 	private String username;
-	
+
 	private String role;
-	
+
 	private int page;
-	
-	//权限
-	private List<Long> authorities;
-	
+
+	// 权限
+	private Set<Long> authorityNumbers;
+
 	private List<User> users;
-	
+
+	private boolean create;
+
+	private Map<String, Object> jsonResult = new HashMap<>();
+
 	@Autowired
 	private UserService userService;
 
+	@Autowired
+	private AuthorityService authorityService;
+
 	@Override
-	public String preSave() throws Exception {
+	public String preCreateUser() throws Exception {
 		// TODO Auto-generated method stub
+		create = true;
 		return INPUT;
 	}
 
-	@Override
-	public String saveUser() throws Exception {
-		// TODO Auto-generated method stub
-		this.userService.saveUser(user, authorities);
-		return null;
+	public void validateCreateUser() throws Exception {
+		if (userService.hasUsername(user.getUsername())) {
+			create = true;
+			this.addFieldError("user.username", "用户名已被使用");
+		}
 	}
 
 	@Override
-	public String updateUser() throws Exception {
+	public String createUser() throws Exception {
 		// TODO Auto-generated method stub
-		this.userService.updateUser(user, authorities);
-		return null;
+		userService.createUser(user, authorityNumbers);
+		return PROFILE;
 	}
 
 	@Override
-	public String listUser() throws Exception {
+	public String preEditUser() throws Exception {
 		// TODO Auto-generated method stub
-		users = userService.findUserWithPage(page, PAGE_SIZE);
+		create = false;
+		user = userService.findUserByName(user.getUsername());
+		authorityNumbers = authorityService.resolveAuthority(user.getAuthority());
+		return EDIT;
+	}
+
+	@Override
+	public String editUser() throws Exception {
+		// TODO Auto-generated method stub
+		userService.editUser(user, authorityNumbers);
+		return PROFILE;
+	}
+
+	@Override
+	public String resetPassword() throws Exception {
+		userService.resetPasswordByName(user.getUsername());
+		jsonResult.put("resultInfo", "密码重置成功");
+		return SUCCESS;
+	}
+
+	@Override
+	public String searchUser() throws Exception {
+		// TODO Auto-generated method stub
+		users = userService.findUserByNameOrRoleWithPage(username, role, page, Constants.PAGE_SIZE);
 		return LIST;
 	}
-	
+
 	public int getMaxPage() {
-		return userService.countMaxPage(PAGE_SIZE);
+		int count = userService.countUserWithNameOrRole(username, role);
+		return (count - 1) / Constants.PAGE_SIZE + 1;
 	}
 
-	public List<String> getRoles() throws IllegalArgumentException, IllegalAccessException{
+	public List<String> getAllRoles() throws IllegalArgumentException, IllegalAccessException {
 		List<String> roles = new ArrayList<String>();
 		Field[] fields = Role.class.getFields();
-		for(Field field : fields){
+		for (Field field : fields) {
 			roles.add((String) field.get(null));
 		}
 		return roles;
+	}
+
+	public List<Authority> getAllAuthorities() {
+		return authorityService.loadAllAuthorities();
+	}
+
+	public List<String> getDisplayAuthorities() {
+		return authorityService.changeToDisplayAuthorities(authorityNumbers);
 	}
 
 	public User getUser() {
@@ -107,20 +153,12 @@ public class UserActionImpl extends ActionSupport implements UserAction {
 		this.page = page;
 	}
 
-	public List<Long> getAuthorities() {
-		return authorities;
+	public Set<Long> getAuthorityNumbers() {
+		return authorityNumbers;
 	}
 
-	public void setAuthorities(List<Long> authorities) {
-		this.authorities = authorities;
-	}
-
-	public UserService getUserService() {
-		return userService;
-	}
-
-	public void setUserService(UserService userService) {
-		this.userService = userService;
+	public void setAuthorityNumbers(Set<Long> authorities) {
+		this.authorityNumbers = authorities;
 	}
 
 	public List<User> getUsers() {
@@ -131,8 +169,40 @@ public class UserActionImpl extends ActionSupport implements UserAction {
 		this.users = users;
 	}
 
-	private static final int PAGE_SIZE = 10;
-	
+	public boolean isCreate() {
+		return create;
+	}
+
+	public void setCreate(boolean create) {
+		this.create = create;
+	}
+
+	public Map<String, Object> getJsonResult() {
+		return jsonResult;
+	}
+
+	public void setJsonResult(Map<String, Object> jsonResult) {
+		this.jsonResult = jsonResult;
+	}
+
+	public UserService getUserService() {
+		return userService;
+	}
+
+	public void setUserService(UserService userService) {
+		this.userService = userService;
+	}
+
+	public AuthorityService getAuthorityService() {
+		return authorityService;
+	}
+
+	public void setAuthorityService(AuthorityService authorityService) {
+		this.authorityService = authorityService;
+	}
+
 	private static final String LIST = "list";
-	
+	private static final String EDIT = "edit";
+	private static final String PROFILE = "profile";
+
 }

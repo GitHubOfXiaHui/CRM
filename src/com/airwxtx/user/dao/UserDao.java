@@ -12,50 +12,43 @@ public interface UserDao {
 	 * @param username
 	 * @return
 	 */
-	List<User> findByUsername(String username);
+	public List<User> findUserByName(String username);
 
 	/**
 	 * 创建用户
 	 * 
 	 * @param user
 	 */
-	Integer saveUser(User user);
+	public void saveOrUpdateUser(User user);
 
 	/**
-	 * 更新用户
+	 * 按用户名或角色分页查询用户
 	 * 
-	 * @param user
-	 */
-	void updateUser(User user);
-
-	/**
-	 * 通过用户id加载用户
-	 * 
-	 * @param userId
-	 * @return
-	 */
-	User userDetials(Integer userId);
-
-	/**
-	 * 查找用户（分页）
-	 * 
+	 * @param username
+	 * @param role
 	 * @param page
 	 * @param pageSize
 	 * @return
 	 */
-	List<User> findUserWithPage(int page, int pageSize);
+	public List<User> findUserByNameOrRoleWithPage(String username, String role, int page, int pageSize);
 
 	/**
 	 * 统计用户数量
 	 * 
 	 * @return
 	 */
-	int countUser();
-	
+	public int countUserWithNameOrRole(String username, String role);
+
 	/**
-	 * 列出所有用户
-	 * @return
+	 * 刷新冻结权限
 	 */
-	List<User> listAllUsers();
+	public void refreshFreeze();
+
+	/**
+	 * 重置对应用户的密码
+	 * 
+	 * @param username
+	 */
+	public void resetPasswordByName(String username);
 
 }

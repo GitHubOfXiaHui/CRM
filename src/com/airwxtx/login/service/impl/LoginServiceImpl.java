@@ -20,7 +20,7 @@ public class LoginServiceImpl implements LoginService {
 	@Transactional(readOnly = true)
 	public boolean canLogin(User user) {
 		// TODO Auto-generated method stub
-		List<User> usr = userDao.findByUsername(user.getUsername());
+		List<User> usr = userDao.findUserByName(user.getUsername());
 		return !usr.isEmpty() && usr.get(0).getPassword().equals(user.getPassword());
 	}
 

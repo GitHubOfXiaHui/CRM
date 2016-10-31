@@ -6,10 +6,14 @@
 <struts>
 	<package name="user" namespace="/user" extends="airwxtx-default">
 		<action name="*Action" class="userAction" method="{1}">
-			<result>/WEB-INF/pages/client/success.jsp</result>
-			<result name="input">/WEB-INF/pages/user/saveUser.jsp</result>
+			<result name="input">/WEB-INF/pages/user/createUser.jsp</result>
+			<result name="edit">/WEB-INF/pages/user/editUser.jsp</result>
+			<result name="profile">/WEB-INF/pages/settings/profile.jsp</result>
 			<result name="list">/WEB-INF/pages/user/listUser.jsp</result>
-			<allowed-methods>listUser</allowed-methods>
+			<result type="json">
+				<param name="root">jsonResult</param>
+			</result>
+			<allowed-methods>preCreateUser,createUser,preEditUser,editUser,searchUser,resetPassword</allowed-methods>
 		</action>
 	</package>
 </struts>

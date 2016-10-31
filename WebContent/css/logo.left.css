@@ -1,0 +1,28 @@
+img {
+	position: fixed;
+	top: 50%;
+	left: 25%;
+	width: 394px;
+	height: 75px;
+	margin-top: -37px;
+	margin-left: -197px;
+}
+
+hr {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	width: 2px;
+	height: 300px;
+	margin-top: -150px;
+	margin-left: -1px;
+	background-color: #9c6;
+}
+
+.panel {
+	position: fixed;
+	top: 50%;
+	left: 75%;
+	width: 300px;
+	transform: translate(-150px, -50%);
+}
