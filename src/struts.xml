@@ -42,9 +42,9 @@
 			<result name="error">/WEB-INF/pages/error/error.jsp</result>
 		</global-results>
 		
-		<global-exception-mappings>
+		<!-- <global-exception-mappings>
 			<exception-mapping result="error" exception="java.lang.Exception" />
-		</global-exception-mappings>
+		</global-exception-mappings> -->
 	</package>
 
 	<include file="com/airwxtx/login/action/login.action.xml" />

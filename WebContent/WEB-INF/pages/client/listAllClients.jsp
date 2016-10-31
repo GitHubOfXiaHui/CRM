@@ -10,22 +10,26 @@
 			    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 			  	 <strong>提示：</strong> 默认显示所有会员。搜索时可单独按姓名或单位搜索，也可以二者都搜。
 		 	</div>
-			<form role="form" class="form-inline">
+			<form role="form" class="form-inline" action="/CRM/client/searchClientAction" method="post">
 				<div class="form-group">
 					<label for="name">姓名:</label>
-					<input type="text" class="form-control" id="name" placeholder="请输入姓名">
+					<input type="text" class="form-control" id="name" value="<s:property value='name' />" placeholder="请输入姓名">
+					<input class="param" name="name" type="hidden" data-target="#name" value="<s:property value='name' />">
 				</div>
 				<div class="form-group">
 					<label for="company">单位:</label>
-					<input type="text" class="form-control" id="company" placeholder="请输入单位">
+					<input type="text" class="form-control" id="company" value="<s:property value='company' />" placeholder="请输入单位">
+					<input class="param" name="company" type="hidden" data-target="#company" value="<s:property value='company' />">
 				</div>
 				<div class="form-group">
 					<label for="card">卡号:</label>
-					<input type="text" class="form-control" id="card" placeholder="请输入卡号">
+					<input type="text" class="form-control" id="card" value="<s:property value='card' />" placeholder="请输入卡号">
+					<input class="param" name="card" type="hidden" data-target="#card" value="<s:property value='card' />">
 				</div>
 				<div class="form-group">
 					<label for="phone">手机号:</label>
-					<input type="text" class="form-control" id="phone" placeholder="请输入手机号">
+					<input type="text" class="form-control" id="phone" value="<s:property value='phone' />" placeholder="请输入手机号">
+					<input class="param" name="phone" type="hidden" data-target="#phone" value="<s:property value='phone' />">
 				</div>
 					<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span>搜索</button>
 					<a href="/CRM/client/preSaveClientAction" target="_blank" type="button" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span>添加</a>
@@ -41,7 +45,8 @@
 					<tr>
 							<th>#</th>
 							<th>单位</th>
-							<th>姓名</th>
+							<th>中文姓名</th>
+							<th>英文姓名</th>
 							<th>手机号</th>
 							<th>身份证号</th>
 							<th>操作</th>
@@ -53,12 +58,15 @@
 						<td><s:property value="#i.index" /></td>
 						<td><s:property value="company" /></td>
 						<td><s:property value="clientName" /></td>
+						<td><s:property value="clientEnglishName" /></td>
 						<td><s:property value="mobilePhoneNumber" /></td>
 						<td><s:property value="idNumber" /></td>
 						<td>
 							<a class="btn btn-success" href="/CRM/client/showClientDetailsAction?clientId=<s:property value='clientId' />" target="_blank">查看</a>
 							/
-							<a class="btn btn-success" href="/CRM/client/preUpateClientAction?clientId=<s:property value='clientId' />" target="_blank">修改</a>
+							<a class="btn btn-success" href="/CRM/client/preUpdateClientAction?clientId=<s:property value='clientId' />" target="_blank">修改</a>
+							/
+							<a class="btn btn-success" href="/CRM/client/preUpdateClientAction?clientId=<s:property value='clientId' />" target="_blank">添加会员卡</a>
 						</td>
 					</tr>
 					</s:iterator>
@@ -74,4 +82,27 @@
 		<a href="#" class="next" data-action="next">&rsaquo;</a>
 		<a href="#" class="last" data-action="last">&raquo;</a>
 	</div>	
+	
+	<script type="text/javascript">
+	$(function(){
+		// 拦截搜索动作
+		$("form").submit(function(){
+			$(".param").each(function(){
+				//将查询参数保存在隐藏框
+				$(this).val($($(this).attr("data-target")).val());
+			});
+			var url = $(this).attr("action");
+			var params = {
+				name: $("[data-target='#name']").val(),
+				phone: $("[data-target='#phone']").val(),
+				company: $("[data-target='#company']").val(),
+				card: $("[data-target='#card']").val()
+			};
+			onsearch(url, params);
+					
+			// 阻止表单默认提交
+			return false;
+		});
+	});
+	</script>
 </div>	
