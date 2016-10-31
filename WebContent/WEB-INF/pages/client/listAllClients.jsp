@@ -3,41 +3,33 @@
 <%@ taglib prefix="s" uri="/struts-tags"%>
 
 <div class="container" style="margin-top:20px;">
-	<div class="row">
-		<div class="col-md-10">
-			<div class="panel panel-success">
-				<div class="panel-heading">搜索</div>
-				<div class="panel-body">
-					<div class="alert alert-success">
-					    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-					  	 <strong>提示：</strong> 默认显示所有会员。搜索时可单独按姓名或单位搜索，也可以二者都搜。
-				 	</div>
-					<form role="form" class="form-horizontal">
-						<div class="form-group">
-						<label class="control-label col-md-2" for="name">会员姓名:</label>
-						<div class="col-md-10">
-						<input type="text" class="form-control" id="name" placeholder="请输入姓名">
-						</div>
-						</div>
-						<div class="form-group">
-						<label class="control-label col-md-2" for="company">会员单位:</label>
-						<div class="col-md-10">
-						<input type="text" class="form-control" id="company" placeholder="请输入单位">
-						</div>
-						</div>
-						<div class="col-md-offset-2">
-						<button type="submit" class="btn btn-success">搜索</button>
-						</div>
-					</form>
+	<div class="panel panel-success">
+		<div class="panel-heading">搜索</div>
+		<div class="panel-body">
+			<div class="alert alert-success">
+			    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+			  	 <strong>提示：</strong> 默认显示所有会员。搜索时可单独按姓名或单位搜索，也可以二者都搜。
+		 	</div>
+			<form role="form" class="form-inline">
+				<div class="form-group">
+					<label for="name">姓名:</label>
+					<input type="text" class="form-control" id="name" placeholder="请输入姓名">
 				</div>
-			</div>
-		</div>
-		<div class="col-md-2">
-			<div class="panel panel-success">
-				<div class="panel-heading">新建</div>
-				<div class="panel-body"><button type="button" class="btn btn-success">+</button></div>
-			</div>
-			
+				<div class="form-group">
+					<label for="company">单位:</label>
+					<input type="text" class="form-control" id="company" placeholder="请输入单位">
+				</div>
+				<div class="form-group">
+					<label for="card">卡号:</label>
+					<input type="text" class="form-control" id="card" placeholder="请输入卡号">
+				</div>
+				<div class="form-group">
+					<label for="phone">手机号:</label>
+					<input type="text" class="form-control" id="phone" placeholder="请输入手机号">
+				</div>
+					<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span>搜索</button>
+					<a href="/CRM/client/preSaveClientAction" target="_blank" type="button" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span>添加</a>
+			</form>
 		</div>
 	</div>
 			
@@ -66,10 +58,10 @@
 						<td>
 							<a class="btn btn-success" href="/CRM/client/showClientDetailsAction?clientId=<s:property value='clientId' />" target="_blank">查看</a>
 							/
-							<a class="btn btn-success" href="/CRM/client/showClientDetailsAction?clientId=<s:property value='clientId' />" target="_blank">修改</a>
+							<a class="btn btn-success" href="/CRM/client/preUpateClientAction?clientId=<s:property value='clientId' />" target="_blank">修改</a>
 						</td>
 					</tr>
-				</s:iterator>
+					</s:iterator>
 				</tbody>
 			</table>
 		</div>

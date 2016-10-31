@@ -16,23 +16,6 @@
 						<bean class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
 							<!-- 工作bean -->
 							<property name="targetObject">
-								<bean class="test.QuartzJob" />
-							</property>
-							<property name="targetMethod">
-								<value>execute</value>
-							</property>
-						</bean>
-					</property>
-					<!-- 每天9-12点，每分钟执行一次 -->
-					<property name="cronExpression" value="0 * 9-12 * * ?" />
-				</bean>
-				
-				<bean class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
-					<!-- 定时任务 -->
-					<property name="jobDetail">
-						<bean class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
-							<!-- 工作bean -->
-							<property name="targetObject">
 								<bean class="com.airwxtx.quartz.RefreshFreezeAuthority" />
 							</property>
 							<property name="targetMethod">

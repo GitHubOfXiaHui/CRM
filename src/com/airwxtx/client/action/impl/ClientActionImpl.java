@@ -61,20 +61,23 @@ public class ClientActionImpl extends ActionSupport implements ClientAction{
 		return INPUT;
 	}
 	@Override
-	public String saveClient() throws Exception {
+	public void saveClient() throws Exception {
 		// TODO Auto-generated method stub
-		if(this.clientService.saveClient(client))
-			return SUCCESS;
-		else
-			return ERROR;
+		this.clientService.saveClient(client);
 	}
 	
 	@Override
-	public String updateClient() throws Exception {
+	public String preUpdateClient() throws Exception {
+		// TODO Auto-generated method stub
+		return UPDATE;
+	}
+	
+	@Override
+	public void updateClient() throws Exception {
 		// TODO Auto-generated method stub
 		this.clientService.updateClient(client);
-		return null;
 	}
+	
 	@Override
 	public String deleteClient() throws Exception {
 		// TODO Auto-generated method stub
@@ -103,5 +106,6 @@ public class ClientActionImpl extends ActionSupport implements ClientAction{
 
 	private static final String DETAILS = "details";
 	private static final String ALL_CLIENTS = "allClients";
+	private static final String UPDATE = "update";
 	private static final int PAGE_SIZE = 10;
 }

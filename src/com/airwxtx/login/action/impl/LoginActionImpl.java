@@ -31,6 +31,8 @@ public class LoginActionImpl extends ActionSupport implements LoginAction {
 	 * @throws Exception
 	 */
 	public void validateLogin() throws Exception {
+		if(user == null || user.getUsername() == null)
+			this.addFieldError("user", "");
 		if (!loginService.canLogin(user)) {
 			this.addFieldError("user", "用户名不存在或密码错误");
 			user.setPassword("");

@@ -13,14 +13,21 @@ public interface ClientAction {
 	 * @return
 	 * @throws Exception
 	 */
-	public String saveClient() throws Exception;
+	public void saveClient() throws Exception;
+	
+	/**
+	 * 进入修改客户
+	 * @return
+	 * @throws Exception
+	 */
+	public String preUpdateClient() throws Exception;
 	
 	/**
 	 * 修改客户
 	 * @return
 	 * @throws Exception
 	 */
-	public String updateClient() throws Exception;
+	public void updateClient() throws Exception;
 	
 	/**
 	 * 删除客户

@@ -6,13 +6,11 @@
 <struts>
 	<package name="client" namespace="/client" extends="airwxtx-default">
 		<action name="*Action" class="clientAction" method="{1}">
-			<result name="preSave"></result>
+			<result name="update">/WEB-INF/pages/client/updateClient.jsp</result>
 			<result name="input">/WEB-INF/pages/client/saveClient.jsp</result>
-			<result name="error">/WEB-INF/pages/client/error.jsp</result>
-			<result>/WEB-INF/pages/client/success.jsp</result>
 			<result name="details">/WEB-INF/pages/client/clientDetails.jsp</result>
 			<result name="allClients">/WEB-INF/pages/client/listAllClients.jsp</result>
-			<allowed-methods>preSaveClient,saveClient,updateClient,listAllClients,showClientDetails,changeClientDetails</allowed-methods>
+			<allowed-methods>preSaveClient,saveClient,updateClient,preUpdateClient,listAllClients,showClientDetails</allowed-methods>
 		</action>
 	</package>
 </struts>

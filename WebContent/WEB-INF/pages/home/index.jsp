@@ -6,7 +6,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <!-- CDN -->
 <link href="http://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
-<script src="http://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 <script src="http://cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <!-- jQuery分页插件 -->
 <link href="/CRM/css/jqpagination.css" rel="stylesheet" type="text/css">
@@ -16,7 +17,6 @@
 <link href="/CRM/css/index-main.css" rel="stylesheet" type="text/css">
 <link href="/CRM/css/index-footer.css" rel="stylesheet" type="text/css">
 
-<script src="/CRM/js/jquery-3.1.1.min.js" type="text/javascript"></script>
 <!-- jQuery分页插件 -->
 <script src="/CRM/js/jquery.jqpagination.min.js" type="text/javascript"></script>
 <script type="text/javascript">

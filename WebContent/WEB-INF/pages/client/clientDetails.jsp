@@ -1,21 +1,32 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <!-- Bootstrap -->
 <link href="http://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
-<script src="http://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 <script src="http://cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
 <title>会员详情</title>
-
-<!-- CSS -->
-<style>
-</style>
+<script type="text/javascript">
+	$(function(){
+		$("[data-target]").click(function(){
+			var value = $(this).text();
+			if(value == "展开"){
+				$(this).text("隐藏");
+			}
+			else
+			{
+				$(this).text("展开");	
+			}
+		});
+	});
+</script>
 </head>
 <body>
 	<div class="container" style="margin-top:20px;">
@@ -45,6 +56,15 @@
 								<li class="list-group-item"><strong>座位喜好：</strong><s:property value="client.preferSeat" /></li>
 								<li class="list-group-item"><strong>推荐来源：</strong><s:property value="client.recommend" /></li>
 								<li class="list-group-item"><strong>特别喜好：</strong><s:property value="client.like" /></li>
+								<li class="list-group-item">
+									<strong>常旅客列表：</strong>
+									<button data-toggle="collapse" data-target="#frequentFlyers" class="btn btn-default btn-sm" >展开</button>
+								</li>
+								<div id="frequentFlyers" class="collapse">
+									<s:iterator value="client.frequentFlyers" >
+										<li class="list-group-item"><s:property /></li>
+									</s:iterator>
+								</div>
 							</ul>
 						</div>
 					</div>

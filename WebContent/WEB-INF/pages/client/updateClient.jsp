@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>创建新客户</title>
+<title>修改客户详情</title>
 
 <!-- CDN -->
 <link href="http://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
@@ -25,6 +25,12 @@
 			<div class="panel-body">
 			<s:fielderror />
 				<form class="form-horizontal" role="form" action="/CRM/client/saveClientAction" method="post">
+  					<div class="form-group">
+				    	<label class="control-label col-sm-2" for="name">会员ID:</label>
+					    <div class="col-sm-10">
+					      <input type="text" class="form-control" id="name" name="client.clientName">
+					    </div>
+				  	</div>
   					<div class="form-group">
 				    	<label class="control-label col-sm-2" for="name">中文姓名:</label>
 					    <div class="col-sm-10">

@@ -2,6 +2,7 @@ package com.airwxtx.client.service.impl;
 
 import java.util.List;
 
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -56,11 +57,15 @@ public class ClientServiceImpl implements ClientService{
 		// TODO Auto-generated method stub
 		return this.clientDao.listAllClients(page,pageSize);
 	}
-
+	
+	@Transactional(readOnly = true)
 	@Override
 	public Client getClient(Integer clientId) {
 		// TODO Auto-generated method stub
-		return this.clientDao.getClient(clientId);
+		//默认不加载集合属性，强制加载集合属性。
+		Client cl = this.clientDao.getClient(clientId);
+		Hibernate.initialize(cl.getFrequentFlyers());
+		return cl;
 	}
 	
 	
