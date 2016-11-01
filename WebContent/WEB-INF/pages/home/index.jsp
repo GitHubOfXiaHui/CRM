@@ -143,7 +143,7 @@ footer {
 				<a class="navbar-brand" href="#">AIRWXTX</a>
 			</div>
 			<ul class="nav navbar-nav" id="nav">
-				<li><a href="#">会员管理</a></li>
+				<li><a href="/CRM/client/searchClientAction">会员管理</a></li>
 				<li><a href="#">会员卡管理</a></li>
 				<li class="active"><a href="/CRM/recode/searchRecodeAction">消费记录</a></li>
 				<li><a href="/CRM/user/searchUserAction">用户管理</a></li>

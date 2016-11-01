@@ -14,4 +14,22 @@ public class CardDaoImpl extends BaseDaoSupport implements CardDao {
 		String hql = "UPDATE Card c SET c.balance = c.balance + ? WHERE c = ?";
 		this.getHibernateTemplate().bulkUpdate(hql, money, card);
 	}
+
+	@Override
+	public void saveCard(Card card) {
+		// TODO Auto-generated method stub
+		this.getHibernateTemplate().save(card);
+	}
+
+	@Override
+	public void updateCard(Card card) {
+		// TODO Auto-generated method stub
+		this.getHibernateTemplate().update(card);
+	}
+
+	@Override
+	public Card loadCard(Integer id) {
+		// TODO Auto-generated method stub
+		return this.getHibernateTemplate().load(Card.class, id);
+	}
 }
