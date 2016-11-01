@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import com.airwxtx.client.action.ClientAction;
 import com.airwxtx.client.entity.Client;
 import com.airwxtx.client.service.ClientService;
+import com.airwxtx.utils.Constants;
 import com.opensymphony.xwork2.ActionSupport;
 
 @SuppressWarnings("serial")
@@ -20,7 +21,90 @@ public class ClientActionImpl extends ActionSupport implements ClientAction{
 	private List<Client> clients;
 	private Integer clientId;
 	private Integer page;
+	private String name;
+	private String company;
+	private String phone;
+	private String card;
+	@Autowired
+	private ClientService clientService;
 	
+	
+	@Override
+	public String preSaveClient() throws Exception {
+		// TODO Auto-generated method stub
+		return INPUT;
+	}
+	@Override
+	public String saveClient() throws Exception {
+		// TODO Auto-generated method stub
+		this.clientService.saveClient(client);
+		return DETAILS;
+	}
+	
+	@Override
+	public String preUpdateClient() throws Exception {
+		// TODO Auto-generated method stub
+		client = this.clientService.getClient(clientId);
+		return UPDATE;
+	}
+	
+	@Override
+	public String updateClient() throws Exception {
+		// TODO Auto-generated method stub
+		this.clientService.updateClient(client);
+		return DETAILS;
+	}
+	
+	@Override
+	public String deleteClient() throws Exception {
+		// TODO Auto-generated method stub
+		this.clientService.deleteClient(client);
+		return null;
+	}
+	@Override
+	public String searchClient() throws Exception {
+		// TODO Auto-generated method stub
+		clients = this.clientService.searchClientByNameOrPhoneOrCompanyOrCardWithPage(name,phone,company,card,page,Constants.PAGE_SIZE);
+		return LIST;
+	}
+
+	@Override
+	public String showClientDetails() throws Exception {
+		// TODO Auto-generated method stub
+		client = this.clientService.getClient(clientId);
+		return DETAILS;
+	}
+	public int getMaxPage(){
+		int count = clientService.countClientByNameOrPhoneOrCompanyOrCardWithPage(name, phone, company, card);
+		return (count - 1) / Constants.PAGE_SIZE + 1;
+	}
+	//=========================================================================================================
+	//set and get
+	//=========================================================================================================
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getCompany() {
+		return company;
+	}
+	public void setCompany(String company) {
+		this.company = company;
+	}
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+	public String getCard() {
+		return card;
+	}
+	public void setCard(String card) {
+		this.card = card;
+	}
 	public Integer getPage() {
 		return page;
 	}
@@ -39,9 +123,6 @@ public class ClientActionImpl extends ActionSupport implements ClientAction{
 	public void setClients(List<Client> clients) {
 		this.clients = clients;
 	}
-	@Autowired
-	private ClientService clientService;
-	
 	public Client getClient() {
 		return client;
 	}
@@ -55,53 +136,8 @@ public class ClientActionImpl extends ActionSupport implements ClientAction{
 		this.clientService = clientService;
 	}
 	
-	@Override
-	public String preSaveClient() throws Exception {
-		// TODO Auto-generated method stub
-		return INPUT;
-	}
-	@Override
-	public String saveClient() throws Exception {
-		// TODO Auto-generated method stub
-		if(this.clientService.saveClient(client))
-			return SUCCESS;
-		else
-			return ERROR;
-	}
-	
-	@Override
-	public String updateClient() throws Exception {
-		// TODO Auto-generated method stub
-		this.clientService.updateClient(client);
-		return null;
-	}
-	@Override
-	public String deleteClient() throws Exception {
-		// TODO Auto-generated method stub
-		this.clientService.deleteClient(client);
-		return null;
-	}
-	@Override
-	public String searchClient() throws Exception {
-		// TODO Auto-generated method stub
-		
-		return null;
-	}
-	@Override
-	public String listAllClients() throws Exception {
-		// TODO Auto-generated method stub
-		clients = this.clientService.listAllClients(page,PAGE_SIZE);
-		return ALL_CLIENTS;
-	}
-	@Override
-	public String showClientDetails() throws Exception {
-		// TODO Auto-generated method stub
-		client = this.clientService.getClient(clientId);
-		return DETAILS;
-	}
-	
 
 	private static final String DETAILS = "details";
-	private static final String ALL_CLIENTS = "allClients";
-	private static final int PAGE_SIZE = 10;
+	private static final String UPDATE = "update";
+	private static final String LIST = "list";
 }

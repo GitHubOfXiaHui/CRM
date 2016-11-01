@@ -3,24 +3,9 @@ package com.airwxtx.client.service;
 import java.util.List;
 
 import com.airwxtx.client.entity.Client;
+import com.airwxtx.utils.Constants;
 
-public interface ClientService {
-	
-	
-	/**
-	 * 根据公司查找客户
-	 * @param company
-	 * @return
-	 */
-	//List<Client> searchClientByCompany(String company);
-	
-	/**
-	 * 列出所有用户
-	 * @param 
-	 * @return
-	 */
-	List<Client> listAllClients(int page,int pageSize);
-	
+public interface ClientService {	
 	/**
 	 * 加载客户详情
 	 * @param clientId
@@ -47,9 +32,24 @@ public interface ClientService {
 	void deleteClient(Client client);
 	
 	/**
-	 * 按客户名查找客户
-	 * @param clientname
+	 * 查找客户
+	 * @param name
+	 * @param phone
+	 * @param company
+	 * @param card
+	 * @param page
+	 * @param pageSize
 	 * @return
 	 */
-	List<Client> searchClientByClientname(String clientname);
+	List<Client> searchClientByNameOrPhoneOrCompanyOrCardWithPage(String name,String phone,String company,String card,int page,int pageSize);
+	
+	/**
+	 * 统计数目
+	 * @param name
+	 * @param phone
+	 * @param company
+	 * @param card
+	 * @return
+	 */
+	int countClientByNameOrPhoneOrCompanyOrCardWithPage(String name,String phone,String company,String card);
 }

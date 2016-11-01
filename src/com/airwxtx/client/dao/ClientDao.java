@@ -6,30 +6,6 @@ import com.airwxtx.client.entity.Client;
 
 public interface ClientDao {
 	/**
-	 * 根据客户名称查找客户
-	 * 
-	 * @param clientname
-	 *            客户名
-	 * @return List<Client> 客户列表
-	 */
-	public List<Client> searchClientByClientname(String clientname);
-
-	/**
-	 * 根据公司名查找客户
-	 * 
-	 * @param company
-	 * @return List<Client> 客户列表
-	 */
-	public List<Client> searchClientByCompany(String company);
-
-	/**
-	 * 列出所有客户
-	 * 
-	 * @return List<Client> 客户列表
-	 */
-	public List<Client> listAllClients(int page,int pageSize);
-
-	/**
 	 * 更新客户信息
 	 * 
 	 * @param client
@@ -60,4 +36,28 @@ public interface ClientDao {
 	 * @return client
 	 */
 	public Client getClient(Integer clientId);
+	
+	/**
+	 * 查找客户
+	 * @param name
+	 * @param phone
+	 * @param company
+	 * @param card
+	 * @param page
+	 * @param pageSize
+	 * @return
+	 */
+	public List<Client> searchClientByNameOrPhoneOrCompanyOrCardWithPage(String name,String phone,String company,String card,int page,int pageSize);
+
+	/**
+	 * 统计数目
+	 * @param name
+	 * @param phone
+	 * @param company
+	 * @param card
+	 * @param page
+	 * @param pageSize
+	 * @return
+	 */
+	public int countClientByNameOrPhoneOrCompanyOrCardWithPage(String name,String phone,String company,String card);
 }

@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>创建新客户</title>
+<title>修改客户</title>
 
 <!-- CDN -->
 <link href="http://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
@@ -14,8 +14,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 <script src="http://cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
-<!-- 导入struts样式 -->
-<s:head />
 
 <script>
 $(document).ready(function(){
@@ -28,15 +26,18 @@ $(document).ready(function(){
 });
 </script>
 
+<!-- 导入struts样式 -->
+<s:head />
 
 </head>
 <body>
 	<div class="container" style="margin-top:20px;">
 		<div class="panel panel-success">
-			<div class="panel-heading">添加会员</div>
+			<div class="panel-heading">修改会员</div>
 			<div class="panel-body">
 			<s:fielderror />
-				<form class="form-horizontal" role="form" action="/CRM/client/saveClientAction" method="post">
+				<form class="form-horizontal" role="form" action="/CRM/client/updateClientAction" method="post">
+					<input name="client.clientId" value="<s:property value='client.clientId' />" type="hidden">
   					<div class="form-group">
 				    	<label class="control-label col-sm-2" for="name">中文姓名:</label>
 					    <div class="col-sm-10">
@@ -88,7 +89,7 @@ $(document).ready(function(){
 				  	<div class="form-group">
 				    	<label class="control-label col-sm-2" for="name">护照有效期:</label>
 					    <div class="col-sm-10">
-					      <input type="text" class="form-control" id="name" name="client.passportValidTime" value="<s:property value='client.passportValidTime' />">
+					      <input type="date" class="form-control" id="name" name="client.passportValidTime" value="<s:property value='client.passportValidTime' />">
 					    </div>
 				  	</div>
 				  	<div class="form-group">
@@ -100,7 +101,7 @@ $(document).ready(function(){
 				  	<div class="form-group">
 				    	<label class="control-label col-sm-2" for="name">通行证有效期:</label>
 					    <div class="col-sm-10">
-					      <input type="text" class="form-control" id="name" name="client.accessValidTime" value="<s:property value='client.accessValidTime' />">
+					      <input type="date" class="form-control" id="name" name="client.accessValidTime" value="<s:property value='client.accessValidTime' />">
 					    </div>
 				  	</div>
 				  	<div class="form-group">
@@ -116,23 +117,24 @@ $(document).ready(function(){
 					    </div>
 				  	</div>
 				  	<div class="form-group">
-				    	<label class="control-label col-sm-2" for="like">特别喜好:</label>
+				    	<label class="control-label col-sm-2" for="name">特别喜好:</label>
 					    <div class="col-sm-10">
-					      <input type="text" class="form-control" id="like" name="client.like" value="<s:property value='client.like' />">
+					      <input type="text" class="form-control" id="name" name="client.like" value="<s:property value='client.like' />">
 					    </div>
 				  	</div>
 				 	<div id="freq" class="form-group">
 				    	<label class="control-label col-sm-2" for="freq">常旅客:</label>
-					    <div class="col-sm-9">
-					      <input type="text" class="form-control" name="client.frequentFlyers" value="<s:property value='client.frequentFlyers' />">
-					    </div>
+				    	<s:iterator value="client.frequentFlyers" >
+				    		<div class="col-sm-offset-2 col-sm-9">
+					      		<input type="text" class="form-control" name="client.frequentFlyers" value="<s:property />">
+					    	</div>
+				    	</s:iterator>
 					    <div class="col-sm-1">
 					    	 <button id="btn1" type="button" class="btn btn-default btn-sm">
           						<span class="glyphicon glyphicon-plus-sign"></span>添加
        				 		 </button>
 					    </div>
 				  	</div>
-				  	
 				    <div class="form-group">
 				    	<div class="col-sm-offset-2 col-sm-10">
 				      		<button type="submit" class="btn btn-success">提交</button>

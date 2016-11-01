@@ -16,6 +16,13 @@ public interface ClientAction {
 	public String saveClient() throws Exception;
 	
 	/**
+	 * 进入修改客户
+	 * @return
+	 * @throws Exception
+	 */
+	public String preUpdateClient() throws Exception;
+	
+	/**
 	 * 修改客户
 	 * @return
 	 * @throws Exception
@@ -35,13 +42,6 @@ public interface ClientAction {
 	 * @throws Exception
 	 */
 	public String searchClient() throws Exception;
-	
-	/**
-	 * 列出所有客户
-	 * @return
-	 * @throws Exception
-	 */
-	public String listAllClients() throws Exception;
 	
 	/**
 	 * 查看客户
