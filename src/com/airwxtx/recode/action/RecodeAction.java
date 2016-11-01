@@ -25,4 +25,12 @@ public interface RecodeAction {
 	 * @throws Exception
 	 */
 	public String delete() throws Exception;
+
+	/**
+	 * 导出消费记录
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public String exportRecode() throws Exception;
 }

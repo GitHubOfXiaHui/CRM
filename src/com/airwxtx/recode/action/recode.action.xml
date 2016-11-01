@@ -11,7 +11,7 @@
 			<result type="json">
 				<param name="root">jsonResult</param>
 			</result>
-			<allowed-methods>searchRecode,detail,delete</allowed-methods>
+			<allowed-methods>searchRecode,detail,delete,exportRecode</allowed-methods>
 		</action>
 	</package>
 </struts>

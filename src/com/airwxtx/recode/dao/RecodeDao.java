@@ -41,4 +41,11 @@ public interface RecodeDao {
 	 */
 	public void deleteRecode(Integer recodeId);
 
+	/**
+	 * 查找所有消费记录
+	 * 
+	 * @return
+	 */
+	public List<Recode> loadAllRecodes();
+
 }

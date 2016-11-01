@@ -7,17 +7,18 @@
 		 style="padding-top:10px;padding-bottom:10px;">
 		<div class="form-group">
 			<label for="company">单位：</label>
-			<input class="form-control" id="company" type="text" value="<s:property value='company' />">
-			<input class="param" name="company" type="hidden" data-target="#company" value="<s:property value='company' />">
+			<input class="form-control" name="company" type="text" value="<s:property value='company' />">
 		</div>
 		<div class="form-group">
 			<label for="name">姓名：</label>
-			<input class="form-control" id="name" type="text" value="<s:property value='name' />">
-			<input class="param" name="name" type="hidden" data-target="#name" value="<s:property value='name' />">
+			<input class="form-control" name="name" type="text" value="<s:property value='name' />">
 		</div>
 		<button class="btn btn-primary" type="submit">
 			<span class="glyphicon glyphicon-search"></span> 搜索
 		</button>
+		<a class="btn btn-info" href="/CRM/recode/exportRecodeAction" target="_blank">
+			<span class="glyphicon glyphicon-download"></span> 导出
+		</a>
 	</form>
 	<table class="table table-bordered table-striped table-hover">
 		<thead>
@@ -63,13 +64,10 @@
 		$(function(){
 			// 拦截搜索动作
 			$("form").submit(function(){
-				$(".param").each(function(){
-					$(this).val($($(this).attr("data-target")).val());
-				});
 				var url = $(this).attr("action");
 				var params = {
-					company: $("[data-target='#company']").val(),
-					name: $("[data-target='#name']").val()
+					company: $("[name='company']").val(),
+					name: $("[name='name']").val()
 				};
 				onsearch(url, params);
 						

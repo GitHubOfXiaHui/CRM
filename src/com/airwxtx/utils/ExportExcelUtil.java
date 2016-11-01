@@ -3,6 +3,7 @@ package com.airwxtx.utils;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.List;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -20,7 +21,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class ExportExcelUtil {
 
-	private static void export(FileOutputStream out, Workbook wb, List<String[]> table) throws IOException {
+	private static void export(OutputStream out, Workbook wb, List<String[]> table) throws IOException {
 		// create a new sheet
 		Sheet s = wb.createSheet();
 		// declare a row object reference
@@ -113,6 +114,11 @@ public class ExportExcelUtil {
 		// create a new HSSFWorkbook
 		export(new FileOutputStream(file), new HSSFWorkbook(), table);
 	}
+	
+	public static void xls(OutputStream out, List<String[]> table) throws IOException {
+		// create a new HSSFWorkbook
+		export(out, new XSSFWorkbook(), table);
+	}
 
 	public static void xlsx(String file, List<String[]> table) throws IOException {
 		// create a new XSSFWorkbook
@@ -124,4 +130,8 @@ public class ExportExcelUtil {
 		export(new FileOutputStream(file), new XSSFWorkbook(), table);
 	}
 
+	public static void xlsx(OutputStream out, List<String[]> table) throws IOException {
+		// create a new XSSFWorkbook
+		export(out, new XSSFWorkbook(), table);
+	}
 }

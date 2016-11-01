@@ -7,18 +7,16 @@
 		 style="padding-top:10px;padding-bottom:10px;">
 		<div class="form-group">
 			<label for="username">用户名：</label>
-			<input class="form-control" id="username" type="text" value="<s:property value='username' />">
-			<input class="param" name="username" type="hidden" data-target="#username" value="<s:property value='username' />">
+			<input class="form-control" name="username" type="text" value="<s:property value='username' />">
 		</div>
 		<div class="form-group">
 			<label for="role">角色：</label>
-			<select class="form-control" id="role">
+			<select class="form-control" name="role">
 				<option value="">请选择</option>
 				<s:iterator value="allRoles" var="role">
 					<option value="<s:property value='#role' />" <s:if test="role == #role">selected</s:if>><s:property value="#role" /></option>
 				</s:iterator>
 			</select>
-			<input class="param" name="role" type="hidden" data-target="#role" value="<s:property value='role' />">
 		</div>
 		<button class="btn btn-primary" type="submit">
 			<span class="glyphicon glyphicon-search"></span> 搜索
@@ -61,13 +59,10 @@
 		$(function(){
 			// 拦截搜索动作
 			$("form").submit(function(){
-				$(".param").each(function(){
-					$(this).val($($(this).attr("data-target")).val());
-				});
 				var url = $(this).attr("action");
 				var params = {
-					username: $("[data-target='#username']").val(),
-					role: $("[data-target='#role']").val()
+					username: $("[name='username']").val(),
+					role: $("[name='role']").val()
 				};
 				onsearch(url, params);
 						
@@ -79,7 +74,8 @@
 			$("[data-id='reset-password']").each(function(){
 				$(this).click(function(){
 					$.getJSON($(this).attr("href"), function(data){
-						showDialog(data.resultInfo);
+						bootbox.setDefaults({locale:"zh_CN"});
+						bootbox.alert(data.resultInfo);
 					});
 							
 					// 阻止默认提交

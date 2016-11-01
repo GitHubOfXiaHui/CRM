@@ -42,15 +42,21 @@ public class RecodeDaoImpl extends BaseDaoSupport implements RecodeDao {
 		}
 		return query;
 	}
-	
+
 	@Override
-	public Recode loadRecode(Integer id){
+	public Recode loadRecode(Integer id) {
 		return this.getHibernateTemplate().get(Recode.class, id);
 	}
-	
+
 	@Override
-	public void deleteRecode(Integer recodeId){
+	public void deleteRecode(Integer recodeId) {
 		String hql = "DELETE FROM Recode WHERE id = ?";
 		this.getHibernateTemplate().bulkUpdate(hql, recodeId);
 	}
+
+	@Override
+	public List<Recode> loadAllRecodes() {
+		return this.getHibernateTemplate().loadAll(Recode.class);
+	}
+
 }

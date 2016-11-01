@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
 <title>主页</title>
 <meta charset="UTF-8">
@@ -30,24 +30,13 @@
 	background-color: #9c6;
 }
 
-/* 当页面内容少时页脚位于屏幕底部，内容多时位于内容下面 */
-html, body {
-	margin: 0;
-	padding: 0;
-	height: 100%;
-}
-
-#wrapper {
-	position: relative;
-	min-height: 100%;
-}
-
+/* 将页脚固定在页面底部  */
 #main {
 	padding-bottom: 60px; /* Height of the footer */
 }
 
 footer {
-	position: absolute;
+	position: fixed;
 	bottom: 0;
 	width: 100%;
 	height: 60px; /* Height of the footer */
@@ -141,45 +130,42 @@ footer {
 	}); 
 </script>
 
-<!-- 弹窗插件 -->
-<link href="/CRM/css/my-dialog.css" rel="stylesheet">
-<script src="/CRM/js/my-dialog.js"></script>
+<!-- Bootstrap弹窗插件 -->
+<script src="/CRM/js/bootbox.min.js"></script>
 
 </head>
 <body>
-	<div id="wrapper">
-		<nav class="navbar navbar-default">
-			<div class="container-fluid">
-				<div class="navbar-header">
-					<a class="navbar-brand" href="#">AIRWXTX</a>
-				</div>
-				<ul class="nav navbar-nav" id="nav">
-					<li><a href="#">会员管理</a></li>
-					<li><a href="#">会员卡管理</a></li>
-					<li class="active"><a href="/CRM/recode/searchRecodeAction">消费记录</a></li>
-					<li><a href="/CRM/user/searchUserAction">用户管理</a></li>
-				</ul>
-				<ul class="nav navbar-nav navbar-right">
-					<li class="dropdown"><a class="dropdown-toggle"
-						data-toggle="dropdown" href="#">设置<span class="caret"></span></a>
-						<ul class="dropdown-menu">
-							<li><a href="/CRM/settings/profileAction"
-								target="_blank">用户信息</a></li>
-							<li><a href="/CRM/settings/preChangePasswordAction"
-								target="_blank">修改密码</a></li>
-							<li><a href="/CRM/settings/exitAction">安全退出</a></li>
-						</ul>
-					</li>
-				</ul>
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#">AIRWXTX</a>
 			</div>
-		</nav>
-		<!-- 调整main-div的高度，使Loading动画显示在页面中央 -->
-		<div id="main" style="height: 500px;"></div>
-		<footer class="container-fluid bg-footer text-center">
-			<p>
-				Copyright &copy; 2016 <a href="http://www.airwxtx.com">airwxtx.com</a>
-			</p>
-		</footer>
-	</div>
+			<ul class="nav navbar-nav" id="nav">
+				<li><a href="#">会员管理</a></li>
+				<li><a href="#">会员卡管理</a></li>
+				<li class="active"><a href="/CRM/recode/searchRecodeAction">消费记录</a></li>
+				<li><a href="/CRM/user/searchUserAction">用户管理</a></li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li class="dropdown"><a class="dropdown-toggle"
+					data-toggle="dropdown" href="#">设置<span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><a href="/CRM/settings/profileAction"
+							target="_blank">用户信息</a></li>
+						<li><a href="/CRM/settings/preChangePasswordAction"
+							target="_blank">修改密码</a></li>
+						<li><a href="/CRM/settings/exitAction">安全退出</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</nav>
+	<!-- 调整main-div的高度，使Loading动画显示在页面中央 -->
+	<div id="main" style="height: 500px;"></div>
+	<footer class="container-fluid bg-footer text-center">
+		<p>
+			Copyright &copy; 2016 <a href="http://www.airwxtx.com">airwxtx.com</a>
+		</p>
+	</footer>
 </body>
 </html>

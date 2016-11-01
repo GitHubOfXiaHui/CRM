@@ -1,5 +1,7 @@
 package com.airwxtx.recode.service;
 
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.List;
 
 import com.airwxtx.recode.entity.Recode;
@@ -40,5 +42,12 @@ public interface RecodeService {
 	 * @param recodeId
 	 */
 	public void deleteRecode(Integer recodeId);
+
+	/**
+	 * 导出消费记录
+	 * 
+	 * @param filepath
+	 */
+	public void exportXlsx(OutputStream out) throws IOException;
 
 }

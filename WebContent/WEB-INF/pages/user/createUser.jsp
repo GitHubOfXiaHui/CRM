@@ -43,8 +43,6 @@
 				<form class="form-horizontal" action="/CRM/user/createUserAction"
 					method="post">
 					<s:fielderror />
-					<input name="user.id" type="hidden"
-						value="<s:property value='user.id' />">
 					<div class="form-group">
 						<label class="control-label col-md-2" for="username">用户名：</label>
 						<div class="col-md-5">
