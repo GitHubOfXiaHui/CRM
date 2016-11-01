@@ -1,7 +1,6 @@
 package com.airwxtx.card.service.impl;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,9 +23,30 @@ public class CardServiceImpl implements CardService {
 	}
 	
 	@Override
+	@Transactional(readOnly = true)
 	public int countUserWithCardNoOrPhone(String cardNo, String phone) {
 		// TODO Auto-generated method stub
 		return cardDao.countUserWithCardNoOrPhone(cardNo, phone);
+	}
+	
+	@Override
+	public Card loadCard(Integer id) {
+		// TODO Auto-generated method stub
+		return this.cardDao.loadCard(id);
+	}
+
+	@Override
+	@Transactional
+	public void saveCard(Card card) {
+		// TODO Auto-generated method stub
+		this.cardDao.saveCard(card);
+	}
+
+	@Override
+	@Transactional
+	public void updateCard(Card card) {
+		// TODO Auto-generated method stub
+		this.cardDao.updateCard(card);
 	}
 
 	public CardDao getCardDao() {

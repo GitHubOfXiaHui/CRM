@@ -17,6 +17,9 @@ import com.opensymphony.xwork2.ActionSupport;
 @Scope("prototype")
 public class CardActionImpl extends ActionSupport implements CardAction {
 
+	private Card card;
+	private Integer cardId;
+	
 	// 查询条件（卡号、手机号）
 	private String cardNo;
 	private String phone;
@@ -27,6 +30,33 @@ public class CardActionImpl extends ActionSupport implements CardAction {
 
 	@Autowired
 	private CardService cardService;
+	
+	@Override
+	public String preSave() throws Exception {
+		// TODO Auto-generated method stub
+		return INPUT;
+	}
+	
+	@Override
+	public String saveCard() throws Exception {
+		// TODO Auto-generated method stub
+		this.cardService.saveCard(card);
+		return DETAILS;
+	}
+	
+	@Override
+	public String preUpdate() throws Exception {
+		// TODO Auto-generated method stub
+		card = this.cardService.loadCard(cardId);
+		return UPDATE;
+	}
+
+	@Override
+	public String update() throws Exception {
+		// TODO Auto-generated method stub
+		this.cardService.updateCard(card);
+		return DETAILS;
+	}
 
 	@Override
 	public String searchCard() throws Exception {
@@ -38,6 +68,22 @@ public class CardActionImpl extends ActionSupport implements CardAction {
 	public int getMaxPage() {
 		int count = cardService.countUserWithCardNoOrPhone(cardNo, phone);
 		return (count - 1) / Constants.PAGE_SIZE + 1;
+	}
+
+	public Card getCard() {
+		return card;
+	}
+
+	public void setCard(Card card) {
+		this.card = card;
+	}
+
+	public Integer getCardId() {
+		return cardId;
+	}
+
+	public void setCardId(Integer cardId) {
+		this.cardId = cardId;
 	}
 
 	public String getCardNo() {
@@ -81,5 +127,8 @@ public class CardActionImpl extends ActionSupport implements CardAction {
 	}
 
 	private static final String LIST = "list";
-
+	private static final String DETAILS = "details";
+	private static final String INPUT = "input";
+	private static final String UPDATE = "update";
+	
 }

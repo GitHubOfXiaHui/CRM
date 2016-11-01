@@ -34,4 +34,26 @@ public interface CardDao {
 	 */
 	public int countUserWithCardNoOrPhone(String cardNo, String phone);
 
+	/**
+	 * 创建
+	 * 
+	 * @param card
+	 */
+	public void saveCard(Card card);
+
+	/**
+	 * 修改
+	 * 
+	 * @param card
+	 */
+	public void updateCard(Card card);
+
+	/**
+	 * 加载
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public Card loadCard(Integer id);
+
 }

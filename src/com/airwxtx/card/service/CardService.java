@@ -26,4 +26,26 @@ public interface CardService {
 	 */
 	public int countUserWithCardNoOrPhone(String cardNo, String phone);
 
+	/**
+	 * 加载会员卡
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public Card loadCard(Integer id);
+
+	/**
+	 * 创建会员卡
+	 * 
+	 * @param card
+	 */
+	public void saveCard(Card card);
+
+	/**
+	 * 修改会员卡
+	 * 
+	 * @param card
+	 */
+	public void updateCard(Card card);
+
 }

@@ -28,7 +28,7 @@ public class CardDaoImpl extends BaseDaoSupport implements CardDao {
 		DetachedCriteria query = createDetachedCriteriaWithCardNoOrPhone(cardNo, phone);
 		return (List<Card>) this.getHibernateTemplate().findByCriteria(query, (page - 1) * pageSize, pageSize);
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public int countUserWithCardNoOrPhone(String cardNo, String phone) {
@@ -48,6 +48,24 @@ public class CardDaoImpl extends BaseDaoSupport implements CardDao {
 			query.add(Restrictions.ilike("phone", phone, MatchMode.ANYWHERE));
 		}
 		return query;
+	}
+
+	@Override
+	public void saveCard(Card card) {
+		// TODO Auto-generated method stub
+		this.getHibernateTemplate().save(card);
+	}
+
+	@Override
+	public void updateCard(Card card) {
+		// TODO Auto-generated method stub
+		this.getHibernateTemplate().update(card);
+	}
+
+	@Override
+	public Card loadCard(Integer id) {
+		// TODO Auto-generated method stub
+		return this.getHibernateTemplate().load(Card.class, id);
 	}
 
 }
