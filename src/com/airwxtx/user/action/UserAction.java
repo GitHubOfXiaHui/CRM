@@ -1,6 +1,15 @@
 package com.airwxtx.user.action;
 
 public interface UserAction {
+
+	/**
+	 * 查看用户详情
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public String userDetails() throws Exception;
+
 	/**
 	 * 进入创建用户页面
 	 * 

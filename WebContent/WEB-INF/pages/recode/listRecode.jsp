@@ -28,7 +28,7 @@
 				<th class="text-center">中文名</th>
 				<th class="text-center">英文名</th>
 				<th class="text-center">订票日期</th>
-				<th class="text-center">消费金额</th>
+				<th class="text-center">消费金额（元）</th>
 				<th class="text-center">操作</th>
 			</tr>
 		</thead>
@@ -75,14 +75,19 @@
 				return false;
 			});
 					
-			// 拦截重置密码
+			// 拦截删除消费记录
 			$("[data-id='delete']").each(function(){
 				var $this = $(this);
 				$this.click(function(){
-					$.getJSON($this.attr("href"), function(data){
-						showDialog(data.resultInfo, function(){
-							$this.closest("tr").remove();
-						});
+					bootbox.setDefaults({locale:"zh_CN"});
+					bootbox.confirm("确定要删除该条消费记录吗？", function(result){
+						if(result){
+							$.getJSON($this.attr("href"), function(data){
+								bootbox.alert(data.resultInfo, function(){
+									$this.closest("tr").remove();
+								});
+							});
+						}
 					});
 							
 					// 阻止默认提交

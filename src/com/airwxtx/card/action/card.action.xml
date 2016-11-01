@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+	"http://struts.apache.org/dtds/struts-2.5.dtd">
+
+<struts>
+	<package name="card" namespace="/card" extends="airwxtx-default">
+		<action name="*Action" class="cardAction" method="{1}">
+			<result name="list">/WEB-INF/pages/card/listCard.jsp</result>
+			<allowed-methods>searchCard</allowed-methods>
+		</action>
+	</package>
+</struts>

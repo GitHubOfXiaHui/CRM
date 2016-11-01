@@ -3,7 +3,6 @@ package com.airwxtx.client.service;
 import java.util.List;
 
 import com.airwxtx.client.entity.Client;
-import com.airwxtx.utils.Constants;
 
 public interface ClientService {	
 	/**

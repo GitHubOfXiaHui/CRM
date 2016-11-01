@@ -52,5 +52,6 @@
 	<include file="com/airwxtx/client/action/client.action.xml" />
 	<include file="com/airwxtx/user/action/user.action.xml" />
 	<include file="com/airwxtx/recode/action/recode.action.xml" />
+	<include file="com/airwxtx/card/action/card.action.xml" />
 	<include file="com/airwxtx/home/action/home.action.xml" />
 </struts>

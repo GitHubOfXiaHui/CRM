@@ -1,18 +1,10 @@
-package com.airwxtx.card.dao;
+package com.airwxtx.card.service;
 
 import java.util.List;
 
 import com.airwxtx.card.entity.Card;
 
-public interface CardDao {
-
-	/**
-	 * 充值
-	 * 
-	 * @param money
-	 * @param card
-	 */
-	public void addMoneyTo(Double money, Card card);
+public interface CardService {
 
 	/**
 	 * 按卡号和/或手机号分页查询会员卡

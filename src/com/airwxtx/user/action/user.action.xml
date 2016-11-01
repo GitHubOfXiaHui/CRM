@@ -13,7 +13,7 @@
 			<result type="json">
 				<param name="root">jsonResult</param>
 			</result>
-			<allowed-methods>preCreateUser,createUser,preEditUser,editUser,searchUser,resetPassword</allowed-methods>
+			<allowed-methods>userDetails,preCreateUser,createUser,preEditUser,editUser,searchUser,resetPassword</allowed-methods>
 		</action>
 	</package>
 </struts>

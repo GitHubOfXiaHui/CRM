@@ -27,18 +27,16 @@ public class UserActionImpl extends ActionSupport implements UserAction {
 
 	private User user;
 
+	// 查询条件（用户名，角色）
 	private String username;
-
 	private String role;
-
+	// 分页
 	private int page;
-
-	// 权限
-	private Set<Long> authorityNumbers;
-
+	// 查询结果
 	private List<User> users;
 
-	private boolean create;
+	// 详情页所要展示的权限
+	private Set<Long> authorityNumbers;
 
 	private Map<String, Object> jsonResult = new HashMap<>();
 
@@ -49,15 +47,20 @@ public class UserActionImpl extends ActionSupport implements UserAction {
 	private AuthorityService authorityService;
 
 	@Override
+	public String userDetails() throws Exception {
+		user = userService.findUserByName(username);
+		authorityNumbers = authorityService.resolveAuthority(user.getAuthority());
+		return PROFILE;
+	}
+
+	@Override
 	public String preCreateUser() throws Exception {
 		// TODO Auto-generated method stub
-		create = true;
 		return INPUT;
 	}
 
 	public void validateCreateUser() throws Exception {
 		if (userService.hasUsername(user.getUsername())) {
-			create = true;
 			this.addFieldError("user.username", "用户名已被使用");
 		}
 	}
@@ -72,7 +75,6 @@ public class UserActionImpl extends ActionSupport implements UserAction {
 	@Override
 	public String preEditUser() throws Exception {
 		// TODO Auto-generated method stub
-		create = false;
 		user = userService.findUserByName(user.getUsername());
 		authorityNumbers = authorityService.resolveAuthority(user.getAuthority());
 		return EDIT;
@@ -167,14 +169,6 @@ public class UserActionImpl extends ActionSupport implements UserAction {
 
 	public void setUsers(List<User> users) {
 		this.users = users;
-	}
-
-	public boolean isCreate() {
-		return create;
-	}
-
-	public void setCreate(boolean create) {
-		this.create = create;
 	}
 
 	public Map<String, Object> getJsonResult() {

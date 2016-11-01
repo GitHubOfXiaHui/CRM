@@ -41,7 +41,8 @@
 					<td><s:property value="username" /></td>
 					<td><s:property value="role" /></td>
 					<td>
-						<a href="/CRM/user/preEditUserAction?user.username=<s:property value='username' />" target="_blank">编辑</a>
+						<a href="/CRM/user/userDetailsAction?username=<s:property value='username' />" target="_blank">详情</a>
+						&nbsp;/&nbsp;<a href="/CRM/user/preEditUserAction?user.username=<s:property value='username' />" target="_blank">编辑</a>
 						&nbsp;/&nbsp;<a href="/CRM/user/resetPasswordAction?user.username=<s:property value='username' />" data-id="reset-password">重置密码</a>
 					</td>
 				</tr>

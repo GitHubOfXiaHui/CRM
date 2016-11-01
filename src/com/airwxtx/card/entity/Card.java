@@ -14,7 +14,7 @@ public class Card implements CardStatus {
 	// ¿¨ºÅ£¨Âß¼­ID£©
 	private String cardNo;
 	// ×´Ì¬£¨Õý³£/¶³½á£©
-	private String status;
+	private String status = NORMAL;
 	// Óà¶î
 	private Double balance;
 	// ÊÖ»úºÅ
