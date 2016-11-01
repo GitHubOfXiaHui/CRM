@@ -7,7 +7,10 @@
 	<package name="login" namespace="/login" extends="struts-default">
 		<action name="*Action" class="loginAction" method="{1}">
 			<result name="input">/WEB-INF/pages/login/login.jsp</result>
-			<result>/WEB-INF/pages/home/index.jsp</result>
+			<result type="redirectAction">
+				<param name="namespace">/home</param>
+				<param name="actionName">homeAction</param>
+			</result>
 			<allowed-methods>preLogin,login</allowed-methods>
 		</action>
 	</package>
