@@ -23,18 +23,16 @@ public interface AuthorityNumber {
 	// 解冻会员卡
 	public static final long UNFREEZE_CARD = 1l << 9;
 	
-	// 查询全部消费记录
-	public static final long SHOW_RECORD_UNLIMITED = 1l << 10;
-	// 查询本人操作的消费记录
-	public static final long SHOW_RECORD_LIMITED = 1l << 11;
+	// 查询消费记录
+	public static final long SHOW_RECORD = 1l << 10;
 	// 删除消费记录
-	public static final long DELETE_RECORD = 1l << 12;
+	public static final long DELETE_RECORD = 1l << 11;
 	// 导出消费记录
-	public static final long EXPORT_RECORD = 1l << 13;
+	public static final long EXPORT_RECORD = 1l << 12;
 	
 	// 管理系统用户
-	public static final long CONTROL_USER = 1l << 14;
+	public static final long CONTROL_USER = 1l << 13;
 		
 	// 汇总后台资金
-	public static final long MONEY_SUMMARY = 1l << 15;
+	public static final long MONEY_SUMMARY = 1l << 14;
 }

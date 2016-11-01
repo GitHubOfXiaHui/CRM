@@ -58,8 +58,8 @@
 						<label class="control-label col-md-2" for="role">角色：</label>
 						<div class="col-md-3">
 							<select class="form-control" id="role" name="user.role">
-								<s:iterator value="allRoles">
-									<option value="<s:property />"><s:property /></option>
+								<s:iterator value="allRoles" var="role">
+									<option value="<s:property value='#role' />" <s:if test="user.role == #role">selected</s:if>><s:property value="#role" /></option>
 								</s:iterator>
 							</select>
 						</div>
@@ -73,7 +73,7 @@
 							<div class="checkbox <s:if test="#st.odd">col-md-offset-2</s:if> col-md-5">
 								<label><input name="authorityNumbers" type="checkbox"
 									value="<s:property value='authorityNumber' />" 
-									<s:if test="authorityNumbers.contains(authorityNumber)">checked</s:if>> 
+									<s:if test="authorityNumber in authorityNumbers">checked</s:if>> 
 									<s:property value="description" />
 								</label>
 							</div>

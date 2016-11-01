@@ -41,7 +41,6 @@
 		<!-- 列出Hibernate映射文件 -->
 		<property name="mappingResources">
 			<list>
-				<value>com/airwxtx/authority/entity/Authority.hbm.xml</value>
 				<value>com/airwxtx/user/entity/User.hbm.xml</value>
 				<value>com/airwxtx/client/entity/Client.hbm.xml</value>
 				<value>com/airwxtx/card/entity/Card.hbm.xml</value>

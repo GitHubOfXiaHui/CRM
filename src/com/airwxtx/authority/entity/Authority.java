@@ -1,23 +1,23 @@
 package com.airwxtx.authority.entity;
 
 public class Authority implements AuthorityNumber {
-	// 物理id
-	private Integer authorityId;
 	
-	/* 普通属性 */
 	// 权限编号
 	private Long authorityNumber;
 	// 权限描述
 	private String description;
 	
-	public Integer getAuthorityId() {
-		return authorityId;
+	public Authority() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
-	
-	public void setAuthorityId(Integer authorityId) {
-		this.authorityId = authorityId;
+
+	public Authority(Long authorityNumber, String description) {
+		super();
+		this.authorityNumber = authorityNumber;
+		this.description = description;
 	}
-	
+
 	public Long getAuthorityNumber() {
 		return authorityNumber;
 	}

@@ -76,7 +76,7 @@
 								<label>
 									<input name="authorityNumbers" type="checkbox"
 										value="<s:property value='authorityNumber' />"
-										<s:if test="authorityNumbers.contains(authorityNumber)">checked</s:if>> 
+										<s:if test="authorityNumber in authorityNumbers">checked</s:if>> 
 										<s:property value="description" />
 								</label>
 							</div>

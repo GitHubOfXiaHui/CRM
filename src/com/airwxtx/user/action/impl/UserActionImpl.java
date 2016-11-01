@@ -35,7 +35,6 @@ public class UserActionImpl extends ActionSupport implements UserAction {
 	// 查询结果
 	private List<User> users;
 
-	// 详情页所要展示的权限
 	private Set<Long> authorityNumbers;
 
 	private Map<String, Object> jsonResult = new HashMap<>();
@@ -119,6 +118,7 @@ public class UserActionImpl extends ActionSupport implements UserAction {
 		return authorityService.loadAllAuthorities();
 	}
 
+	// 详情页所要展示的权限
 	public List<String> getDisplayAuthorities() {
 		return authorityService.changeToDisplayAuthorities(authorityNumbers);
 	}
