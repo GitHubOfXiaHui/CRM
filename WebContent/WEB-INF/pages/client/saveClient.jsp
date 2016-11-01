@@ -3,16 +3,15 @@
 <%@ taglib prefix="s" uri="/struts-tags" %>
 
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>创建新客户</title>
 
-<!-- CDN -->
-<link href="http://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
-<!-- jQuery library -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-<script src="http://cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<!-- Bootstrap样式 -->
+<link rel="stylesheet" href="/CRM/css/bootstrap.min.css">
+<script src="/CRM/js/jquery.min.js" type="text/javascript"></script>
+<script src="/CRM/js/bootstrap.min.js" type="text/javascript"></script>
 
 <!-- 导入struts样式 -->
 <s:head />
@@ -28,6 +27,10 @@ $(document).ready(function(){
 });
 </script>
 
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<script src="/CRM/js/html5shiv.min.js" type="text/javascript"></script>
+<script src="/CRM/js/respond.min.js" type="text/javascript"></script>
 
 </head>
 <body>

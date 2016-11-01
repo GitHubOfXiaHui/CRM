@@ -8,12 +8,9 @@
 <meta charset="UTF-8">
 
 <!-- Bootstrap样式 -->
-<link rel="stylesheet"
-	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-<script
-	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="/CRM/css/bootstrap.min.css">
+<script src="/CRM/js/jquery.min.js" type="text/javascript"></script>
+<script src="/CRM/js/bootstrap.min.js" type="text/javascript"></script>
 <style>
 /* 微调Bootstrap样式 */
 .navbar {
@@ -51,41 +48,41 @@ footer {
 <script src="/CRM/js/jquery.jqpagination.min.js" type="text/javascript"></script>
 <script type="text/javascript">
 	// 初始化Loading插件
-	function runWaitMe(target){
-	    $(target).waitMe({
-	
-		    //none, rotateplane, stretch, orbit, roundBounce, win8, 
-		    //win8_linear, ios, facebook, rotation, timer, pulse, 
-		    //progressBar, bouncePulse or img
-		    effect: 'bounce',
-		
-		    //place text under the effect (string).
-		    text: '加载中...',
-		
-		    //background for container (string).
-		    bg: '',
-		
-		    //color for background animation and text (string).
-		    color: '#9c6',
-		
-		    //change width for elem animation (string).
-		    sizeW: '',
-		
-		    //change height for elem animation (string).
-		    sizeH: '',
-		
-		    // url to image
-		    source: ''
-	
-	    });
-  	}
-	
+	function runWaitMe(target) {
+		$(target).waitMe({
+
+			//none, rotateplane, stretch, orbit, roundBounce, win8, 
+			//win8_linear, ios, facebook, rotation, timer, pulse, 
+			//progressBar, bouncePulse or img
+			effect : 'bounce',
+
+			//place text under the effect (string).
+			text : '加载中...',
+
+			//background for container (string).
+			bg : '',
+
+			//color for background animation and text (string).
+			color : '#9c6',
+
+			//change width for elem animation (string).
+			sizeW : '',
+
+			//change height for elem animation (string).
+			sizeH : '',
+
+			// url to image
+			source : ''
+
+		});
+	}
+
 	function onsearch(url, params) {
 		// 显示Loading画面
 		runWaitMe("#main");
 		// 加载第1页到#main
 		params.page = 1;
-		$("#main").load(url, params, function(){
+		$("#main").load(url, params, function() {
 			// 隐藏Loading
 			$("#main").waitMe("hide");
 			// 初始化分页插件
@@ -97,7 +94,7 @@ footer {
 					runWaitMe();
 					// 刷新table
 					params.page = page;
-					$("table").load(url + " thead,tbody", params, function(){
+					$("table").load(url + " thead,tbody", params, function() {
 						// 隐藏Loading
 						$("#main").waitMe("hide");
 					});
@@ -112,26 +109,31 @@ footer {
 			var url = $(this).attr("href");
 			$(this).click(function() {
 				onsearch(url, {});
-				
+
 				$(this).parent("li").addClass("active") // 父li元素添加active属性
 				.siblings("li").removeClass("active"); // 父li元素同级的li元素移除active属性
-				
+
 				// 阻止a标签的默认动作
 				return false;
 			});
 		});
 	});
-	
+
 	// 模拟点击导航按钮
-	$(function(){
+	$(function() {
 		var url = $("#nav li.active a").attr("href");
-		
+
 		onsearch(url, {});
-	}); 
+	});
 </script>
 
 <!-- Bootstrap弹窗插件 -->
-<script src="/CRM/js/bootbox.min.js"></script>
+<script src="/CRM/js/bootbox.min.js" type="text/javascript"></script>
+
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<script src="/CRM/js/html5shiv.min.js" type="text/javascript"></script>
+<script src="/CRM/js/respond.min.js" type="text/javascript"></script>
 
 </head>
 <body>
@@ -150,13 +152,11 @@ footer {
 				<li class="dropdown"><a class="dropdown-toggle"
 					data-toggle="dropdown" href="#">设置<span class="caret"></span></a>
 					<ul class="dropdown-menu">
-						<li><a href="/CRM/settings/profileAction"
-							target="_blank">用户信息</a></li>
+						<li><a href="/CRM/settings/profileAction" target="_blank">用户信息</a></li>
 						<li><a href="/CRM/settings/preChangePasswordAction"
 							target="_blank">修改密码</a></li>
 						<li><a href="/CRM/settings/exitAction">安全退出</a></li>
-					</ul>
-				</li>
+					</ul></li>
 			</ul>
 		</div>
 	</nav>
