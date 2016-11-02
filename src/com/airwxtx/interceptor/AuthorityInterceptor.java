@@ -19,18 +19,23 @@ public class AuthorityInterceptor extends AbstractInterceptor {
 
 	@Autowired
 	private UserService userService;
-	
+
 	@Autowired
 	private AuthorityService authorityService;
 
+	/**
+	 * 将当前用户权限放入全局权限表
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public String intercept(ActionInvocation invocation) throws Exception {
 		// TODO Auto-generated method stub
+		// 当前用户
+		String username = (String) invocation.getInvocationContext().getSession().get("user");
+		// 全局权限表
 		Map<String, Set<Long>> authority = (Map<String, Set<Long>>) invocation.getInvocationContext().getApplication()
 				.getOrDefault("authority", new HashMap<>());
-		String username = (String) invocation.getInvocationContext().getSession().get("user");
-		// 全局权限表是否包含当前用户
+		// 全局权限表不包含当前用户权限
 		if (!authority.containsKey(username)) {
 			Set<Long> userAuthority = getUserAuthority(username);
 			authority.put(username, userAuthority);

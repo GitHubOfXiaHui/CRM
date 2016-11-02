@@ -18,6 +18,7 @@ import com.airwxtx.user.entity.Role;
 import com.airwxtx.user.entity.User;
 import com.airwxtx.user.service.UserService;
 import com.airwxtx.utils.Constants;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 @SuppressWarnings("serial")
@@ -26,6 +27,7 @@ import com.opensymphony.xwork2.ActionSupport;
 public class UserActionImpl extends ActionSupport implements UserAction {
 
 	private User user;
+	private Set<Long> authorityNumbers;
 
 	// 查询条件（用户名，角色）
 	private String username;
@@ -34,8 +36,6 @@ public class UserActionImpl extends ActionSupport implements UserAction {
 	private int page;
 	// 查询结果
 	private List<User> users;
-
-	private Set<Long> authorityNumbers;
 
 	private Map<String, Object> jsonResult = new HashMap<>();
 
@@ -79,10 +79,18 @@ public class UserActionImpl extends ActionSupport implements UserAction {
 		return EDIT;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public String editUser() throws Exception {
 		// TODO Auto-generated method stub
 		userService.editUser(user, authorityNumbers);
+		// 修改全局权限表中本次修改用户的权限
+		// 全局权限表
+		Map<String, Set<Long>> authority = (Map<String, Set<Long>>) ActionContext.getContext().getApplication()
+				.get("authority");
+		if (authority.containsKey(user.getUsername())) {
+			authority.put(user.getUsername(), authorityNumbers);
+		}
 		return PROFILE;
 	}
 

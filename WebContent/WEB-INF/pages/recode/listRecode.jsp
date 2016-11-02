@@ -2,6 +2,9 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 
+<%-- 从Application中取到用户权限 --%>
+<s:set var="userAuthority" value="#application.authority.get(#session.user)" />
+
 <div class="container text-center">
 	<form class="form-inline" action="/CRM/recode/searchRecodeAction" method="post"
 		 style="padding-top:10px;padding-bottom:10px;">
@@ -16,9 +19,11 @@
 		<button class="btn btn-primary" type="submit">
 			<span class="glyphicon glyphicon-search"></span> 搜索
 		</button>
-		<a class="btn btn-info" href="/CRM/recode/exportRecodeAction" target="_blank">
-			<span class="glyphicon glyphicon-download"></span> 导出
-		</a>
+		<s:if test="@com.airwxtx.authority.entity.AuthorityNumber@EXPORT_RECORD in #userAuthority">
+			<a class="btn btn-info" href="/CRM/recode/exportRecodeAction" target="_blank">
+				<span class="glyphicon glyphicon-download"></span> 导出
+			</a>
+		</s:if>
 	</form>
 	<table class="table table-bordered table-striped table-hover">
 		<thead>
@@ -47,7 +52,9 @@
 					</td>
 					<td>
 						<a href="/CRM/recode/detailAction?recodeId=<s:property value='id' />" target="_blank">详情</a>
-						&nbsp;/&nbsp;<a href="/CRM/recode/deleteAction?recodeId=<s:property value='id' />" data-id="delete">删除</a>
+						<s:if test="@com.airwxtx.authority.entity.AuthorityNumber@DELETE_RECORD in #userAuthority">
+							&nbsp;/&nbsp;<a href="/CRM/recode/deleteAction?recodeId=<s:property value='id' />" data-id="delete">删除</a>
+						</s:if>
 					</td>
 				</tr>
 			</s:iterator>

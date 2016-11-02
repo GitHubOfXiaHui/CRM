@@ -23,8 +23,8 @@
 							</property>
 						</bean>
 					</property>
-					<!-- 每天9-12点，每分钟执行一次 -->
-					<property name="cronExpression" value="0 40 14 * * ?" />
+					<!-- 每天0点执行一次 -->
+					<property name="cronExpression" value="0 0 0 * * ?" />
 				</bean>
 			</list>
 		</property>

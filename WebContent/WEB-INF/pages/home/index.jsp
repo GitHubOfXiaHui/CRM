@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="s" uri="/struts-tags"%>
 
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -137,6 +138,8 @@ footer {
 
 </head>
 <body>
+	<%-- 从Application中取到用户权限 --%>
+	<s:set var="userAuthority" value="#application.authority.get(#session.user)" />
 	<nav class="navbar navbar-default">
 		<div class="container-fluid">
 			<div class="navbar-header">
@@ -146,7 +149,9 @@ footer {
 				<li class="active"><a href="/CRM/client/searchClientAction">会员管理</a></li>
 				<li><a href="/CRM/card/searchCardAction">会员卡管理</a></li>
 				<li><a href="/CRM/recode/searchRecodeAction">消费记录</a></li>
-				<li><a href="/CRM/user/searchUserAction">用户管理</a></li>
+				<s:if test="@com.airwxtx.authority.entity.AuthorityNumber@CONTROL_USER in #userAuthority">
+					<li><a href="/CRM/user/searchUserAction">用户管理</a></li>
+				</s:if>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown"><a class="dropdown-toggle"
