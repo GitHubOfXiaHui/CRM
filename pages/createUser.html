@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<title>用户信息</title>
+<meta charset="utf-8">
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<style>
+img {
+	position: fixed;
+	top: 50%;
+	left: 75%;
+	width: 394px;
+	height: 75px;
+	margin-top: -37px;
+	margin-left: -197px;
+}
+hr {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	width: 2px;
+	height: 300px;
+	margin-top: -150px;
+	margin-left: -1px;
+	background-color: #9c6;
+}
+.panel {
+	position: fixed;
+	top: 50%;
+	left: 25%;
+	width: 300px;
+	transform: translate(-150px,-50%);
+}
+</style>
+</head>
+<body>
+	<div class="container-fluid">
+    <div class="panel panel-info">
+      <div class="panel-heading">用户信息</div>
+      <div class="panel-body">
+        <form class="form-horizontal">
+          <div class="form-group">
+            <label class="control-label col-md-4" for="username">用户名：</label>
+            <div class="col-md-8">
+              <input class="form-control" id="username" name="user.username" type="text" placeholder="Enter username">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-md-4" for="role">角色：</label>
+            <div class="col-md-8">
+              <select class="form-control" id="role">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-md-4">权限：</label>
+            <div class="checkbox col-md-8">
+              <label><input type="checkbox">全选</label>
+            </div>
+            <div class="checkbox col-md-offset-4 col-md-8">
+              <label><input type="checkbox" value="">Option 1</label>
+            </div>
+            <div class="checkbox col-md-offset-4 col-md-8">
+              <label><input type="checkbox" value="">Option 2</label>
+            </div>
+            <div class="checkbox col-md-offset-4 col-md-8">
+              <label><input type="checkbox" value="">Option 3</label>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-md-offset-4 col-md-8">
+              <input class="btn btn-success" type="submit" value="确定" style="width: 100px;">
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <hr>
+    <img class="img-responsive" src="logo.png" alt="logo.png" width="394px" height="75px">
+  </div>
+</body>
+</html>
