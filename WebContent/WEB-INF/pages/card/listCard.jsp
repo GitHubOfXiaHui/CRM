@@ -43,7 +43,7 @@
 						</s:text>
 					</td>
 					<td>
-						<a href="/CRM/card/cardDetailsAction?cardId=<s:property value='id' />" target="_blank">详情</a>
+						<a href="/CRM/card/loadCardAction?id=<s:property value='id' />" target="_blank">详情</a>
 						<s:if test="status == @com.airwxtx.card.entity.CardStatus@NORMAL">
 							&nbsp;/&nbsp;<a href="/CRM/card/freezeCardAction?cardId=<s:property value='id' />">冻结</a>
 							&nbsp;/&nbsp;<a href="/CRM/card/cardChargeAction?cardId=<s:property value='id' />">充值</a>

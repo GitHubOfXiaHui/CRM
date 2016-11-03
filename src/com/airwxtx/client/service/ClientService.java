@@ -1,5 +1,7 @@
 package com.airwxtx.client.service;
 
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.List;
 
 import com.airwxtx.client.entity.Client;
@@ -51,4 +53,11 @@ public interface ClientService {
 	 * @return
 	 */
 	int countClientByNameOrPhoneOrCompanyOrCardWithPage(String name,String phone,String company,String card);
+	
+	/**
+	 * 导出会员列表
+	 * 
+	 * @param filepath
+	 */
+	public void exportXlsx(OutputStream out) throws IOException;
 }

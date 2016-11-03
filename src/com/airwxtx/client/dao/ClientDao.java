@@ -60,4 +60,10 @@ public interface ClientDao {
 	 * @return
 	 */
 	public int countClientByNameOrPhoneOrCompanyOrCardWithPage(String name,String phone,String company,String card);
+	
+	/**
+	 * 加载所有会员
+	 * @return
+	 */
+	public List<Client> loadAll();
 }

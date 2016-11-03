@@ -1,6 +1,8 @@
 package com.airwxtx.card.service.impl;
 
 import java.util.List;
+
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,9 +32,12 @@ public class CardServiceImpl implements CardService {
 	}
 	
 	@Override
+	@Transactional(readOnly = true)
 	public Card loadCard(Integer id) {
 		// TODO Auto-generated method stub
-		return this.cardDao.loadCard(id);
+		Card card = cardDao.loadCard(id);
+		Hibernate.initialize(card.getClient());
+		return card;
 	}
 
 	@Override

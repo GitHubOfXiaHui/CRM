@@ -29,10 +29,41 @@
 			<div class="panel-body">
 			<s:fielderror />
 				<form class="form-horizontal" role="form" action="/CRM/card/saveCardAction" method="post">
-  					<div class="form-group">
-				    	<label class="control-label col-sm-2" for="name">会员卡号:</label>
+  					<!-- 隐藏会员id -->
+					<input type="hidden" name="clientId" value="<s:property value='clientId' />" >
+				  	
+				  	<div class="form-group">
+				    	<label class="control-label col-sm-2" for="name">会员姓名:</label>
 					    <div class="col-sm-10">
-					      <input type="text" class="form-control" id="name" name="card.id" value="<s:property value='card.id' />">
+					      <input type="text" class="form-control" id="name" name="client.clientName" value="<s:property value='client.clientName' />" disabled>
+					    </div>
+				  	</div>
+				  	
+				  	<div class="form-group">
+				    	<label class="control-label col-sm-2" for="phone">手机号:</label>
+					    <div class="col-sm-10">
+					      <input type="text" class="form-control" id="phone" name="client.mobilePhoneNumber" value="<s:property value='client.mobilePhoneNumber' />" disabled>
+					    </div>
+				  	</div>
+  					
+  					<div class="form-group">
+				    	<label class="control-label col-sm-2" for="cardNo">会员卡号:</label>
+					    <div class="col-sm-10">
+					      <input type="text" class="form-control" id="cardNo" name="card.cardNo" value="<s:property value='card.cardNo' />">
+					    </div>
+				  	</div>
+				  	
+				  	<div class="form-group">
+				    	<label class="control-label col-sm-2" for="status">会员卡状态:</label>
+					    <div class="col-sm-10">
+					      <input type="text" class="form-control" id="status" name="card.status" value="<s:property value='card.status' />">
+					    </div>
+				  	</div>
+				  	
+				  	<div class="form-group">
+				    	<label class="control-label col-sm-2" for="checkCode">会员卡校验码:</label>
+					    <div class="col-sm-10">
+					      <input type="text" class="form-control" id="checkCode" name="card.checkCode" value="<s:property value='card.checkCode' />">
 					    </div>
 				  	</div>
 				  	

@@ -33,6 +33,7 @@
 				</div>
 					<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span>搜索</button>
 					<a href="/CRM/client/preSaveClientAction" target="_blank" type="button" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span>添加</a>
+					<a class="btn btn-info" href="/CRM/client/exportClientAction" target="_blank"><span class="glyphicon glyphicon-download"></span>导出</a>
 			</form>
 		</div>
 	</div>
@@ -55,7 +56,7 @@
 				<tbody>
 					<s:iterator value="clients" status="i">
 					<tr>
-						<td><s:property value="#i.index" /></td>
+						<td><s:property value="#i.index+1" /></td>
 						<td><s:property value="company" /></td>
 						<td><s:property value="clientName" /></td>
 						<td><s:property value="clientEnglishName" /></td>
@@ -66,7 +67,7 @@
 							/
 							<a class="btn btn-success" href="/CRM/client/preUpdateClientAction?clientId=<s:property value='clientId' />" target="_blank">修改</a>
 							/
-							<a class="btn btn-success" href="/CRM/client/preUpdateClientAction?clientId=<s:property value='clientId' />" target="_blank">添加会员卡</a>
+							<a class="btn btn-success" href="/CRM/card/preSaveAction?clientId=<s:property value='clientId' />" target="_blank">添加会员卡</a>
 						</td>
 					</tr>
 					</s:iterator>

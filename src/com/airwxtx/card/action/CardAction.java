@@ -40,5 +40,11 @@ public interface CardAction {
 	 * @throws Exception
 	 */
 	public String update() throws Exception;
+	
+	/**
+	 * º”‘ÿª·‘±ø®
+	 * @throws Exception
+	 */
+	public String loadCard() throws Exception;
 
 }

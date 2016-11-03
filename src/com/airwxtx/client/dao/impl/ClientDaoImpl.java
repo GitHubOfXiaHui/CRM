@@ -78,4 +78,10 @@ public class ClientDaoImpl extends BaseDaoSupport implements ClientDao {
 		return Integer.parseInt(ans.get(0).toString());
 	}
 
+	@Override
+	public List<Client> loadAll() {
+		// TODO Auto-generated method stub
+		return this.getHibernateTemplate().loadAll(Client.class);
+	}
+
 }

@@ -49,4 +49,10 @@ public interface ClientAction {
 	 * @throws Exception
 	 */
 	public String showClientDetails() throws Exception;
+	
+	/**
+	 * 导出会员
+	 * @throws Exception
+	 */
+	public void exportClient() throws Exception;
 }

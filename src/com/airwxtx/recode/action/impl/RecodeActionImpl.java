@@ -1,5 +1,7 @@
 package com.airwxtx.recode.action.impl;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -56,7 +58,9 @@ public class RecodeActionImpl extends ActionSupport implements RecodeAction {
 
 	@Override
 	public String exportRecode() throws Exception {
-		String filename = "消费记录.xlsx";
+		Date now = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String filename = "消费记录 ["+sdf.format(now)+"].xlsx";
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
 		response.setHeader("Content-disposition", "attachment;filename=" + new String(filename.getBytes("UTF-8"), "ISO-8859-1"));

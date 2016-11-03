@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import com.airwxtx.card.action.CardAction;
 import com.airwxtx.card.entity.Card;
 import com.airwxtx.card.service.CardService;
+import com.airwxtx.client.entity.Client;
+import com.airwxtx.client.service.ClientService;
 import com.airwxtx.utils.Constants;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -16,9 +18,12 @@ import com.opensymphony.xwork2.ActionSupport;
 @Controller("cardAction")
 @Scope("prototype")
 public class CardActionImpl extends ActionSupport implements CardAction {
-
+	//客户id
+	private Integer clientId;
+	private Client client;
 	private Card card;
-	private Integer cardId;
+	//卡物理id
+	private Integer id;
 	
 	// 查询条件（卡号、手机号）
 	private String cardNo;
@@ -30,16 +35,22 @@ public class CardActionImpl extends ActionSupport implements CardAction {
 
 	@Autowired
 	private CardService cardService;
+	@Autowired
+	private ClientService clientService;
 	
 	@Override
 	public String preSave() throws Exception {
 		// TODO Auto-generated method stub
+		client = this.clientService.getClient(clientId);
 		return INPUT;
 	}
 	
 	@Override
 	public String saveCard() throws Exception {
 		// TODO Auto-generated method stub
+		client = this.clientService.getClient(clientId);
+		card.setPhone(client.getMobilePhoneNumber());
+		card.setClient(client);
 		this.cardService.saveCard(card);
 		return DETAILS;
 	}
@@ -47,7 +58,8 @@ public class CardActionImpl extends ActionSupport implements CardAction {
 	@Override
 	public String preUpdate() throws Exception {
 		// TODO Auto-generated method stub
-		card = this.cardService.loadCard(cardId);
+		client = this.clientService.getClient(clientId);
+		card = this.cardService.loadCard(id);
 		return UPDATE;
 	}
 
@@ -57,7 +69,14 @@ public class CardActionImpl extends ActionSupport implements CardAction {
 		this.cardService.updateCard(card);
 		return DETAILS;
 	}
-
+	
+	@Override
+	public String loadCard() throws Exception {
+		// TODO Auto-generated method stub
+		card = this.cardService.loadCard(id);
+		return DETAILS;
+	}
+	
 	@Override
 	public String searchCard() throws Exception {
 		// TODO Auto-generated method stub
@@ -79,11 +98,11 @@ public class CardActionImpl extends ActionSupport implements CardAction {
 	}
 
 	public Integer getCardId() {
-		return cardId;
+		return id;
 	}
 
 	public void setCardId(Integer cardId) {
-		this.cardId = cardId;
+		this.id = cardId;
 	}
 
 	public String getCardNo() {
@@ -125,10 +144,45 @@ public class CardActionImpl extends ActionSupport implements CardAction {
 	public void setCardService(CardService cardService) {
 		this.cardService = cardService;
 	}
+	
+	public Integer getClientId() {
+		return clientId;
+	}
+
+	public void setClientId(Integer clientId) {
+		this.clientId = clientId;
+	}
+
+	public Client getClient() {
+		return client;
+	}
+
+	public void setClient(Client client) {
+		this.client = client;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public ClientService getClientService() {
+		return clientService;
+	}
+
+	public void setClientService(ClientService clientService) {
+		this.clientService = clientService;
+	}
+
 
 	private static final String LIST = "list";
 	private static final String DETAILS = "details";
 	private static final String INPUT = "input";
 	private static final String UPDATE = "update";
+
+	
 	
 }

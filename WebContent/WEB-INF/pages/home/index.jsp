@@ -160,8 +160,7 @@ footer {
 			</ul>
 		</div>
 	</nav>
-	<!-- 调整main-div的高度，使Loading动画显示在页面中央 -->
-	<div id="main" style="height: 500px;"></div>
+	<div id="main"></div>
 	<footer class="container-fluid bg-footer text-center">
 		<p>
 			Copyright &copy; 2016 <a href="http://www.airwxtx.com">airwxtx.com</a>

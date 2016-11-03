@@ -1,5 +1,7 @@
 package com.airwxtx.client.service.impl;
 
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.List;
 
 import org.hibernate.Hibernate;
@@ -67,6 +69,12 @@ public class ClientServiceImpl implements ClientService{
 		return this.clientDao.countClientByNameOrPhoneOrCompanyOrCardWithPage(name, phone, company, card);
 	}
 	
+	@Transactional(readOnly = true)
+	@Override
+	public void exportXlsx(OutputStream out) throws IOException {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	public ClientDao getClientDao() {
 		return clientDao;
@@ -75,4 +83,6 @@ public class ClientServiceImpl implements ClientService{
 	public void setClientDao(ClientDao clientDao) {
 		this.clientDao = clientDao;
 	}
+
+	
 }

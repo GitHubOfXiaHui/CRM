@@ -1,7 +1,12 @@
 package com.airwxtx.client.action.impl;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -27,7 +32,6 @@ public class ClientActionImpl extends ActionSupport implements ClientAction{
 	private String card;
 	@Autowired
 	private ClientService clientService;
-	
 	
 	@Override
 	public String preSaveClient() throws Exception {
@@ -77,6 +81,18 @@ public class ClientActionImpl extends ActionSupport implements ClientAction{
 	public int getMaxPage(){
 		int count = clientService.countClientByNameOrPhoneOrCompanyOrCardWithPage(name, phone, company, card);
 		return (count - 1) / Constants.PAGE_SIZE + 1;
+	}
+	
+	@Override
+	public void exportClient() throws Exception {
+		// TODO Auto-generated method stub
+		Date now = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String filename = "会员列表 ["+sdf.format(now)+"].xlsx";
+		HttpServletResponse response = ServletActionContext.getResponse();
+		response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+		response.setHeader("Content-disposition", "attachment;filename=" + new String(filename.getBytes("UTF-8"), "ISO-8859-1"));
+		clientService.exportXlsx(response.getOutputStream());
 	}
 	//=========================================================================================================
 	//set and get
@@ -140,4 +156,6 @@ public class ClientActionImpl extends ActionSupport implements ClientAction{
 	private static final String DETAILS = "details";
 	private static final String UPDATE = "update";
 	private static final String LIST = "list";
+
+	
 }

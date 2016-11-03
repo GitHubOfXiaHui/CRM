@@ -65,7 +65,7 @@ public class CardDaoImpl extends BaseDaoSupport implements CardDao {
 	@Override
 	public Card loadCard(Integer id) {
 		// TODO Auto-generated method stub
-		return this.getHibernateTemplate().load(Card.class, id);
+		return this.getHibernateTemplate().get(Card.class, id);
 	}
 
 }
