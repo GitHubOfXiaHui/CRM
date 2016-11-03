@@ -64,16 +64,16 @@ public class RecodeServiceImpl implements RecodeService {
 	public void exportXlsx(OutputStream out) throws IOException {
 		List<Recode> recodes = recodeDao.loadAllRecodes();
 		List<String[]> table = new ArrayList<>();
-		table.add(new String[] { "航班号", "航程起点", "航程终点", "航程日期", "订票日期", "消费金额（元）", "备注", "会员单位", "会员中文名", "会员英文名",
-				"会员卡号", "操作员" });
+		table.add(
+				new String[] { "航班号", "行程", "航班日期", "订票日期", "消费金额（元）", "备注", "会员单位", "会员中文名", "会员英文名", "会员卡号", "操作员" });
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 		DecimalFormat df = new DecimalFormat("#,##0.00");
 		for (Recode recode : recodes) {
-			table.add(new String[] { recode.getFltNo(), recode.getOrigin(), recode.getDestination(),
-					sdf.format(recode.getFlightDate()), sdf.format(recode.getBookingDate()),
-					df.format(recode.getConsumption()), recode.getComment(), recode.getClient().getCompany(),
-					recode.getClient().getClientName(), recode.getClient().getClientEnglishName(),
-					recode.getCard().getCardNo(), recode.getUser().getUsername() });
+			table.add(new String[] { recode.getFltNo(), recode.getRoute(), sdf.format(recode.getFlightDate()),
+					sdf.format(recode.getBookingDate()), df.format(recode.getConsumption()), recode.getComment(),
+					recode.getClient().getCompany(), recode.getClient().getClientName(),
+					recode.getClient().getClientEnglishName(), recode.getCard().getCardNo(),
+					recode.getUser().getUsername() });
 		}
 		ExportExcelUtil.xlsx(out, table);
 	}

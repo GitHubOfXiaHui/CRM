@@ -40,11 +40,28 @@ public interface CardAction {
 	 * @throws Exception
 	 */
 	public String update() throws Exception;
-	
+
 	/**
 	 * 加载会员卡
+	 * 
 	 * @throws Exception
 	 */
 	public String loadCard() throws Exception;
+
+	/**
+	 * 冻结会员卡
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public String freezeCard() throws Exception;
+
+	/**
+	 * 解冻会员卡
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public String unfreezeCard() throws Exception;
 
 }

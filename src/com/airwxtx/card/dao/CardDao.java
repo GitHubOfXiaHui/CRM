@@ -56,4 +56,11 @@ public interface CardDao {
 	 */
 	public Card loadCard(Integer id);
 
+	/**
+	 * ∂≥Ω·ª·‘±ø®
+	 * 
+	 * @param cardId
+	 */
+	public void updateCardStatus(Integer cardId, String cardStatus);
+
 }

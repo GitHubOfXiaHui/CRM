@@ -10,7 +10,10 @@
 			<result name="update">/WEB-INF/pages/card/updateCard.jsp</result>
 			<result name="input">/WEB-INF/pages/card/saveCard.jsp</result>
 			<result name="details">/WEB-INF/pages/card/cardDetails.jsp</result>
-			<allowed-methods>preSave,saveCard,updateCard,preUpdate,searchCard,loadCard</allowed-methods>
+			<result type="json">
+				<param name="root">jsonResult</param>
+			</result>
+			<allowed-methods>preSave,saveCard,updateCard,preUpdate,searchCard,loadCard,freezeCard,unfreezeCard</allowed-methods>
 		</action>
 	</package>
 </struts>

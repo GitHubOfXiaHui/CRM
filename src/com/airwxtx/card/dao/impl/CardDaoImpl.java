@@ -68,4 +68,11 @@ public class CardDaoImpl extends BaseDaoSupport implements CardDao {
 		return this.getHibernateTemplate().get(Card.class, id);
 	}
 
+	@Override
+	public void updateCardStatus(Integer cardId, String cardStatus) {
+		// TODO Auto-generated method stub
+		String hql = "UPDATE Card SET status = ? WHERE id = ?";
+		this.getHibernateTemplate().bulkUpdate(hql, cardStatus, cardId);
+	}
+
 }

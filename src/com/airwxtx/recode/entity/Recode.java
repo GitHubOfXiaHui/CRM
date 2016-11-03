@@ -13,10 +13,8 @@ public class Recode {
 	/* 普通属性 */
 	// 航班号
 	private String fltNo;
-	// 航程起点
-	private String origin;
-	// 航程终点
-	private String destination;
+	// 行程
+	private String route;
 	// 航程日期
 	private Date flightDate;
 	// 订票日期
@@ -50,22 +48,14 @@ public class Recode {
 		this.fltNo = fltNo;
 	}
 	
-	public String getOrigin() {
-		return origin;
+	public String getRoute() {
+		return route;
 	}
-	
-	public void setOrigin(String origin) {
-		this.origin = origin;
+
+	public void setRoute(String route) {
+		this.route = route;
 	}
-	
-	public String getDestination() {
-		return destination;
-	}
-	
-	public void setDestination(String destination) {
-		this.destination = destination;
-	}
-	
+
 	public Date getFlightDate() {
 		return flightDate;
 	}

@@ -40,7 +40,7 @@
 			  	
 			  	<div class="row">
 			    	<label class="col-sm-2 text-right"><strong>手机号：</strong></label>
-				    <div class="col-sm-4"><s:property value="card.phone" /></div>
+				    <div class="col-sm-4"><s:property value="card.client.mobilePhoneNumber" /></div>
 				    <label class="col-sm-2 text-right"><strong>会员卡校验码：</strong></label>
 				    <div class="col-sm-4"><s:property value="card.checkCode" /></div>
 			  	</div>

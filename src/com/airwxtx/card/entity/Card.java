@@ -17,8 +17,6 @@ public class Card implements CardStatus {
 	private String status = NORMAL;
 	// 余额
 	private Double balance;
-	// 手机号
-	private String phone;
 	// 卡校验码
 	private String checkCode;
 	
@@ -58,14 +56,6 @@ public class Card implements CardStatus {
 	
 	public void setBalance(Double balance) {
 		this.balance = balance;
-	}
-	
-	public String getPhone() {
-		return phone;
-	}
-
-	public void setPhone(String phone) {
-		this.phone = phone;
 	}
 
 	public String getCheckCode() {

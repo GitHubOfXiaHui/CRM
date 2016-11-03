@@ -48,4 +48,26 @@ public interface CardService {
 	 */
 	public void updateCard(Card card);
 
+	/**
+	 * 判断该用户是否具有冻结权限
+	 * 
+	 * @param username
+	 * @return
+	 */
+	public boolean canFreezeCard(String username);
+
+	/**
+	 * 冻结会员卡
+	 * 
+	 * @param cardId
+	 */
+	public void freezeCard(Integer cardId);
+
+	/**
+	 * 解冻会员卡
+	 * 
+	 * @param cardId
+	 */
+	public void unfreezeCard(Integer cardId);
+
 }

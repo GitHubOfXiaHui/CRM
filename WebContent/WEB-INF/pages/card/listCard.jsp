@@ -14,7 +14,7 @@
 		</div>
 		<div class="form-group">
 			<label for="phone">手机号：</label>
-			<input class="form-control" name="phone" type="text" value="<s:property value='phone' />">
+			<input class="form-control" name="phone" type="text" value="<s:property value='client.mobilePhoneNumber' />">
 		</div>
 		<button class="btn btn-primary" type="submit">
 			<span class="glyphicon glyphicon-search"></span> 搜索
@@ -49,19 +49,19 @@
 						<a href="/CRM/card/loadCardAction?id=<s:property value='id' />" target="_blank">详情</a>
 						<s:if test="status == @com.airwxtx.card.entity.CardStatus@NORMAL">
 							<s:if test="(@com.airwxtx.authority.entity.AuthorityNumber@FREEZE_CARD_UNLIMITED in #userAuthority) || (@com.airwxtx.authority.entity.AuthorityNumber@FREEZE_CARD_LIMITED in #userAuthority)">
-								&nbsp;/&nbsp;<a href="/CRM/card/freezeCardAction?cardId=<s:property value='id' />">冻结</a>
+								&nbsp;/&nbsp;<a class="js-freeze" href="/CRM/card/freezeCardAction?cardId=<s:property value='id' />">冻结</a>
 							</s:if>
 							<s:if test="@com.airwxtx.authority.entity.AuthorityNumber@CHARGE in #userAuthority">
-								&nbsp;/&nbsp;<a href="/CRM/card/cardChargeAction?cardId=<s:property value='id' />">充值</a>
+								&nbsp;/&nbsp;<a class="js-charge" href="/CRM/card/cardChargeAction?cardId=<s:property value='id' />">充值</a>
 							</s:if>
 							
 							<s:if test="@com.airwxtx.authority.entity.AuthorityNumber@PAY in #userAuthority">
-								&nbsp;/&nbsp;<a href="/CRM/card/carPayAction?cardId=<s:property value='id' />" target="_blank">扣款</a>
+								&nbsp;/&nbsp;<a class="js-pay" href="/CRM/card/carPayAction?cardId=<s:property value='id' />" target="_blank">扣款</a>
 							</s:if>
 						</s:if>
 						<s:else>
 							<s:if test="@com.airwxtx.authority.entity.AuthorityNumber@UNFREEZE_CARD in #userAuthority">
-								&nbsp;/&nbsp;<a href="/CRM/user/unfreezeCardAction?cardId=<s:property value='id' />">解冻</a>
+								&nbsp;/&nbsp;<a class="js-unfreeze" href="/CRM/card/unfreezeCardAction?cardId=<s:property value='id' />">解冻</a>
 							</s:if>
 						</s:else>
 					</td>
@@ -88,6 +88,26 @@
 				onsearch(url, params);
 						
 				// 阻止表单默认提交
+				return false;
+			});
+			
+			// 冻结
+			$(".js-freeze").click(function(){
+				$.getJSON($(this).attr("href"), function(data){
+					bootbox.setDefaults({locale:"zh_CN"});
+					bootbox.alert(data.resultInfo);
+				});
+				
+				return false;
+			});
+			
+			// 解冻
+			$(".js-unfreeze").click(function(){
+				$.getJSON($(this).attr("href"), function(data){
+					bootbox.setDefaults({locale:"zh_CN"});
+					bootbox.alert(data.resultInfo);
+				});
+				
 				return false;
 			});
 		});

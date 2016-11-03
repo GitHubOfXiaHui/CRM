@@ -13,9 +13,8 @@
 
 		<!-- 映射普通属性 -->
 		<property name="fltNo" column="航班号" />
-		<property name="origin" column="航程起点" />
-		<property name="destination" column="航程终点" />
-		<property name="flightDate" column="航程日期" type="date" />
+		<property name="route" column="行程" />
+		<property name="flightDate" column="航班日期" type="date" />
 		<property name="bookingDate" column="订票日期" type="date" />
 		<property name="consumption" column="消费金额" />
 		<property name="comment" column="备注" />

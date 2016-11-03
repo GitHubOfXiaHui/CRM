@@ -51,4 +51,11 @@ public interface UserDao {
 	 */
 	public void resetPasswordByName(String username);
 
+	/**
+	 * 
+	 * @param username
+	 * @return
+	 */
+	public int findUserFreezeCount(String username);
+
 }

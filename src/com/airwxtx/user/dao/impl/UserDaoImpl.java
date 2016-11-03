@@ -72,4 +72,13 @@ public class UserDaoImpl extends BaseDaoSupport implements UserDao {
 		this.getHibernateTemplate().bulkUpdate(hql);
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public int findUserFreezeCount(String username) {
+		// TODO Auto-generated method stub
+		String hql = "SELECT u.freezeCount FROM User u WHERE u.username = :username";
+		List<Object> ans = (List<Object>) this.getHibernateTemplate().findByNamedParam(hql, "username", username);
+		return Integer.parseInt(ans.get(0).toString());
+	}
+
 }

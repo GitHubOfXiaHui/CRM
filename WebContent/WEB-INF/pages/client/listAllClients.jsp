@@ -70,20 +70,13 @@
 						<td><s:property value="mobilePhoneNumber" /></td>
 						<td><s:property value="idNumber" /></td>
 						<td>
-							<a class="btn btn-success" href="/CRM/client/showClientDetailsAction?clientId=<s:property value='clientId' />" target="_blank">查看</a>
-<<<<<<< HEAD
-							/
-							<a class="btn btn-success" href="/CRM/client/preUpdateClientAction?clientId=<s:property value='clientId' />" target="_blank">修改</a>
-							/
-							<a class="btn btn-success" href="/CRM/card/preSaveAction?clientId=<s:property value='clientId' />" target="_blank">添加会员卡</a>
-=======
+							<a class="btn btn-success" href="/CRM/client/showClientDetailsAction?clientId=<s:property value='clientId' />" target="_blank">详情</a>
 							<s:if test="@com.airwxtx.authority.entity.AuthorityNumber@UPDATE_CLIENT in #userAuthority">
 								&nbsp;/&nbsp;<a class="btn btn-success" href="/CRM/client/preUpdateClientAction?clientId=<s:property value='clientId' />" target="_blank">修改</a>
 							</s:if>
 							<s:if test="@com.airwxtx.authority.entity.AuthorityNumber@SELL_CARD in #userAuthority">
 								&nbsp;/&nbsp;<a class="btn btn-success" href="/CRM/client/preUpdateClientAction?clientId=<s:property value='clientId' />" target="_blank">添加会员卡</a>
 							</s:if>
->>>>>>> 44bda0d390f1971e4b3f98da4e8846909eecd635
 						</td>
 					</tr>
 					</s:iterator>
