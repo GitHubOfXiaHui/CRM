@@ -2,14 +2,14 @@ body {
   font-family: sans-serif;
 }
 
-#wrapper {
+.container-fluid {
   position: fixed;
   top: 20%;
   left: 50%;
   transform: translateX(-50%);
 }
 
-#logo {
+.logo {
   text-align: center;
   font-size: 40px;
   font-weight: bold;
@@ -21,13 +21,11 @@ label {
 
 input[type="text"],
 input[type="password"] {
-  height: 18px;
   font-size: 15px;
   border-top: none;
   border-right: none;
   border-bottom: 1px solid black;
   border-left: none;
-  transform: translateY(-5px);
 }
 
 input[type="submit"] {

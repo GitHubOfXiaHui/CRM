@@ -21,7 +21,6 @@ public abstract class Constants {
 	
 	static {
 		ALL_AUTHORITIES.add(new Authority(AuthorityNumber.SAVE_CLIENT, "录入会员信息"));
-		ALL_AUTHORITIES.add(new Authority(AuthorityNumber.SHOW_CLIENT, "查询会员信息"));
 		ALL_AUTHORITIES.add(new Authority(AuthorityNumber.UPDATE_CLIENT, "修改会员信息"));
 		ALL_AUTHORITIES.add(new Authority(AuthorityNumber.EXPORT_CLIENT, "导出会员信息"));
 		ALL_AUTHORITIES.add(new Authority(AuthorityNumber.SELL_CARD, "录入会员卡信息"));
@@ -30,7 +29,6 @@ public abstract class Constants {
 		ALL_AUTHORITIES.add(new Authority(AuthorityNumber.FREEZE_CARD_UNLIMITED, "冻结会员卡无限制"));
 		ALL_AUTHORITIES.add(new Authority(AuthorityNumber.FREEZE_CARD_LIMITED, "冻结会员卡每天2次"));
 		ALL_AUTHORITIES.add(new Authority(AuthorityNumber.UNFREEZE_CARD, "解冻会员卡"));
-		ALL_AUTHORITIES.add(new Authority(AuthorityNumber.SHOW_RECORD, "查询消费记录"));
 		ALL_AUTHORITIES.add(new Authority(AuthorityNumber.DELETE_RECORD, "删除消费记录"));
 		ALL_AUTHORITIES.add(new Authority(AuthorityNumber.EXPORT_RECORD, "导出消费记录"));
 		ALL_AUTHORITIES.add(new Authority(AuthorityNumber.CONTROL_USER, "管理系统用户"));

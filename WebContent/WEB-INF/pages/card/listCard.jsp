@@ -2,6 +2,9 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 
+<%-- 从Application中取到用户权限 --%>
+<s:set var="userAuthority" value="#application.authority.get(#session.user)" />
+
 <div class="container text-center">
 	<form class="form-inline" action="/CRM/card/searchCardAction" method="post"
 		 style="padding-top:10px;padding-bottom:10px;">
@@ -45,12 +48,21 @@
 					<td>
 						<a href="/CRM/card/loadCardAction?id=<s:property value='id' />" target="_blank">详情</a>
 						<s:if test="status == @com.airwxtx.card.entity.CardStatus@NORMAL">
-							&nbsp;/&nbsp;<a href="/CRM/card/freezeCardAction?cardId=<s:property value='id' />">冻结</a>
-							&nbsp;/&nbsp;<a href="/CRM/card/cardChargeAction?cardId=<s:property value='id' />">充值</a>
-							&nbsp;/&nbsp;<a href="/CRM/card/carPayAction?cardId=<s:property value='id' />" target="_blank">扣款</a>
+							<s:if test="(@com.airwxtx.authority.entity.AuthorityNumber@FREEZE_CARD_UNLIMITED in #userAuthority) || (@com.airwxtx.authority.entity.AuthorityNumber@FREEZE_CARD_LIMITED in #userAuthority)">
+								&nbsp;/&nbsp;<a href="/CRM/card/freezeCardAction?cardId=<s:property value='id' />">冻结</a>
+							</s:if>
+							<s:if test="@com.airwxtx.authority.entity.AuthorityNumber@CHARGE in #userAuthority">
+								&nbsp;/&nbsp;<a href="/CRM/card/cardChargeAction?cardId=<s:property value='id' />">充值</a>
+							</s:if>
+							
+							<s:if test="@com.airwxtx.authority.entity.AuthorityNumber@PAY in #userAuthority">
+								&nbsp;/&nbsp;<a href="/CRM/card/carPayAction?cardId=<s:property value='id' />" target="_blank">扣款</a>
+							</s:if>
 						</s:if>
 						<s:else>
-							&nbsp;/&nbsp;<a href="/CRM/user/unfreezeCardAction?cardId=<s:property value='id' />">解冻</a>
+							<s:if test="@com.airwxtx.authority.entity.AuthorityNumber@UNFREEZE_CARD in #userAuthority">
+								&nbsp;/&nbsp;<a href="/CRM/user/unfreezeCardAction?cardId=<s:property value='id' />">解冻</a>
+							</s:if>
 						</s:else>
 					</td>
 				</tr>
