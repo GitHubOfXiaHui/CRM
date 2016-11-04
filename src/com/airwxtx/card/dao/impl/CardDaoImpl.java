@@ -16,9 +16,15 @@ import com.airwxtx.utils.BaseDaoSupport;
 public class CardDaoImpl extends BaseDaoSupport implements CardDao {
 
 	@Override
-	public void addMoneyTo(Double money, Card card) {
+	public void updateCardBalance(Card card, Double money) {
 		String hql = "UPDATE Card c SET c.balance = c.balance + ? WHERE c = ?";
 		this.getHibernateTemplate().bulkUpdate(hql, money, card);
+	}
+
+	@Override
+	public void updateCardBalance(Integer cardId, Double money) {
+		String hql = "UPDATE Card SET balance = balance + ? WHERE id = ?";
+		this.getHibernateTemplate().bulkUpdate(hql, money, cardId);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -45,7 +51,8 @@ public class CardDaoImpl extends BaseDaoSupport implements CardDao {
 			query.add(Restrictions.ilike("cardNo", cardNo, MatchMode.ANYWHERE));
 		}
 		if (phone != null && !phone.equals("")) {
-			query.add(Restrictions.ilike("phone", phone, MatchMode.ANYWHERE));
+			query.createCriteria("client");
+			query.add(Restrictions.ilike("mobilePhoneNumber", phone, MatchMode.ANYWHERE));
 		}
 		return query;
 	}

@@ -53,9 +53,9 @@ body {
 				</div>
 				<div class="row">
 					<div class="col-md-2 text-right"><strong>消费金额：</strong></div>
-					<div class="col-md-4"><s:property value="recode.consumption" /></div>
-					<div class="col-md-2 text-right"><strong>备注：</strong></div>
-					<div class="col-md-4"><s:property value="recode.comment" /></div>
+					<div class="col-md-4"><s:property value="recode.consumption" /></div>				
+					<div class="col-md-2 text-right"><strong>操作员：</strong></div>
+					<div class="col-md-4"><s:property value="recode.user.username" /></div>
 				</div>
 				<div class="row">
 					<div class="col-md-2 text-right"><strong>会员单位：</strong></div>
@@ -70,8 +70,8 @@ body {
 					<div class="col-md-4"><s:property value="recode.client.clientEnglishName" /></div>
 				</div>
 				<div class="row">
-					<div class="col-md-2 text-right"><strong>操作员：</strong></div>
-					<div class="col-md-4"><s:property value="recode.user.username" /></div>
+					<div class="col-md-2 text-right"><strong>备注：</strong></div>
+					<div class="col-md-10"><s:property value="recode.comment" /></div>
 				</div>
 			</div>
 		</div>

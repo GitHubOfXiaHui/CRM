@@ -16,7 +16,7 @@ public class Card implements CardStatus {
 	// 状态（正常/冻结）
 	private String status = NORMAL;
 	// 余额
-	private Double balance;
+	private Double balance = 0.0;
 	// 卡校验码
 	private String checkCode;
 	

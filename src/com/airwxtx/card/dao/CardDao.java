@@ -7,12 +7,20 @@ import com.airwxtx.card.entity.Card;
 public interface CardDao {
 
 	/**
-	 * 充值
+	 * 修改余额
 	 * 
 	 * @param money
 	 * @param card
 	 */
-	public void addMoneyTo(Double money, Card card);
+	public void updateCardBalance(Card card, Double money);
+
+	/**
+	 * 修改余额
+	 * 
+	 * @param cardId
+	 * @param money
+	 */
+	public void updateCardBalance(Integer cardId, Double money);
 
 	/**
 	 * 按卡号和/或手机号分页查询会员卡

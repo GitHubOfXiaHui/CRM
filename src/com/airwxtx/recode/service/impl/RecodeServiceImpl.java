@@ -43,9 +43,6 @@ public class RecodeServiceImpl implements RecodeService {
 	@Transactional(readOnly = true)
 	public Recode loadRecode(Integer id) {
 		Recode recode = recodeDao.loadRecode(id);
-		Hibernate.initialize(recode.getClient());
-		Hibernate.initialize(recode.getCard());
-		Hibernate.initialize(recode.getUser());
 		return recode;
 	}
 
@@ -54,7 +51,7 @@ public class RecodeServiceImpl implements RecodeService {
 	public void deleteRecode(Integer recodeId) {
 		Recode recode = recodeDao.loadRecode(recodeId);
 		// 恢复对应会员卡的余额
-		cardDao.addMoneyTo(recode.getConsumption(), recode.getCard());
+		cardDao.updateCardBalance(recode.getCard(), recode.getConsumption());
 		// 删除消费记录
 		recodeDao.deleteRecode(recodeId);
 	}

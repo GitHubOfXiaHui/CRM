@@ -52,11 +52,11 @@
 								&nbsp;/&nbsp;<a class="js-freeze" href="/CRM/card/freezeCardAction?cardId=<s:property value='id' />">冻结</a>
 							</s:if>
 							<s:if test="@com.airwxtx.authority.entity.AuthorityNumber@CHARGE in #userAuthority">
-								&nbsp;/&nbsp;<a class="js-charge" href="/CRM/card/cardChargeAction?cardId=<s:property value='id' />">充值</a>
+								&nbsp;/&nbsp;<a class="js-charge" href="/CRM/card/cardChargeAction?cardId=<s:property value='id' />&money=">充值</a>
 							</s:if>
 							
 							<s:if test="@com.airwxtx.authority.entity.AuthorityNumber@PAY in #userAuthority">
-								&nbsp;/&nbsp;<a class="js-pay" href="/CRM/card/carPayAction?cardId=<s:property value='id' />" target="_blank">扣款</a>
+								&nbsp;/&nbsp;<a class="js-pay" href="/CRM/card/preCardPayAction?cardId=<s:property value='id' />" target="_blank">扣款</a>
 							</s:if>
 						</s:if>
 						<s:else>
@@ -110,6 +110,28 @@
 				
 				return false;
 			});
+			
+			// 充值
+			$(".js-charge").click(function(){
+				var $this = $(this);
+				bootbox.setDefaults({locale:"zh_CN"});
+				bootbox.prompt({
+					title: "充值金额",
+				    inputType: "number",
+				    callback: function (result) {
+				        if (result > 0){
+							$.getJSON($this.attr("href") + result, function(data){
+								bootbox.alert(data.resultInfo);
+							});
+				        } else {
+				        	bootbox.alert("充值金额无效");
+				        }
+				    }
+				});
+				
+				return false;
+			});
+
 		});
 	</script>
 </div>

@@ -48,4 +48,10 @@ public interface RecodeDao {
 	 */
 	public List<Recode> loadAllRecodes();
 
+	/**
+	 * 保存消费记录
+	 * @param recode
+	 */
+	public void save(Recode recode);
+
 }

@@ -59,4 +59,10 @@ public class RecodeDaoImpl extends BaseDaoSupport implements RecodeDao {
 		return this.getHibernateTemplate().loadAll(Recode.class);
 	}
 
+	@Override
+	public void save(Recode recode) {
+		// TODO Auto-generated method stub
+		this.getHibernateTemplate().save(recode);
+	}
+
 }

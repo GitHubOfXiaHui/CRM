@@ -3,6 +3,7 @@ package com.airwxtx.card.service;
 import java.util.List;
 
 import com.airwxtx.card.entity.Card;
+import com.airwxtx.recode.entity.Recode;
 
 public interface CardService {
 
@@ -60,8 +61,9 @@ public interface CardService {
 	 * 冻结会员卡
 	 * 
 	 * @param cardId
+	 * @param username
 	 */
-	public void freezeCard(Integer cardId);
+	public void freezeCard(Integer cardId, String username);
 
 	/**
 	 * 解冻会员卡
@@ -69,5 +71,21 @@ public interface CardService {
 	 * @param cardId
 	 */
 	public void unfreezeCard(Integer cardId);
+
+	/**
+	 * 充值
+	 * 
+	 * @param cardId
+	 * @param money
+	 */
+	public void charge(Integer cardId, double money);
+
+	/**
+	 * 扣款
+	 * 
+	 * @param card
+	 * @param recode
+	 */
+	public void pay(Card card, Recode recode);
 
 }

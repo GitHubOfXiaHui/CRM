@@ -52,10 +52,18 @@ public interface UserDao {
 	public void resetPasswordByName(String username);
 
 	/**
+	 * 查找用户当前冻结次数
 	 * 
 	 * @param username
 	 * @return
 	 */
 	public int findUserFreezeCount(String username);
+
+	/**
+	 * 用户冻结次数加一
+	 * 
+	 * @param username
+	 */
+	public void userFreezeCountInc(String username);
 
 }

@@ -81,4 +81,11 @@ public class UserDaoImpl extends BaseDaoSupport implements UserDao {
 		return Integer.parseInt(ans.get(0).toString());
 	}
 
+	@Override
+	public void userFreezeCountInc(String username) {
+		// TODO Auto-generated method stub
+		String hql = "UPDATE User SET freezeCount = freezeCount + 1 WHERE username = ?";
+		this.getHibernateTemplate().bulkUpdate(hql, username);
+	}
+
 }

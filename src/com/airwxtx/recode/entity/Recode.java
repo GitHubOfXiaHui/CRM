@@ -15,7 +15,7 @@ public class Recode {
 	private String fltNo;
 	// 行程
 	private String route;
-	// 航程日期
+	// 航班日期
 	private Date flightDate;
 	// 订票日期
 	private Date bookingDate;

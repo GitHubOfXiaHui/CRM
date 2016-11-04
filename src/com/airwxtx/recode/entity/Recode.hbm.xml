@@ -21,10 +21,10 @@
 
 		<!-- 映射关联属性 -->
 		<many-to-one name="client" column="会员"
-			class="com.airwxtx.client.entity.Client" />
+			class="com.airwxtx.client.entity.Client" lazy="false" />
 		<many-to-one name="card" column="会员卡"
-			class="com.airwxtx.card.entity.Card" />
+			class="com.airwxtx.card.entity.Card" lazy="false" />
 		<many-to-one name="user" column="操作员"
-			class="com.airwxtx.user.entity.User" />
+			class="com.airwxtx.user.entity.User" lazy="false" />
 	</class>
 </hibernate-mapping>

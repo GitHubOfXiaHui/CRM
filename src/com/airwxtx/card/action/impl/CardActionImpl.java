@@ -13,6 +13,7 @@ import com.airwxtx.card.entity.Card;
 import com.airwxtx.card.service.CardService;
 import com.airwxtx.client.entity.Client;
 import com.airwxtx.client.service.ClientService;
+import com.airwxtx.recode.entity.Recode;
 import com.airwxtx.utils.Constants;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -29,6 +30,11 @@ public class CardActionImpl extends ActionSupport implements CardAction {
 
 	// 卡id
 	private Integer cardId;
+	// 充值金额
+	private double money;
+
+	// 扣款生成的消费记录
+	private Recode recode;
 
 	// 查询条件（卡号、手机号）
 	private String cardNo;
@@ -48,14 +54,14 @@ public class CardActionImpl extends ActionSupport implements CardAction {
 	@Override
 	public String preSave() throws Exception {
 		// TODO Auto-generated method stub
-		client = this.clientService.getClient(clientId);
-		return INPUT;
+		client = clientService.getClient(clientId);
+		return SAVE;
 	}
 
 	@Override
 	public String saveCard() throws Exception {
 		// TODO Auto-generated method stub
-		client = this.clientService.getClient(clientId);
+		client = clientService.getClient(clientId);
 		card.setClient(client);
 		this.cardService.saveCard(card);
 		return DETAILS;
@@ -64,8 +70,8 @@ public class CardActionImpl extends ActionSupport implements CardAction {
 	@Override
 	public String preUpdate() throws Exception {
 		// TODO Auto-generated method stub
-		client = this.clientService.getClient(clientId);
-		card = this.cardService.loadCard(cardId);
+		client = clientService.getClient(clientId);
+		card = cardService.loadCard(cardId);
 		return UPDATE;
 	}
 
@@ -79,7 +85,7 @@ public class CardActionImpl extends ActionSupport implements CardAction {
 	@Override
 	public String loadCard() throws Exception {
 		// TODO Auto-generated method stub
-		card = this.cardService.loadCard(cardId);
+		card = cardService.loadCard(cardId);
 		return DETAILS;
 	}
 
@@ -88,20 +94,48 @@ public class CardActionImpl extends ActionSupport implements CardAction {
 		// TODO Auto-generated method stub
 		String username = (String) ActionContext.getContext().getSession().get("user");
 		if (cardService.canFreezeCard(username)) {
-			cardService.freezeCard(cardId);
+			cardService.freezeCard(cardId, username);
 			jsonResult.put("resultInfo", "冻结成功");
 		} else {
 			jsonResult.put("resultInfo", "超过当日冻结次数");
 		}
 		return SUCCESS;
 	}
-	
+
 	@Override
 	public String unfreezeCard() throws Exception {
 		// TODO Auto-generated method stub
 		cardService.unfreezeCard(cardId);
 		jsonResult.put("resultInfo", "解冻成功");
 		return SUCCESS;
+	}
+
+	@Override
+	public String cardCharge() throws Exception {
+		// TODO Auto-generated method stub
+		cardService.charge(cardId, money);
+		jsonResult.put("resultInfo", "充值成功");
+		return SUCCESS;
+	}
+
+	@Override
+	public String preCardPay() throws Exception {
+		// TODO Auto-generated method stub
+		card = cardService.loadCard(cardId);
+		return INPUT;
+	}
+
+	public void validateCardPay() throws Exception {
+		if (recode.getConsumption() > card.getBalance()) {
+			this.addFieldError("recode.consumption", "余额不足");
+		}
+	}
+
+	@Override
+	public String cardPay() throws Exception {
+		// TODO Auto-generated method stub
+		cardService.pay(card, recode);
+		return RECODE;
 	}
 
 	@Override
@@ -130,6 +164,22 @@ public class CardActionImpl extends ActionSupport implements CardAction {
 
 	public void setCardId(Integer cardId) {
 		this.cardId = cardId;
+	}
+
+	public double getMoney() {
+		return money;
+	}
+
+	public void setMoney(double money) {
+		this.money = money;
+	}
+
+	public Recode getRecode() {
+		return recode;
+	}
+
+	public void setRecode(Recode recode) {
+		this.recode = recode;
 	}
 
 	public String getCardNo() {
@@ -206,7 +256,8 @@ public class CardActionImpl extends ActionSupport implements CardAction {
 
 	private static final String LIST = "list";
 	private static final String DETAILS = "details";
-	private static final String INPUT = "input";
+	private static final String SAVE = "save";
 	private static final String UPDATE = "update";
+	private static final String RECODE = "recode";
 
 }
