@@ -8,8 +8,8 @@ import org.springframework.stereotype.Controller;
 
 import com.airwxtx.authority.service.AuthorityService;
 import com.airwxtx.settings.action.SettingsAction;
-import com.airwxtx.settings.service.SettingsService;
 import com.airwxtx.user.entity.User;
+import com.airwxtx.user.service.UserService;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -18,19 +18,17 @@ import com.opensymphony.xwork2.ActionSupport;
 @Scope("prototype")
 public class SettingsActionImpl extends ActionSupport implements SettingsAction {
 
-	// 用户
+	// 个人信息
 	private User user;
+	private List<String> displayAuthorities;
 
 	// 修改密码
 	private String oldPassword;
 	private String newPassword;
 	private String confirmPassword;
 
-	private String result;
-	private String resultInfo;
-
 	@Autowired
-	private SettingsService settingsService;
+	private UserService userService;
 
 	@Autowired
 	private AuthorityService authorityService;
@@ -39,7 +37,8 @@ public class SettingsActionImpl extends ActionSupport implements SettingsAction 
 	public String profile() throws Exception {
 		// TODO Auto-generated method stub
 		String username = (String) ActionContext.getContext().getSession().get("user");
-		user = settingsService.findUser(username);
+		user = userService.findUserByName(username);
+		displayAuthorities = authorityService.changeToDisplayAuthorities(user.getAuthority());
 		return PROFILE;
 	}
 
@@ -51,7 +50,7 @@ public class SettingsActionImpl extends ActionSupport implements SettingsAction 
 
 	public void validateChangePassword() throws Exception {
 		String username = (String) ActionContext.getContext().getSession().get("user");
-		User user = settingsService.findUser(username);
+		User user = userService.findUserByName(username);
 		if (!oldPassword.equals(user.getPassword())) {
 			this.addFieldError("oldPassword", "原密码错误");
 		}
@@ -61,9 +60,7 @@ public class SettingsActionImpl extends ActionSupport implements SettingsAction 
 	public String changePassword() throws Exception {
 		// TODO Auto-generated method stub
 		String username = (String) ActionContext.getContext().getSession().get("user");
-		settingsService.changePassword(username, newPassword);
-		result = "success";
-		resultInfo = "密码修改成功。";
+		userService.updatePasswordWithUsername(username, newPassword);
 		return CHANGE_PASSWORD;
 	}
 
@@ -76,16 +73,20 @@ public class SettingsActionImpl extends ActionSupport implements SettingsAction 
 		return EXIT;
 	}
 
-	public List<String> getDisplayAuthorities() throws IllegalArgumentException, IllegalAccessException {
-		return authorityService.changeToDisplayAuthorities(user.getAuthority());
-	}
-
 	public User getUser() {
 		return user;
 	}
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public List<String> getDisplayAuthorities() {
+		return displayAuthorities;
+	}
+
+	public void setDisplayAuthorities(List<String> displayAuthorities) {
+		this.displayAuthorities = displayAuthorities;
 	}
 
 	public String getOldPassword() {
@@ -112,28 +113,12 @@ public class SettingsActionImpl extends ActionSupport implements SettingsAction 
 		this.confirmPassword = confirmPassword;
 	}
 
-	public String getResult() {
-		return result;
+	public UserService getUserService() {
+		return userService;
 	}
 
-	public void setResult(String result) {
-		this.result = result;
-	}
-
-	public String getResultInfo() {
-		return resultInfo;
-	}
-
-	public void setResultInfo(String resultInfo) {
-		this.resultInfo = resultInfo;
-	}
-
-	public SettingsService getSettingsService() {
-		return settingsService;
-	}
-
-	public void setSettingsService(SettingsService settingsService) {
-		this.settingsService = settingsService;
+	public void setUserService(UserService userService) {
+		this.userService = userService;
 	}
 
 	public AuthorityService getAuthorityService() {

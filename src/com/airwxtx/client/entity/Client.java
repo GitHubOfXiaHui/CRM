@@ -1,13 +1,14 @@
 package com.airwxtx.client.entity;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 import com.airwxtx.card.entity.Card;
-import com.airwxtx.recode.entity.Recode;
 
 public class Client {
-	// 客户id
+	
+	// 逻辑ID
 	private Integer clientId;
 	
 	/* 普通属性 */
@@ -32,7 +33,7 @@ public class Client {
 	// 护照有效期
 	private Date passportValidTime;
 	// 通行证有效期
-	private Date accsessValidTime;
+	private Date accessValidTime;
 	// 座位喜好
 	private String preferSeat;
 	// 推荐客户来源
@@ -40,13 +41,11 @@ public class Client {
 	// 特别喜好
 	private String like;
 	// 常旅客列表
-	private Set<String> frequentFlyers;
+	private List<String> frequentFlyers;
 	
 	/* 关联属性 */
 	// 会员卡
 	private Set<Card> cards;
-	// 消费记录
-	private Set<Recode> recodes;
 
 	public Integer getClientId() {
 		return clientId;
@@ -136,12 +135,12 @@ public class Client {
 		this.passportValidTime = passportValidTime;
 	}
 
-	public Date getAccsessValidTime() {
-		return accsessValidTime;
+	public Date getAccessValidTime() {
+		return accessValidTime;
 	}
 
-	public void setAccsessValidTime(Date accsessValidTime) {
-		this.accsessValidTime = accsessValidTime;
+	public void setAccessValidTime(Date accessValidTime) {
+		this.accessValidTime = accessValidTime;
 	}
 
 	public String getPreferSeat() {
@@ -168,11 +167,11 @@ public class Client {
 		this.like = like;
 	}
 
-	public Set<String> getFrequentFlyers() {
+	public List<String> getFrequentFlyers() {
 		return frequentFlyers;
 	}
 
-	public void setFrequentFlyers(Set<String> frequentFlyers) {
+	public void setFrequentFlyers(List<String> frequentFlyers) {
 		this.frequentFlyers = frequentFlyers;
 	}
 
@@ -182,14 +181,6 @@ public class Client {
 
 	public void setCards(Set<Card> cards) {
 		this.cards = cards;
-	}
-
-	public Set<Recode> getRecodes() {
-		return recodes;
-	}
-
-	public void setRecodes(Set<Recode> recodes) {
-		this.recodes = recodes;
 	}
 	
 }

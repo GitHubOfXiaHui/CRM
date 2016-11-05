@@ -11,7 +11,6 @@ import org.springframework.stereotype.Repository;
 import com.airwxtx.user.dao.UserDao;
 import com.airwxtx.user.entity.User;
 import com.airwxtx.utils.BaseDaoSupport;
-import com.airwxtx.utils.Constants;
 
 @Repository
 public class UserDaoImpl extends BaseDaoSupport implements UserDao {
@@ -31,9 +30,9 @@ public class UserDaoImpl extends BaseDaoSupport implements UserDao {
 	}
 
 	@Override
-	public void resetPasswordByName(String username) {
+	public void updatePasswordWithUsername(String username, String password) {
 		String hql = "UPDATE User SET password = ? WHERE username = ?";
-		this.getHibernateTemplate().bulkUpdate(hql, Constants.PASSWORD, username);
+		this.getHibernateTemplate().bulkUpdate(hql, password, username);
 	}
 
 	@SuppressWarnings("unchecked")

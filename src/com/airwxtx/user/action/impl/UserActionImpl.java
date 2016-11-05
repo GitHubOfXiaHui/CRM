@@ -26,8 +26,10 @@ import com.opensymphony.xwork2.ActionSupport;
 @Scope("prototype")
 public class UserActionImpl extends ActionSupport implements UserAction {
 
+	// 个人信息
 	private User user;
 	private Set<Long> authorityNumbers;
+	private List<String> displayAuthorities;
 
 	// 查询条件（用户名，角色）
 	private String username;
@@ -47,8 +49,8 @@ public class UserActionImpl extends ActionSupport implements UserAction {
 
 	@Override
 	public String userDetails() throws Exception {
-		user = userService.findUserByName(username);
-		authorityNumbers = authorityService.resolveAuthority(user.getAuthority());
+		user = userService.findUserByName(user.getUsername());
+		displayAuthorities = authorityService.changeToDisplayAuthorities(user.getAuthority());
 		return PROFILE;
 	}
 
@@ -67,7 +69,8 @@ public class UserActionImpl extends ActionSupport implements UserAction {
 	@Override
 	public String createUser() throws Exception {
 		// TODO Auto-generated method stub
-		userService.createUser(user, authorityNumbers);
+		userService.saveUser(user, authorityNumbers);
+		displayAuthorities = authorityService.changeToDisplayAuthorities(user.getAuthority());
 		return PROFILE;
 	}
 
@@ -83,7 +86,8 @@ public class UserActionImpl extends ActionSupport implements UserAction {
 	@Override
 	public String editUser() throws Exception {
 		// TODO Auto-generated method stub
-		userService.editUser(user, authorityNumbers);
+		userService.updateUser(user, authorityNumbers);
+		displayAuthorities = authorityService.changeToDisplayAuthorities(authorityNumbers);
 		// 修改全局权限表中本次修改用户的权限
 		// 全局权限表
 		Map<String, Set<Long>> authority = (Map<String, Set<Long>>) ActionContext.getContext().getApplication()
@@ -96,7 +100,7 @@ public class UserActionImpl extends ActionSupport implements UserAction {
 
 	@Override
 	public String resetPassword() throws Exception {
-		userService.resetPasswordByName(user.getUsername());
+		userService.updatePasswordWithUsername(user.getUsername(), Constants.PASSWORD);
 		jsonResult.put("resultInfo", "密码重置成功");
 		return SUCCESS;
 	}
@@ -126,17 +130,28 @@ public class UserActionImpl extends ActionSupport implements UserAction {
 		return authorityService.loadAllAuthorities();
 	}
 
-	// 详情页所要展示的权限
-	public List<String> getDisplayAuthorities() {
-		return authorityService.changeToDisplayAuthorities(authorityNumbers);
-	}
-
 	public User getUser() {
 		return user;
 	}
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+	
+	public Set<Long> getAuthorityNumbers() {
+		return authorityNumbers;
+	}
+
+	public void setAuthorityNumbers(Set<Long> authorities) {
+		this.authorityNumbers = authorities;
+	}
+
+	public List<String> getDisplayAuthorities() {
+		return displayAuthorities;
+	}
+
+	public void setDisplayAuthorities(List<String> displayAuthorities) {
+		this.displayAuthorities = displayAuthorities;
 	}
 
 	public String getUsername() {
@@ -161,14 +176,6 @@ public class UserActionImpl extends ActionSupport implements UserAction {
 
 	public void setPage(int page) {
 		this.page = page;
-	}
-
-	public Set<Long> getAuthorityNumbers() {
-		return authorityNumbers;
-	}
-
-	public void setAuthorityNumbers(Set<Long> authorities) {
-		this.authorityNumbers = authorities;
 	}
 
 	public List<User> getUsers() {

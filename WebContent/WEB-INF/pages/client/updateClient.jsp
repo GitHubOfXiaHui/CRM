@@ -5,142 +5,185 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>修改客户</title>
+<title>修改会员信息</title>
+<meta charset="UTF-8">
 
 <!-- Bootstrap样式 -->
 <link rel="stylesheet" href="/CRM/css/bootstrap.min.css">
 <script src="/CRM/js/jquery.min.js" type="text/javascript"></script>
 <script src="/CRM/js/bootstrap.min.js" type="text/javascript"></script>
 
+<!-- Bootstrap-datetimepicker -->
+<link rel="stylesheet" href="/CRM/css/bootstrap-datetimepicker.min.css">
+<script src="/CRM/js/bootstrap-datetimepicker.min.js" type="text/javascript" charset="UTF-8"></script>
+<script src="/CRM/js/bootstrap-datetimepicker.zh-CN.js" type="text/javascript" charset="UTF-8"></script>
+<script type="text/javascript">
+	// 设置datetimepicker参数
+	$(function(){
+		$(".form_date").datetimepicker({
+	        language:  "zh-CN",
+	        todayBtn:  "linked",
+			autoclose: true,
+			todayHighlight: true,
+			minView: "month",
+			pickerPosition: "bottom-left",
+			forceParse: false
+	    });
+	});
+</script>
 
 <script>
-$(document).ready(function(){
-    $("#btn1").click(function(){
-        $("#freq").append(
-        		"<div class='col-sm-offset-2 col-sm-9'>"
-        	   		+"<input type='text' class='form-control' name='client.frequentFlyers' value='<s:property value='client.frequentFlyers' />'></div>"
-        		);
+$(function(){
+	var freq = "<div class='col-md-offset-2 col-md-9' style='padding-top:10px;'>"
+			+    "<input type='text' class='form-control' name='client.frequentFlyers'>"
+			+  "</div>";
+    $("#add").click(function(){
+        $("#freqs").append(freq);
     });
 });
 </script>
+
+<style type="text/css">
+.container {
+	padding-top: 20px;
+}
+</style>
 
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <script src="/CRM/js/html5shiv.min.js" type="text/javascript"></script>
 <script src="/CRM/js/respond.min.js" type="text/javascript"></script>
 
-<!-- 导入struts样式 -->
-<s:head />
-
 </head>
 <body>
-	<div class="container" style="margin-top:20px;">
-		<div class="panel panel-success">
-			<div class="panel-heading">修改会员</div>
+	<div class="container">
+		<div class="panel panel-info">
+			<div class="panel-heading">新建会员</div>
 			<div class="panel-body">
-			<s:fielderror />
-				<form class="form-horizontal" role="form" action="/CRM/client/updateClientAction" method="post">
+				<form class="form-horizontal" action="/CRM/client/updateClientAction" method="post">
+					<!-- 关联会员ID -->
 					<input name="client.clientId" value="<s:property value='client.clientId' />" type="hidden">
-  					<div class="form-group">
-				    	<label class="control-label col-sm-2" for="name">中文姓名:</label>
-					    <div class="col-sm-10">
-					      <input type="text" class="form-control" id="name" name="client.clientName" value="<s:property value='client.clientName' />">
-					    </div>
+					
+					<div class="form-group">
+						<label class="control-label col-md-2" for="company">单位：</label>
+						<div  class="col-md-4">
+							<input type="text" class="form-control" id="company" name="client.company" value="<s:property value='client.company' />">
+						</div>
+						<label class="control-label col-md-2" for="title">职位：</label>
+						<div  class="col-md-4">
+							<input type="text" class="form-control" id="title" name="client.title" value="<s:property value='client.title' />">
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label class="control-label col-md-2" for="clientName">中文名：</label>
+						<div  class="col-md-4">
+							<input type="text" class="form-control" id="clientName" name="client.clientName" value="<s:property value='client.clientName' />">
+						</div>
+						<label class="control-label col-md-2" for="clientEnglishName">英文名：</label>
+						<div  class="col-md-4">
+							<input type="text" class="form-control" id="clientEnglishName" name="client.clientEnglishName" value="<s:property value='client.clientEnglishName' />">
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label class="control-label col-md-2" for="mobilePhoneNumber">手机号：</label>
+						<div  class="col-md-4">
+							<input type="text" class="form-control" id="mobilePhoneNumber" name="client.mobilePhoneNumber" value="<s:property value='client.mobilePhoneNumber' />">
+						</div>
+						<label class="control-label col-md-2" for="idNumber">身份证：</label>
+						<div  class="col-md-4">
+							<input type="text" class="form-control" id="idNumber" name="client.idNumber" value="<s:property value='client.idNumber' />">
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label class="control-label col-md-2" for="passportNumber">护照：</label>
+						<div  class="col-md-4">
+							<input type="text" class="form-control" id="passportNumber" name="client.passportNumber" value="<s:property value='client.passportNumber' />">
+						</div>
+						<label class="control-label col-md-2" for="passportValidTime">护照有效期：</label>
+						<div class="input-group date form_date col-md-4" id="passportValidTime" data-date-format="yyyy-mm-dd" style="padding-right: 15px;padding-left: 15px;">
+                    		<input class="form-control" name="client.passportValidTime" type="text" value="<s:property value='client.passportValidTime' />" readonly>
+                    		<span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                		</div>
+					</div>
+					
+					<div class="form-group">
+						<label class="control-label col-md-2" for="accessNumber">通行证：</label>
+						<div  class="col-md-4">
+							<input type="text" class="form-control" id="accessNumber" name="client.accessNumber" value="<s:property value='client.accessNumber' />">
+						</div>
+						<label class="control-label col-md-2" for="accessValidTime">通行证有效期：</label>
+						<div class="input-group date form_date col-md-4" id="accessValidTime" data-date-format="yyyy-mm-dd" style="padding-right: 15px;padding-left: 15px;">
+                    		<input class="form-control" name="client.accessValidTime" type="text" value="<s:property value='client.accessValidTime' />" readonly>
+                    		<span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                		</div>
+					</div>
+										
+					<div class="form-group">
+						<label class="control-label col-md-2" for="address">住址：</label>
+						<div  class="col-md-10">
+							<input type="text" class="form-control" id="address" name="client.address" value="<s:property value='client.address' />">
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label class="control-label col-md-2" for="recommend">推荐客户来源：</label>
+						<div  class="col-md-10">
+							<input type="text" class="form-control" id="recommend" name="client.recommend" value="<s:property value='client.recommend' />">
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label class="control-label col-md-2" for="preferSeat">座位喜好：</label>
+						<div  class="col-md-10">
+							<input type="text" class="form-control" id="preferSeat" name="client.preferSeat" value="<s:property value='client.preferSeat' />">
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label class="control-label col-md-2" for="like">特别喜好：</label>
+						<div  class="col-md-10">
+							<input type="text" class="form-control" id="like" name="client.like" value="<s:property value='client.like' />">
+						</div>
+					</div>
+					
+				 	<div id="freqs" class="form-group">
+				    	<label class="control-label col-md-2" for="freqs">常旅客：</label>
+				    	<s:if test="client.frequentFlyers.empty">
+			    			<div class="col-md-9">
+						      	<input type="text" class="form-control" name="client.frequentFlyers">
+						    </div>
+						    <div class="col-md-1">
+						    	 <button class="btn btn-success" id="add" type="button">
+	          						<span class="glyphicon glyphicon-plus"></span>
+	       				 		 </button>
+						    </div>
+				    	</s:if>
+				    	<s:else>
+					    	<s:iterator value="client.frequentFlyers" status="st">
+					    		<s:if test="#st.first">
+					    			<div class="col-md-9">
+								      	<input type="text" class="form-control" name="client.frequentFlyers" value="<s:property />">
+								    </div>
+								    <div class="col-md-1">
+								    	 <button class="btn btn-success" id="add" type="button">
+			          						<span class="glyphicon glyphicon-plus"></span>
+			       				 		 </button>
+								    </div>
+					    		</s:if>
+					    		<s:else>
+					    			<div class="col-md-offset-2 col-md-9">
+							      		<input type="text" class="form-control" name="client.frequentFlyers" value="<s:property />">
+							    	</div>
+					    		</s:else>
+					    	</s:iterator>
+				    	</s:else>
 				  	</div>
-				  	<div class="form-group">
-				    	<label class="control-label col-sm-2" for="name">英文姓名:</label>
-					    <div class="col-sm-10">
-					      <input type="text" class="form-control" id="name" name="client.clientEnglishName" value="<s:property value='client.clientEnglishName' />">
-					    </div>
-				  	</div>
-				  	<div class="form-group">
-				    	<label class="control-label col-sm-2" for="name">手机号:</label>
-					    <div class="col-sm-10">
-					      <input type="text" class="form-control" id="name" name="client.mobilePhoneNumber" value="<s:property value='client.mobilePhoneNumber' />">
-					    </div>
-				  	</div>
-				  	<div class="form-group">
-				    	<label class="control-label col-sm-2" for="name">单位:</label>
-					    <div class="col-sm-10">
-					      <input type="text" class="form-control" id="name" name="client.company" value="<s:property value='client.company' />">
-					    </div>
-				  	</div>
-				  	<div class="form-group">
-				    	<label class="control-label col-sm-2" for="name">职称:</label>
-					    <div class="col-sm-10">
-					      <input type="text" class="form-control" id="name" name="client.title" value="<s:property value='client.title' />">
-					    </div>
-				  	</div>
-				  	<div class="form-group">
-				    	<label class="control-label col-sm-2" for="name">地址:</label>
-					    <div class="col-sm-10">
-					      <input type="text" class="form-control" id="name" name="client.address" value="<s:property value='client.address' />">
-					    </div>
-				  	</div>
-				  	<div class="form-group">
-				    	<label class="control-label col-sm-2" for="name">身份证号:</label>
-					    <div class="col-sm-10">
-					      <input type="text" class="form-control" id="name" name="client.idNumber" value="<s:property value='client.idNumber' />">
-					    </div>
-				  	</div>
-				  	<div class="form-group">
-				    	<label class="control-label col-sm-2" for="name">护照号:</label>
-					    <div class="col-sm-10">
-					      <input type="text" class="form-control" id="name" name="client.passportNumber" value="<s:property value='client.passportNumber' />">
-					    </div>
-				  	</div>
-				  	<div class="form-group">
-				    	<label class="control-label col-sm-2" for="name">护照有效期:</label>
-					    <div class="col-sm-10">
-					      <input type="date" class="form-control" id="name" name="client.passportValidTime" value="<s:property value='client.passportValidTime' />">
-					    </div>
-				  	</div>
-				  	<div class="form-group">
-				    	<label class="control-label col-sm-2" for="name">通行证号:</label>
-					    <div class="col-sm-10">
-					      <input type="text" class="form-control" id="name" name="client.accessNumber" value="<s:property value='client.accessNumber' />">
-					    </div>
-				  	</div>
-				  	<div class="form-group">
-				    	<label class="control-label col-sm-2" for="name">通行证有效期:</label>
-					    <div class="col-sm-10">
-					      <input type="date" class="form-control" id="name" name="client.accessValidTime" value="<s:property value='client.accessValidTime' />">
-					    </div>
-				  	</div>
-				  	<div class="form-group">
-				    	<label class="control-label col-sm-2" for="name">座位喜好:</label>
-					    <div class="col-sm-10">
-					      <input type="text" class="form-control" id="name" name="client.preferSeat" value="<s:property value='client.preferSeat' />">
-					    </div>
-				  	</div>
-				  	<div class="form-group">
-				    	<label class="control-label col-sm-2" for="name">推荐来源:</label>
-					    <div class="col-sm-10">
-					      <input type="text" class="form-control" id="name" name="client.recommend" value="<s:property value='client.recommend' />">
-					    </div>
-				  	</div>
-				  	<div class="form-group">
-				    	<label class="control-label col-sm-2" for="name">特别喜好:</label>
-					    <div class="col-sm-10">
-					      <input type="text" class="form-control" id="name" name="client.like" value="<s:property value='client.like' />">
-					    </div>
-				  	</div>
-				 	<div id="freq" class="form-group">
-				    	<label class="control-label col-sm-2" for="freq">常旅客:</label>
-				    	<s:iterator value="client.frequentFlyers" >
-				    		<div class="col-sm-offset-2 col-sm-9">
-					      		<input type="text" class="form-control" name="client.frequentFlyers" value="<s:property />">
-					    	</div>
-				    	</s:iterator>
-					    <div class="col-sm-1">
-					    	 <button id="btn1" type="button" class="btn btn-default btn-sm">
-          						<span class="glyphicon glyphicon-plus-sign"></span>添加
-       				 		 </button>
-					    </div>
-				  	</div>
+				  	
 				    <div class="form-group">
-				    	<div class="col-sm-offset-2 col-sm-10">
+				    	<div class="col-md-offset-2 col-md-10">
 				      		<button type="submit" class="btn btn-success">提交</button>
 				    	</div>
 				  	</div>

@@ -24,16 +24,15 @@ import com.opensymphony.xwork2.ActionSupport;
 @Scope("prototype")
 public class RecodeActionImpl extends ActionSupport implements RecodeAction {
 
-	private Integer recodeId;
-
+	// 消费记录
 	private Recode recode;
 
-	private String company;
-
-	private String name;
-
+	// 查询条件（航班号，行程）
+	private String fltNo;
+	private String route;
+	// 分页
 	private int page;
-
+	// 查询结果
 	private List<Recode> recodes;
 
 	// 储存json结果
@@ -45,46 +44,38 @@ public class RecodeActionImpl extends ActionSupport implements RecodeAction {
 	@Override
 	public String detail() throws Exception {
 		// TODO Auto-generated method stub
-		recode = recodeService.loadRecode(recodeId);
+		recode = recodeService.loadRecode(recode.getRecodeId());
 		return DETAIL;
 	}
 
 	@Override
 	public String delete() throws Exception {
-		recodeService.deleteRecode(recodeId);
+		recodeService.deleteRecode(recode);
 		jsonResult.put("resultInfo", "消费记录删除成功");
 		return SUCCESS;
 	}
 
 	@Override
 	public String exportRecode() throws Exception {
-		Date now = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		String filename = "消费记录 ["+sdf.format(now)+"].xlsx";
+		String filename = "消费记录[" + sdf.format(new Date()) + "].xlsx";
 		HttpServletResponse response = ServletActionContext.getResponse();
 		response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-		response.setHeader("Content-disposition", "attachment;filename=" + new String(filename.getBytes("UTF-8"), "ISO-8859-1"));
+		response.setHeader("Content-disposition",
+				"attachment;filename=" + new String(filename.getBytes("UTF-8"), "ISO-8859-1"));
 		recodeService.exportXlsx(response.getOutputStream());
 		return null;
 	}
 
 	@Override
 	public String searchRecode() throws Exception {
-		recodes = recodeService.findRecodeByCompanyOrNameWithPage(company, name, page, Constants.PAGE_SIZE);
+		recodes = recodeService.findRecodeByFltNoOrRouteWithPage(fltNo, route, page, Constants.PAGE_SIZE);
 		return LIST;
 	}
 
 	public int getMaxPage() {
-		int count = recodeService.countUserWithCompanyOrName(company, name);
+		int count = recodeService.countRecodeWithFltNoOrRoute(fltNo, route);
 		return (count - 1) / Constants.PAGE_SIZE + 1;
-	}
-
-	public Integer getRecodeId() {
-		return recodeId;
-	}
-
-	public void setRecodeId(Integer recodeId) {
-		this.recodeId = recodeId;
 	}
 
 	public Recode getRecode() {
@@ -95,20 +86,20 @@ public class RecodeActionImpl extends ActionSupport implements RecodeAction {
 		this.recode = recode;
 	}
 
-	public String getCompany() {
-		return company;
+	public String getFltNo() {
+		return fltNo;
 	}
 
-	public void setCompany(String company) {
-		this.company = company;
+	public void setFltNo(String fltNo) {
+		this.fltNo = fltNo;
 	}
 
-	public String getName() {
-		return name;
+	public String getRoute() {
+		return route;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setRoute(String route) {
+		this.route = route;
 	}
 
 	public int getPage() {

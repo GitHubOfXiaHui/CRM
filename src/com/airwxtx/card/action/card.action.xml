@@ -7,15 +7,13 @@
 	<package name="card" namespace="/card" extends="airwxtx-default">
 		<action name="*Action" class="cardAction" method="{1}">
 			<result name="list">/WEB-INF/pages/card/listCard.jsp</result>
-			<result name="update">/WEB-INF/pages/card/updateCard.jsp</result>
-			<result name="save">/WEB-INF/pages/card/saveCard.jsp</result>
 			<result name="details">/WEB-INF/pages/card/cardDetails.jsp</result>
 			<result name="input">/WEB-INF/pages/card/cardPay.jsp</result>
 			<result name="recode">/WEB-INF/pages/recode/detail.jsp</result>
 			<result type="json">
 				<param name="root">jsonResult</param>
 			</result>
-			<allowed-methods>preSave,saveCard,updateCard,preUpdate,searchCard,loadCard,freezeCard,unfreezeCard,cardCharge,preCardPay,cardPay</allowed-methods>
+			<allowed-methods>searchCard,cardDetails,freezeCard,unfreezeCard,cardCharge,preCardPay,cardPay</allowed-methods>
 		</action>
 	</package>
 </struts>

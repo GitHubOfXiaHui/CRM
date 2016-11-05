@@ -9,24 +9,24 @@ import com.airwxtx.recode.entity.Recode;
 public interface RecodeService {
 
 	/**
-	 * 按会员单位或姓名分页查询消费记录
+	 * 按航班号和/或行程分页查询消费记录
 	 * 
-	 * @param company
-	 * @param name
+	 * @param fltNo
+	 * @param route
 	 * @param page
 	 * @param pageSize
 	 * @return
 	 */
-	public List<Recode> findRecodeByCompanyOrNameWithPage(String company, String name, int page, int pageSize);
+	public List<Recode> findRecodeByFltNoOrRouteWithPage(String fltNo, String route, int page, int pageSize);
 
 	/**
-	 * 按会员单位或姓名统计消费记录数量
+	 * 按航班号和/或行程统计消费记录数量
 	 * 
-	 * @param company
-	 * @param name
+	 * @param fltNo
+	 * @param route
 	 * @return
 	 */
-	public int countUserWithCompanyOrName(String company, String name);
+	public int countRecodeWithFltNoOrRoute(String fltNo, String route);
 
 	/**
 	 * 加载消费记录
@@ -34,14 +34,14 @@ public interface RecodeService {
 	 * @param id
 	 * @return
 	 */
-	public Recode loadRecode(Integer id);
+	public Recode loadRecode(Integer recodeId);
 
 	/**
 	 * 删除消费记录
 	 * 
 	 * @param recodeId
 	 */
-	public void deleteRecode(Integer recodeId);
+	public void deleteRecode(Recode recode);
 
 	/**
 	 * 导出消费记录

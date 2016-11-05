@@ -24,8 +24,9 @@ body {
 }
 
 .container {
-	width: 800px;
 	padding-top: 20px;
+	padding-right: 20%;
+	padding-left: 20%;
 }
 
 .row {
@@ -40,38 +41,41 @@ body {
 			<div class="panel-heading">消费记录详情</div>
 			<div class="panel-body">
 				<div class="row">
-					<div class="col-md-2 text-right"><strong>航班号：</strong></div>
-					<div class="col-md-4"><s:property value="recode.fltNo" /></div>
-					<div class="col-md-2 text-right"><strong>行程：</strong></div>
-					<div class="col-md-4"><s:property value="recode.route" /></div>
+					<label class="col-md-3"><strong>航班号：</strong></label>
+					<div class="col-md-9"><s:property value="recode.fltNo" /></div>
 				</div>
+				
 				<div class="row">
-					<div class="col-md-2 text-right"><strong>航班日期：</strong></div>
-					<div class="col-md-4"><s:property value="recode.flightDate" /></div>
-					<div class="col-md-2 text-right"><strong>订票日期：</strong></div>
-					<div class="col-md-4"><s:property value="recode.bookingDate" /></div>
+					<label class="col-md-3"><strong>行程：</strong></label>
+					<div class="col-md-9"><s:property value="recode.route" /></div>
 				</div>
+				
 				<div class="row">
-					<div class="col-md-2 text-right"><strong>消费金额：</strong></div>
-					<div class="col-md-4"><s:property value="recode.consumption" /></div>				
-					<div class="col-md-2 text-right"><strong>操作员：</strong></div>
-					<div class="col-md-4"><s:property value="recode.user.username" /></div>
+					<label class="col-md-3"><strong>航班日期：</strong></label>
+					<div class="col-md-9">
+						<s:date name="recode.flightDate" format="yyyy-MM-dd" />
+					</div>
 				</div>
+				
 				<div class="row">
-					<div class="col-md-2 text-right"><strong>会员单位：</strong></div>
-					<div class="col-md-4"><s:property value="recode.client.company" /></div>
-					<div class="col-md-2 text-right"><strong>会员卡号：</strong></div>
-					<div class="col-md-4"><s:property value="recode.card.cardNo" /></div>
+					<label class="col-md-3"><strong>订票日期：</strong></label>
+					<div class="col-md-9">
+						<s:date name="recode.bookingDate" format="yyyy-MM-dd" />
+					</div>
 				</div>
+				
 				<div class="row">
-					<div class="col-md-2 text-right"><strong>会员中文名：</strong></div>
-					<div class="col-md-4"><s:property value="recode.client.clientName" /></div>
-					<div class="col-md-2 text-right"><strong>会员英文名：</strong></div>
-					<div class="col-md-4"><s:property value="recode.client.clientEnglishName" /></div>
+					<label class="col-md-3"><strong>消费金额：</strong></label>
+					<div class="col-md-9">
+						<s:text name="global.format.money">
+							<s:param value="recode.consumption" />
+						</s:text>
+					</div>				
 				</div>
+				
 				<div class="row">
-					<div class="col-md-2 text-right"><strong>备注：</strong></div>
-					<div class="col-md-10"><s:property value="recode.comment" /></div>
+					<label class="col-md-3"><strong>备注：</strong></label>
+					<div class="col-md-9"><s:property value="recode.comment" /></div>
 				</div>
 			</div>
 		</div>

@@ -10,4 +10,10 @@
 			<allowed-methods>home</allowed-methods>
 		</action>
 	</package>
+	
+	<package name="index" extends="airwxtx-default">
+		<action name="*">
+			<result>/WEB-INF/pages/home/index.jsp</result>
+		</action>
+	</package>
 </struts>

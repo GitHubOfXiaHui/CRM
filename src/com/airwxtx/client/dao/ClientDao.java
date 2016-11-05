@@ -19,15 +19,7 @@ public interface ClientDao {
 	 * @param client
 	 * @return 客户ID
 	 */
-	public Integer saveClient(Client client);
-
-	/**
-	 * 删除客户
-	 * 
-	 * @param client
-	 * @return boolean
-	 */
-	public void deleteClient(Client client);
+	public void saveClient(Client client);
 
 	/**
 	 * 加载客户

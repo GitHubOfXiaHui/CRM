@@ -26,21 +26,21 @@ public interface CardDao {
 	 * 按卡号和/或手机号分页查询会员卡
 	 * 
 	 * @param cardNo
-	 * @param phone
+	 * @param status
 	 * @param page
 	 * @param pageSize
 	 * @return
 	 */
-	public List<Card> findCardByCardNoOrPhoneWithPage(String cardNo, String phone, int page, int pageSize);
+	public List<Card> findCardByCardNoOrPhoneWithPage(String cardNo, String status, int page, int pageSize);
 
 	/**
-	 * 统计会员卡数量
+	 * 按卡号和/或手机号统计会员卡数量
 	 * 
 	 * @param cardNo
-	 * @param phone
+	 * @param status
 	 * @return
 	 */
-	public int countUserWithCardNoOrPhone(String cardNo, String phone);
+	public int countUserWithCardNoOrPhone(String cardNo, String status);
 
 	/**
 	 * 创建
@@ -48,13 +48,6 @@ public interface CardDao {
 	 * @param card
 	 */
 	public void saveCard(Card card);
-
-	/**
-	 * 修改
-	 * 
-	 * @param card
-	 */
-	public void updateCard(Card card);
 
 	/**
 	 * 加载

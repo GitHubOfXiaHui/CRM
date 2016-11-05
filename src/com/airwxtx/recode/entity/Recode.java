@@ -3,12 +3,12 @@ package com.airwxtx.recode.entity;
 import java.util.Date;
 
 import com.airwxtx.card.entity.Card;
-import com.airwxtx.client.entity.Client;
 import com.airwxtx.user.entity.User;
 
 public class Recode {
-	// 物理ID
-	private Integer id;
+	
+	// 逻辑ID
+	private Integer recodeId;
 	
 	/* 普通属性 */
 	// 航班号
@@ -18,28 +18,26 @@ public class Recode {
 	// 航班日期
 	private Date flightDate;
 	// 订票日期
-	private Date bookingDate;
+	private Date bookingDate = new Date();
 	// 消费金额
 	private Double consumption;
 	// 备注
 	private String comment;
 	
 	/* 关联属性 */
-	// 会员
-	private Client client;
 	// 会员卡
 	private Card card;
 	// 操作员
 	private User user;
 	
-	public Integer getId() {
-		return id;
+	public Integer getRecodeId() {
+		return recodeId;
 	}
-	
-	public void setId(Integer id) {
-		this.id = id;
+
+	public void setRecodeId(Integer recodeId) {
+		this.recodeId = recodeId;
 	}
-	
+
 	public String getFltNo() {
 		return fltNo;
 	}
@@ -86,14 +84,6 @@ public class Recode {
 	
 	public void setComment(String comment) {
 		this.comment = comment;
-	}
-	
-	public Client getClient() {
-		return client;
-	}
-	
-	public void setClient(Client client) {
-		this.client = client;
 	}
 	
 	public Card getCard() {

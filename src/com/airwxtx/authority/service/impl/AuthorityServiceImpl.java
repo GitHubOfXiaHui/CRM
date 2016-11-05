@@ -15,11 +15,12 @@ import com.airwxtx.utils.Constants;
 public class AuthorityServiceImpl implements AuthorityService {
 
 	@Override
-	public List<String> changeToDisplayAuthorities(Set<Long> authorityNumbers) {
+	public List<String> changeToDisplayAuthorities(Long authorities)
+			throws IllegalArgumentException, IllegalAccessException {
 		// TODO Auto-generated method stub
 		List<String> displayAuthorities = new ArrayList<>();
 		for (Authority authority : Constants.ALL_AUTHORITIES) {
-			if (authorityNumbers.contains(authority.getAuthorityNumber())) {
+			if ((authority.getAuthorityNumber() & authorities) != 0) {
 				displayAuthorities.add(authority.getDescription());
 			}
 		}
@@ -27,12 +28,11 @@ public class AuthorityServiceImpl implements AuthorityService {
 	}
 
 	@Override
-	public List<String> changeToDisplayAuthorities(Long authorities)
-			throws IllegalArgumentException, IllegalAccessException {
+	public List<String> changeToDisplayAuthorities(Set<Long> authorityNumbers) {
 		// TODO Auto-generated method stub
 		List<String> displayAuthorities = new ArrayList<>();
 		for (Authority authority : Constants.ALL_AUTHORITIES) {
-			if ((authority.getAuthorityNumber() & authorities) != 0) {
+			if (authorityNumbers.contains(authority.getAuthorityNumber())) {
 				displayAuthorities.add(authority.getDescription());
 			}
 		}

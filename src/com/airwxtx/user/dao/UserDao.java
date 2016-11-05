@@ -49,7 +49,7 @@ public interface UserDao {
 	 * 
 	 * @param username
 	 */
-	public void resetPasswordByName(String username);
+	public void updatePasswordWithUsername(String username, String password);
 
 	/**
 	 * 查找用户当前冻结次数

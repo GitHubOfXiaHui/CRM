@@ -6,7 +6,7 @@
 <hibernate-mapping>
 	<class name="com.airwxtx.recode.entity.Recode" table="消费记录表">
 		<!-- 映射ID -->
-		<id name="id" column="消费记录ID" type="integer">
+		<id name="recodeId" column="消费记录ID" type="integer">
 			<!-- 主键采用MySQL的自增长策略 -->
 			<generator class="identity" />
 		</id>
@@ -20,8 +20,6 @@
 		<property name="comment" column="备注" />
 
 		<!-- 映射关联属性 -->
-		<many-to-one name="client" column="会员"
-			class="com.airwxtx.client.entity.Client" lazy="false" />
 		<many-to-one name="card" column="会员卡"
 			class="com.airwxtx.card.entity.Card" lazy="false" />
 		<many-to-one name="user" column="操作员"

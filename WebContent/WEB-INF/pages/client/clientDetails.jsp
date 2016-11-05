@@ -5,28 +5,27 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>会员详情</title>
+<meta charset="UTF-8">
 
 <!-- Bootstrap样式 -->
 <link rel="stylesheet" href="/CRM/css/bootstrap.min.css">
 <script src="/CRM/js/jquery.min.js" type="text/javascript"></script>
 <script src="/CRM/js/bootstrap.min.js" type="text/javascript"></script>
+<!-- 微调Bootstrap样式 -->
+<style type="text/css">
+body {
+	font-size: 16px;
+}
 
-<title>会员详情</title>
-<script type="text/javascript">
-	$(function(){
-		$("[data-target]").click(function(){
-			var value = $(this).text();
-			if(value == "展开"){
-				$(this).text("隐藏");
-			}
-			else
-			{
-				$(this).text("展开");	
-			}
-		});
-	});
-</script>
+.container {
+	padding-top: 20px;
+}
+
+.row {
+	margin-bottom: 10px;
+}
+</style>
 
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -35,124 +34,151 @@
 
 </head>
 <body>
-	<div class="container" style="margin-top:20px;">
+	<div class="container">
 		<div class="panel-group">
-			<div class="panel panel-success">
-				<div class="panel-heading">会员详细信息</div>
+			<div class="panel panel-info">
+				<div class="panel-heading">会员信息</div>
 				<div class="panel-body">
-					<!-- 把详细信息分为两列 -->
 					<div class="row">
-						<div class="col-md-6">
-							 <ul class="list-group">
-								 <li class="list-group-item"><strong>中文姓名：</strong><s:property value="client.clientName" /></li>
-								 <li class="list-group-item"><strong>英文姓名:</strong><s:property value="client.clientEnglishName" /></li>
-								 <li class="list-group-item"><strong>手机号:</strong><s:property value="client.mobilePhoneNumber" /></li>
-								 <li class="list-group-item"><strong>单位：</strong><s:property value="client.company" /></li>
-								 <li class="list-group-item"><strong>职称：</strong><s:property value="client.title" /></li>
-								 <li class="list-group-item"><strong>地址：</strong><s:property value="client.address" /></li>
-								 <li class="list-group-item"><strong>身份证号：</strong><s:property value="client.IDNumber" /></li>
-							 </ul>
-						</div>
-						<div class="col-md-6">
-							<ul class="list-group">
-								<li class="list-group-item"><strong>护照号：</strong><s:property value="client.passportNumber" /></li>
-								<li class="list-group-item"><strong>护照有效期：</strong><s:property value="client.passportValidTime" /></li>
-								<li class="list-group-item"><strong>通行证号：</strong><s:property value="client.accessNumber" /></li>
-								<li class="list-group-item"><strong>通行证有效期：</strong><s:property value="client.accessValidTime" /></li>
-								<li class="list-group-item"><strong>座位喜好：</strong><s:property value="client.preferSeat" /></li>
-								<li class="list-group-item"><strong>推荐来源：</strong><s:property value="client.recommend" /></li>
-								<li class="list-group-item"><strong>特别喜好：</strong><s:property value="client.like" /></li>
-								<li class="list-group-item">
-									<strong>常旅客列表：</strong>
-									<button data-toggle="collapse" data-target="#frequentFlyers" class="btn btn-default btn-sm" >展开</button>
-								</li>
-								<div id="frequentFlyers" class="collapse">
-									<s:iterator value="client.frequentFlyers" >
-										<li class="list-group-item"><s:property /></li>
-									</s:iterator>
-								</div>
-							</ul>
+						<label class="col-md-2"><strong>单位：</strong></label>
+						<div class="col-md-4"><s:property value="client.company" /></div>
+						<label class="col-md-2"><strong>职位：</strong></label>
+						<div class="col-md-4"><s:property value="client.title" /></div>
+					</div>
+					
+					<div class="row">
+						<label class="col-md-2"><strong>中文名：</strong></label>
+						<div class="col-md-4"><s:property value="client.clientName" /></div>
+						<label class="col-md-2"><strong>英文名：</strong></label>
+						<div class="col-md-4"><s:property value="client.clientEnglishName" /></div>
+					</div>
+					
+					<div class="row">
+						<label class="col-md-2"><strong>手机号：</strong></label>
+						<div class="col-md-4"><s:property value="client.mobilePhoneNumber" /></div>
+						<label class="col-md-2"><strong>身份证：</strong></label>
+						<div class="col-md-4"><s:property value="client.idNumber" /></div>
+					</div>
+					
+					<div class="row">
+						<label class="col-md-2"><strong>护照：</strong></label>
+						<div class="col-md-4"><s:property value="client.passportNumber" /></div>
+						<label class="col-md-2"><strong>护照有效期：</strong></label>
+						<div class="col-md-4"><s:date name="client.passportValidTime" format="yyyy-MM-dd" /></div>
+					</div>
+					
+					<div class="row">
+						<label class="col-md-2"><strong>通行证：</strong></label>
+						<div class="col-md-4"><s:property value="client.accessNumber" /></div>
+						<label class="col-md-2"><strong>通行证有效期：</strong></label>
+						<div class="col-md-4"><s:date name="client.accessValidTime" format="yyyy-MM-dd" /></div>
+					</div>
+										
+					<div class="row">
+						<label class="col-md-2"><strong>地址：</strong></label>
+						<div class="col-md-10"><s:property value="client.address" /></div>
+					</div>
+					
+					<div class="row">
+						<label class="col-md-2"><strong>推荐客户来源：</strong></label>
+						<div class="col-md-10"><s:property value="client.recommend" /></div>
+					</div>
+					
+					<div class="row">
+						<label class="col-md-2"><strong>座位喜好：</strong></label>
+						<div class="col-md-10"><s:property value="client.preferSeat" /></div>
+					</div>
+					
+					<div class="row">
+						<label class="col-md-2"><strong>特别喜好：</strong></label>
+						<div class="col-md-10"><s:property value="client.like" /></div>
+					</div>
+					
+					<div class="row">
+						<label class="col-md-2"><strong>常旅客：</strong></label>
+						<div class="col-md-10">
+							<s:iterator value="client.frequentFlyers" status="st">
+								<s:if test="#st.first">
+									<s:property />
+								</s:if>
+								<s:else>
+									, <s:property />
+								</s:else>
+							</s:iterator>
 						</div>
 					</div>
 				</div>
 			</div>
 			
-			<div class="panel panel-success">
-				<div class="panel-heading">会员详细信息</div>
+			<div class="panel panel-info">
+				<div class="panel-heading">会员卡信息</div>
 				<div class="panel-body">
-					<table class="table table-hover table-bordered">
+					<table class="table table-hover table-bordered text-center">
 						<thead>
 							<tr>
-								<th>中文姓名</th>
-								<th>英文姓名</th>
-								<th>手机号</th>
-								<th>单位</th>
-								<th>职称</th>
-								<th>地址</th>
-								<th>身份证号</th>
-								<th>护照号</th>
-								<th>护照有效期</th>
-								<th>通行证号</th>
-								<th>通行证有效期</th>
-								<th>座位喜好</th>
-								<th>推荐来源</th>
-								<th>特别喜好</th>
+								<th class="text-center">#</th>
+								<th class="text-center">卡号</th>
+								<th class="text-center">卡校验码</th>
+								<th class="text-center">卡状态</th>
+								<th class="text-center">余额（元）</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td><s:property value="client.clientName" /></td>
-								<td><s:property value="client.clientEnglishName" /></td>
-								<td><s:property value="client.mobilePhoneNumber" /></td>
-								<td><s:property value="client.company" /></td>
-								<td><s:property value="client.title" /></td>
-								<td><s:property value="client.address" /></td>
-								<td><s:property value="client.IDNumber" /></td>
-								<td><s:property value="client.passportNumber" /></td>
-								<td><s:property value="client.passportValidTime" /></td>
-								<td><s:property value="client.accessNumber" /></td>
-								<td><s:property value="client.accessValidTime" /></td>
-								<td><s:property value="client.preferSeat" /></td>
-								<td><s:property value="client.recommend" /></td>
-								<td><s:property value="client.like" /></td>
-							</tr>
+							<s:iterator value="client.cards" status="st">
+								<tr>
+									<td><s:property value="#st.index + 1" /></td>
+									<td><s:property value="cardNo" /></td>
+									<td><s:property value="checkCode" /></td>
+									<td><s:property value="status" /></td>
+									<td>
+										<s:text name="global.format.money">
+											<s:param value="balance" />
+										</s:text>
+									</td>
+								</tr>
+							</s:iterator>
 						</tbody>
 					</table>
 				</div>
 			</div>
 			
-			<div class="panel panel-success">
-				<div class="panel-heading">会员卡列表</div>
+			<div class="panel panel-info">
+				<div class="panel-heading">消费记录</div>
 				<div class="panel-body">
-					<table class="table table-hover table-bordered">
+					<table class="table table-hover table-bordered text-center">
 						<thead>
 							<tr>
-								<th>会员卡号</th>
-								<th>会员卡余额</th>
-								<th>会员卡状态</th>
+								<th class="text-center">#</th>
+								<th class="text-center">航班号</th>
+								<th class="text-center">行程</th>
+								<th class="text-center">航班日期</th>
+								<th class="text-center">订票日期</th>
+								<th class="text-center">消费金额</th>
+								<th class="text-center">操作员</th>
+								<th class="text-center">备注</th>
 							</tr>
 						</thead>
 						<tbody>
-						</tbody>
-					</table>
-				</div>
-			</div>
-			
-			<div class="panel panel-success">
-				<div class="panel-heading">会员消费记录</div>
-				<div class="panel-body">
-					<table class="table table-hover table-bordered">
-						<thead>
-							<tr>
-								<th>航班号</th>
-								<th>航班起点</th>
-								<th>航班终点</th>
-								<th>航班日期</th>
-								<th>订票日期</th>
-								<th>消费金额</th>
-							</tr>
-						</thead>
-						<tbody>
+							<s:set var="index" value="1" />
+							<s:iterator value="client.cards">
+								<s:iterator value="recodes">
+									<tr>
+										<td><s:property value="#index" /></td>
+										<td><s:property value="fltNo" /></td>
+										<td><s:property value="route" /></td>
+										<td><s:date name="flightDate" format="yyyy-MM-dd" /></td>
+										<td><s:date name="bookingDate" format="yyyy-MM-dd" /></td>
+										<td>
+											<s:text name="global.format.money">
+												<s:param value="consumption" />
+											</s:text>
+										</td>
+										<td><s:property value="user.username" /></td>
+										<td><s:property value="comment" /></td>
+									</tr>
+									<s:set var="index" value="#index + 1" />
+								</s:iterator>
+							</s:iterator>
 						</tbody>
 					</table>
 				</div>

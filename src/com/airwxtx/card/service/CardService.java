@@ -8,24 +8,24 @@ import com.airwxtx.recode.entity.Recode;
 public interface CardService {
 
 	/**
-	 * 按卡号和/或手机号分页查询会员卡
+	 * 按卡号和/或卡状态分页查询会员卡
 	 * 
 	 * @param cardNo
-	 * @param phone
+	 * @param status
 	 * @param page
 	 * @param pageSize
 	 * @return
 	 */
-	public List<Card> findCardByCardNoOrPhoneWithPage(String cardNo, String phone, int page, int pageSize);
+	public List<Card> findCardByCardNoOrStatusWithPage(String cardNo, String status, int page, int pageSize);
 
 	/**
-	 * 统计会员卡数量
+	 * 按卡号和/或卡状态统计会员卡数量
 	 * 
 	 * @param cardNo
-	 * @param phone
+	 * @param status
 	 * @return
 	 */
-	public int countUserWithCardNoOrPhone(String cardNo, String phone);
+	public int countCardWithCardNoOrStatus(String cardNo, String status);
 
 	/**
 	 * 加载会员卡
@@ -33,7 +33,7 @@ public interface CardService {
 	 * @param id
 	 * @return
 	 */
-	public Card loadCard(Integer id);
+	public Card loadCard(Integer cardId);
 
 	/**
 	 * 创建会员卡
@@ -41,13 +41,6 @@ public interface CardService {
 	 * @param card
 	 */
 	public void saveCard(Card card);
-
-	/**
-	 * 修改会员卡
-	 * 
-	 * @param card
-	 */
-	public void updateCard(Card card);
 
 	/**
 	 * 判断该用户是否具有冻结权限

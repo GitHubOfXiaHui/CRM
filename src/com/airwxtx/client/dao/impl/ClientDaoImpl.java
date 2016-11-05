@@ -23,15 +23,9 @@ public class ClientDaoImpl extends BaseDaoSupport implements ClientDao {
 	}
 
 	@Override
-	public Integer saveClient(Client client) {
+	public void saveClient(Client client) {
 		// TODO Auto-generated method stub
-		return (Integer) this.getHibernateTemplate().save(client);
-	}
-
-	@Override
-	public void deleteClient(Client client) {
-		// TODO Auto-generated method stub
-		this.getHibernateTemplate().delete(client);
+		this.getHibernateTemplate().save(client);
 	}
 
 	@Override

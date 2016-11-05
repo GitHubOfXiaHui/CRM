@@ -3,6 +3,7 @@ package com.airwxtx.client.action.impl;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.function.Predicate;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -11,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.airwxtx.card.entity.Card;
+import com.airwxtx.card.service.CardService;
 import com.airwxtx.client.action.ClientAction;
 import com.airwxtx.client.entity.Client;
 import com.airwxtx.client.service.ClientService;
@@ -22,68 +25,80 @@ import com.opensymphony.xwork2.ActionSupport;
 // 每个请求都会生成一个对象
 @Scope("prototype")
 public class ClientActionImpl extends ActionSupport implements ClientAction {
+
+	// 会员信息
 	private Client client;
-	private List<Client> clients;
-	private Integer clientId;
-	private Integer page;
+	// 会员卡信息
+	private Card card;
+
+	// 查询条件（姓名，单位，手机号，卡号）
 	private String name;
 	private String company;
 	private String phone;
-	private String card;
+	private String cardNo;
+	// 分页
+	private int page;
+	// 查询结果
+	private List<Client> clients;
+
 	@Autowired
 	private ClientService clientService;
+	
+	@Autowired
+	private CardService cardService;
 
 	@Override
 	public String preSaveClient() throws Exception {
 		// TODO Auto-generated method stub
-		return INPUT;
+		return SAVE;
 	}
 
 	@Override
 	public String saveClient() throws Exception {
 		// TODO Auto-generated method stub
-		this.clientService.saveClient(client);
-		return DETAILS;
+		removeNull(client.getFrequentFlyers());
+		clientService.saveClient(client);
+		return RESULT;
 	}
 
 	@Override
 	public String preUpdateClient() throws Exception {
 		// TODO Auto-generated method stub
-		client = this.clientService.getClient(clientId);
+		client = clientService.loadClient(client.getClientId());
 		return UPDATE;
 	}
 
 	@Override
 	public String updateClient() throws Exception {
 		// TODO Auto-generated method stub
-		this.clientService.updateClient(client);
-		return DETAILS;
+		removeNull(client.getFrequentFlyers());
+		clientService.updateClient(client);
+		return RESULT;
 	}
 
-	@Override
-	public String deleteClient() throws Exception {
-		// TODO Auto-generated method stub
-		this.clientService.deleteClient(client);
-		return null;
-	}
-
-	@Override
-	public String searchClient() throws Exception {
-		// TODO Auto-generated method stub
-		clients = this.clientService.searchClientByNameOrPhoneOrCompanyOrCardWithPage(name, phone, company, card, page,
-				Constants.PAGE_SIZE);
-		return LIST;
+	private void removeNull(List<String> list) {
+		Predicate<String> pred1 = freq -> freq == null;
+		Predicate<String> pred2 = freq -> freq.equals("");
+		list.removeIf(pred1.or(pred2));
 	}
 
 	@Override
 	public String showClientDetails() throws Exception {
 		// TODO Auto-generated method stub
-		client = this.clientService.getClient(clientId);
+		client = clientService.loadClient(client.getClientId());
 		return DETAILS;
 	}
 
+	@Override
+	public String searchClient() throws Exception {
+		// TODO Auto-generated method stub
+		clients = this.clientService.searchClientByNameOrPhoneOrCompanyOrCardNoWithPage(name, phone, company, cardNo,
+				page, Constants.PAGE_SIZE);
+		return LIST;
+	}
+
 	public int getMaxPage() {
-		int count = clientService.countClientByNameOrPhoneOrCompanyOrCardWithPage(name, phone, company, card);
+		int count = clientService.countClientByNameOrPhoneOrCompanyOrCardNo(name, phone, company, cardNo);
 		return (count - 1) / Constants.PAGE_SIZE + 1;
 	}
 
@@ -99,10 +114,37 @@ public class ClientActionImpl extends ActionSupport implements ClientAction {
 				"attachment;filename=" + new String(filename.getBytes("UTF-8"), "ISO-8859-1"));
 		clientService.exportXlsx(response.getOutputStream());
 	}
+	
+	@Override
+	public String preAddCard() throws Exception {
+		// TODO Auto-generated method stub
+		return ADD;
+	}
 
-	// =========================================================================================================
-	// set and get
-	// =========================================================================================================
+	@Override
+	public String addCard() throws Exception {
+		// TODO Auto-generated method stub
+		card.setClient(client);
+		cardService.saveCard(card);
+		return CARD_DETAILS;
+	}
+
+	public Client getClient() {
+		return client;
+	}
+
+	public void setClient(Client client) {
+		this.client = client;
+	}
+
+	public Card getCard() {
+		return card;
+	}
+
+	public void setCard(Card card) {
+		this.card = card;
+	}
+
 	public String getName() {
 		return name;
 	}
@@ -127,28 +169,20 @@ public class ClientActionImpl extends ActionSupport implements ClientAction {
 		this.phone = phone;
 	}
 
-	public String getCard() {
-		return card;
+	public String getCardNo() {
+		return cardNo;
 	}
 
-	public void setCard(String card) {
-		this.card = card;
+	public void setCardNo(String cardNo) {
+		this.cardNo = cardNo;
 	}
 
-	public Integer getPage() {
+	public int getPage() {
 		return page;
 	}
 
-	public void setPage(Integer page) {
+	public void setPage(int page) {
 		this.page = page;
-	}
-
-	public Integer getClientId() {
-		return clientId;
-	}
-
-	public void setClientId(Integer clientId) {
-		this.clientId = clientId;
 	}
 
 	public List<Client> getClients() {
@@ -159,14 +193,6 @@ public class ClientActionImpl extends ActionSupport implements ClientAction {
 		this.clients = clients;
 	}
 
-	public Client getClient() {
-		return client;
-	}
-
-	public void setClient(Client client) {
-		this.client = client;
-	}
-
 	public ClientService getClientService() {
 		return clientService;
 	}
@@ -175,8 +201,20 @@ public class ClientActionImpl extends ActionSupport implements ClientAction {
 		this.clientService = clientService;
 	}
 
+	public CardService getCardService() {
+		return cardService;
+	}
+
+	public void setCardService(CardService cardService) {
+		this.cardService = cardService;
+	}
+
 	private static final String DETAILS = "details";
+	private static final String SAVE = "save";
 	private static final String UPDATE = "update";
+	private static final String RESULT = "result";
 	private static final String LIST = "list";
+	private static final String ADD = "add";
+	private static final String CARD_DETAILS = "cardDetails";
 
 }

@@ -16,42 +16,40 @@ import com.airwxtx.utils.BaseDaoSupport;
 public class RecodeDaoImpl extends BaseDaoSupport implements RecodeDao {
 
 	@SuppressWarnings("unchecked")
-	public List<Recode> findRecodeByCompanyOrNameWithPage(String company, String name, int page, int pageSize) {
-		DetachedCriteria query = createDetachedCriteriaWithCompanyOrName(company, name);
+	public List<Recode> findRecodeByFltNoOrRouteWithPage(String fltNo, String route, int page, int pageSize) {
+		DetachedCriteria query = createDetachedCriteriaWithFltNoOrRoute(fltNo, route);
 		return (List<Recode>) this.getHibernateTemplate().findByCriteria(query, (page - 1) * pageSize, pageSize);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public int countUserWithCompanyOrName(String company, String name) {
-		DetachedCriteria query = createDetachedCriteriaWithCompanyOrName(company, name)
+	public int countRecodeWithFltNoOrRoute(String fltNo, String route) {
+		DetachedCriteria query = createDetachedCriteriaWithFltNoOrRoute(fltNo, route)
 				.setProjection(Projections.rowCount());
 		List<Object> ans = (List<Object>) this.getHibernateTemplate().findByCriteria(query);
 		return Integer.parseInt(ans.get(0).toString());
 	}
 
-	private DetachedCriteria createDetachedCriteriaWithCompanyOrName(String company, String name) {
+	private DetachedCriteria createDetachedCriteriaWithFltNoOrRoute(String fltNo, String route) {
 		// TODO Auto-generated method stub
-		DetachedCriteria query = DetachedCriteria.forClass(Recode.class).createCriteria("client");
-		if (company != null && !company.equals("")) {
-			query.add(Restrictions.ilike("company", company, MatchMode.ANYWHERE));
+		DetachedCriteria query = DetachedCriteria.forClass(Recode.class);
+		if (fltNo != null && !fltNo.equals("")) {
+			query.add(Restrictions.ilike("fltNo", fltNo, MatchMode.ANYWHERE));
 		}
-		if (name != null && !name.equals("")) {
-			query.add(Restrictions.or(Restrictions.ilike("clientName", name, MatchMode.ANYWHERE),
-					Restrictions.ilike("clientEnglishName", name, MatchMode.ANYWHERE)));
+		if (route != null && !route.equals("")) {
+			query.add(Restrictions.ilike("route", route, MatchMode.ANYWHERE));
 		}
 		return query;
 	}
 
 	@Override
-	public Recode loadRecode(Integer id) {
-		return this.getHibernateTemplate().get(Recode.class, id);
+	public Recode loadRecode(Integer recodeId) {
+		return this.getHibernateTemplate().get(Recode.class, recodeId);
 	}
 
 	@Override
-	public void deleteRecode(Integer recodeId) {
-		String hql = "DELETE FROM Recode WHERE id = ?";
-		this.getHibernateTemplate().bulkUpdate(hql, recodeId);
+	public void deleteRecode(Recode recode) {
+		this.getHibernateTemplate().delete(recode);
 	}
 
 	@Override

@@ -17,14 +17,6 @@ public interface AuthorityService {
 	/**
 	 * 将权限编号变为权限描述
 	 * 
-	 * @param authorityNumbers
-	 * @return
-	 */
-	public List<String> changeToDisplayAuthorities(Set<Long> authorityNumbers);
-
-	/**
-	 * 将权限编号变为权限描述
-	 * 
 	 * @param authority
 	 * @return
 	 * @throws IllegalAccessException
@@ -32,6 +24,14 @@ public interface AuthorityService {
 	 */
 	public List<String> changeToDisplayAuthorities(Long authority)
 			throws IllegalArgumentException, IllegalAccessException;
+
+	/**
+	 * 将权限编号变为权限描述
+	 * 
+	 * @param authorityNumbers
+	 * @return
+	 */
+	public List<String> changeToDisplayAuthorities(Set<Long> authorityNumbers);
 
 	/**
 	 * 将聚合的权限分解

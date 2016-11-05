@@ -29,30 +29,29 @@ public class CardDaoImpl extends BaseDaoSupport implements CardDao {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Card> findCardByCardNoOrPhoneWithPage(String cardNo, String phone, int page, int pageSize) {
+	public List<Card> findCardByCardNoOrPhoneWithPage(String cardNo, String status, int page, int pageSize) {
 		// TODO Auto-generated method stub
-		DetachedCriteria query = createDetachedCriteriaWithCardNoOrPhone(cardNo, phone);
+		DetachedCriteria query = createDetachedCriteriaWithCardNoOrStatus(cardNo, status);
 		return (List<Card>) this.getHibernateTemplate().findByCriteria(query, (page - 1) * pageSize, pageSize);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public int countUserWithCardNoOrPhone(String cardNo, String phone) {
+	public int countUserWithCardNoOrPhone(String cardNo, String status) {
 		// TODO Auto-generated method stub
-		DetachedCriteria query = createDetachedCriteriaWithCardNoOrPhone(cardNo, phone)
+		DetachedCriteria query = createDetachedCriteriaWithCardNoOrStatus(cardNo, status)
 				.setProjection(Projections.rowCount());
 		List<Object> ans = (List<Object>) this.getHibernateTemplate().findByCriteria(query);
 		return Integer.parseInt(ans.get(0).toString());
 	}
 
-	private DetachedCriteria createDetachedCriteriaWithCardNoOrPhone(String cardNo, String phone) {
+	private DetachedCriteria createDetachedCriteriaWithCardNoOrStatus(String cardNo, String status) {
 		DetachedCriteria query = DetachedCriteria.forClass(Card.class);
 		if (cardNo != null && !cardNo.equals("")) {
 			query.add(Restrictions.ilike("cardNo", cardNo, MatchMode.ANYWHERE));
 		}
-		if (phone != null && !phone.equals("")) {
-			query.createCriteria("client");
-			query.add(Restrictions.ilike("mobilePhoneNumber", phone, MatchMode.ANYWHERE));
+		if (status != null && !status.equals("")) {
+			query.add(Restrictions.ilike("status", status, MatchMode.ANYWHERE));
 		}
 		return query;
 	}
@@ -61,12 +60,6 @@ public class CardDaoImpl extends BaseDaoSupport implements CardDao {
 	public void saveCard(Card card) {
 		// TODO Auto-generated method stub
 		this.getHibernateTemplate().save(card);
-	}
-
-	@Override
-	public void updateCard(Card card) {
-		// TODO Auto-generated method stub
-		this.getHibernateTemplate().update(card);
 	}
 
 	@Override

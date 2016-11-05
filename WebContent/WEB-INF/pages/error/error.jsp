@@ -4,6 +4,7 @@
 <html lang="zh-CN">
 <head>
 <title>错误</title>
+<meta charset="UTF-8">
 
 <link href="/CRM/css/result.css" rel="stylesheet">
 

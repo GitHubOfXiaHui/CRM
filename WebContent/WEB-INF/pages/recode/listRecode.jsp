@@ -9,12 +9,12 @@
 	<form class="form-inline" action="/CRM/recode/searchRecodeAction" method="post"
 		 style="padding-top:10px;padding-bottom:10px;">
 		<div class="form-group">
-			<label for="company">单位：</label>
-			<input class="form-control" name="company" type="text" value="<s:property value='company' />">
+			<label for="fltNo">航班号：</label>
+			<input class="form-control" id="fltNo" name="fltNo" type="text" value="<s:property value='fltNo' />">
 		</div>
 		<div class="form-group">
-			<label for="name">姓名：</label>
-			<input class="form-control" name="name" type="text" value="<s:property value='name' />">
+			<label for="route">行程：</label>
+			<input class="form-control" id="route" name="route" type="text" value="<s:property value='route' />">
 		</div>
 		<button class="btn btn-primary" type="submit">
 			<span class="glyphicon glyphicon-search"></span> 搜索
@@ -29,10 +29,9 @@
 		<thead>
 			<tr>
 				<th class="text-center">#</th>
-				<th class="text-center">单位</th>
-				<th class="text-center">中文名</th>
-				<th class="text-center">英文名</th>
-				<th class="text-center">订票日期</th>
+				<th class="text-center">航班号</th>
+				<th class="text-center">行程</th>
+				<th class="text-center">航班日期</th>
 				<th class="text-center">消费金额（元）</th>
 				<th class="text-center">操作</th>
 			</tr>
@@ -41,19 +40,18 @@
 			<s:iterator value="recodes" status="st">
 				<tr>
 					<td><s:property value="#st.index + 1" /></td>
-					<td><s:property value="client.company" /></td>
-					<td><s:property value="client.clientName" /></td>
-					<td><s:property value="client.clientEnglishName" /></td>
-					<td><s:date name="bookingDate" format="yyyy-MM-dd" /></td>
+					<td><s:property value="fltNo" /></td>
+					<td><s:property value="route" /></td>
+					<td><s:date name="flightDate" format="yyyy-MM-dd" /></td>
 					<td>
 						<s:text name="global.format.money">
 							<s:param value="consumption" />
 						</s:text>
 					</td>
 					<td>
-						<a href="/CRM/recode/detailAction?recodeId=<s:property value='id' />" target="_blank">详情</a>
+						<a href="/CRM/recode/detailAction?recode.recodeId=<s:property value='recodeId' />" target="_blank">详情</a>
 						<s:if test="@com.airwxtx.authority.entity.AuthorityNumber@DELETE_RECORD in #userAuthority">
-							&nbsp;/&nbsp;<a href="/CRM/recode/deleteAction?recodeId=<s:property value='id' />" data-id="delete">删除</a>
+							&nbsp;/&nbsp;<a class="js-delete" href="/CRM/recode/deleteAction?recode.recodeId=<s:property value='recodeId' />">删除</a>
 						</s:if>
 					</td>
 				</tr>
@@ -73,8 +71,8 @@
 			$("form").submit(function(){
 				var url = $(this).attr("action");
 				var params = {
-					company: $("[name='company']").val(),
-					name: $("[name='name']").val()
+					fltNo: $("#fltNo").val(),
+					route: $("#route").val()
 				};
 				onsearch(url, params);
 						
@@ -83,16 +81,16 @@
 			});
 					
 			// 拦截删除消费记录
-			$("[data-id='delete']").each(function(){
+			$(".js-delete").each(function(){
 				var $this = $(this);
 				$this.click(function(){
 					bootbox.setDefaults({locale:"zh_CN"});
 					bootbox.confirm("确定要删除该条消费记录吗？", function(result){
 						if(result){
 							$.getJSON($this.attr("href"), function(data){
-								bootbox.alert(data.resultInfo, function(){
+								bootbox.alert(data.resultInfo/* , function(){
 									$this.closest("tr").remove();
-								});
+								} */);
 							});
 						}
 					});

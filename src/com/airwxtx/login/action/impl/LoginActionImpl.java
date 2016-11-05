@@ -5,8 +5,8 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.airwxtx.login.action.LoginAction;
-import com.airwxtx.login.service.LoginService;
 import com.airwxtx.user.entity.User;
+import com.airwxtx.user.service.UserService;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -16,9 +16,9 @@ import com.opensymphony.xwork2.ActionSupport;
 public class LoginActionImpl extends ActionSupport implements LoginAction {
 	// 用户
 	private User user;
-
+	
 	@Autowired
-	private LoginService loginService;
+	private UserService userService;
 
 	@Override
 	public String preLogin() throws Exception {
@@ -33,7 +33,7 @@ public class LoginActionImpl extends ActionSupport implements LoginAction {
 	public void validateLogin() throws Exception {
 		if (user == null || user.getUsername() == null) {
 			this.addActionError("请先登录");
-		} else if (!loginService.canLogin(user)) {
+		} else if (!userService.canLogin(user)) {
 			this.addFieldError("user", "用户名不存在或密码错误");
 		}
 	}
@@ -52,12 +52,12 @@ public class LoginActionImpl extends ActionSupport implements LoginAction {
 		this.user = user;
 	}
 
-	public LoginService getLoginService() {
-		return loginService;
+	public UserService getUserService() {
+		return userService;
 	}
 
-	public void setLoginService(LoginService loginService) {
-		this.loginService = loginService;
+	public void setUserService(UserService userService) {
+		this.userService = userService;
 	}
 
 }

@@ -1,5 +1,7 @@
 package com.airwxtx.card.action.impl;
 
+import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,8 +12,8 @@ import org.springframework.stereotype.Controller;
 
 import com.airwxtx.card.action.CardAction;
 import com.airwxtx.card.entity.Card;
+import com.airwxtx.card.entity.CardStatus;
 import com.airwxtx.card.service.CardService;
-import com.airwxtx.client.entity.Client;
 import com.airwxtx.client.service.ClientService;
 import com.airwxtx.recode.entity.Recode;
 import com.airwxtx.utils.Constants;
@@ -23,22 +25,17 @@ import com.opensymphony.xwork2.ActionSupport;
 @Scope("prototype")
 public class CardActionImpl extends ActionSupport implements CardAction {
 
-	// 客户id
-	private Integer clientId;
-	private Client client;
+	// 会员卡信息
 	private Card card;
-
-	// 卡id
-	private Integer cardId;
 	// 充值金额
 	private double money;
 
 	// 扣款生成的消费记录
 	private Recode recode;
 
-	// 查询条件（卡号、手机号）
+	// 查询条件（卡号，卡状态）
 	private String cardNo;
-	private String phone;
+	private String status;
 	// 分页
 	private int page;
 	// 查询结果
@@ -52,40 +49,9 @@ public class CardActionImpl extends ActionSupport implements CardAction {
 	private ClientService clientService;
 
 	@Override
-	public String preSave() throws Exception {
+	public String cardDetails() throws Exception {
 		// TODO Auto-generated method stub
-		client = clientService.getClient(clientId);
-		return SAVE;
-	}
-
-	@Override
-	public String saveCard() throws Exception {
-		// TODO Auto-generated method stub
-		client = clientService.getClient(clientId);
-		card.setClient(client);
-		this.cardService.saveCard(card);
-		return DETAILS;
-	}
-
-	@Override
-	public String preUpdate() throws Exception {
-		// TODO Auto-generated method stub
-		client = clientService.getClient(clientId);
-		card = cardService.loadCard(cardId);
-		return UPDATE;
-	}
-
-	@Override
-	public String update() throws Exception {
-		// TODO Auto-generated method stub
-		this.cardService.updateCard(card);
-		return DETAILS;
-	}
-
-	@Override
-	public String loadCard() throws Exception {
-		// TODO Auto-generated method stub
-		card = cardService.loadCard(cardId);
+		card = cardService.loadCard(card.getCardId());
 		return DETAILS;
 	}
 
@@ -94,7 +60,7 @@ public class CardActionImpl extends ActionSupport implements CardAction {
 		// TODO Auto-generated method stub
 		String username = (String) ActionContext.getContext().getSession().get("user");
 		if (cardService.canFreezeCard(username)) {
-			cardService.freezeCard(cardId, username);
+			cardService.freezeCard(card.getCardId(), username);
 			jsonResult.put("resultInfo", "冻结成功");
 		} else {
 			jsonResult.put("resultInfo", "超过当日冻结次数");
@@ -105,7 +71,7 @@ public class CardActionImpl extends ActionSupport implements CardAction {
 	@Override
 	public String unfreezeCard() throws Exception {
 		// TODO Auto-generated method stub
-		cardService.unfreezeCard(cardId);
+		cardService.unfreezeCard(card.getCardId());
 		jsonResult.put("resultInfo", "解冻成功");
 		return SUCCESS;
 	}
@@ -113,7 +79,7 @@ public class CardActionImpl extends ActionSupport implements CardAction {
 	@Override
 	public String cardCharge() throws Exception {
 		// TODO Auto-generated method stub
-		cardService.charge(cardId, money);
+		cardService.charge(card.getCardId(), money);
 		jsonResult.put("resultInfo", "充值成功");
 		return SUCCESS;
 	}
@@ -121,7 +87,7 @@ public class CardActionImpl extends ActionSupport implements CardAction {
 	@Override
 	public String preCardPay() throws Exception {
 		// TODO Auto-generated method stub
-		card = cardService.loadCard(cardId);
+		card = cardService.loadCard(card.getCardId());
 		return INPUT;
 	}
 
@@ -141,13 +107,22 @@ public class CardActionImpl extends ActionSupport implements CardAction {
 	@Override
 	public String searchCard() throws Exception {
 		// TODO Auto-generated method stub
-		cards = cardService.findCardByCardNoOrPhoneWithPage(cardNo, phone, page, Constants.PAGE_SIZE);
+		cards = cardService.findCardByCardNoOrStatusWithPage(cardNo, status, page, Constants.PAGE_SIZE);
 		return LIST;
 	}
 
 	public int getMaxPage() {
-		int count = cardService.countUserWithCardNoOrPhone(cardNo, phone);
+		int count = cardService.countCardWithCardNoOrStatus(cardNo, status);
 		return (count - 1) / Constants.PAGE_SIZE + 1;
+	}
+
+	public List<String> getAllCardStautses() throws IllegalArgumentException, IllegalAccessException {
+		List<String> cardStautses = new ArrayList<String>();
+		Field[] fields = CardStatus.class.getFields();
+		for (Field field : fields) {
+			cardStautses.add((String) field.get(null));
+		}
+		return cardStautses;
 	}
 
 	public Card getCard() {
@@ -156,14 +131,6 @@ public class CardActionImpl extends ActionSupport implements CardAction {
 
 	public void setCard(Card card) {
 		this.card = card;
-	}
-
-	public Integer getCardId() {
-		return cardId;
-	}
-
-	public void setCardId(Integer cardId) {
-		this.cardId = cardId;
 	}
 
 	public double getMoney() {
@@ -190,12 +157,12 @@ public class CardActionImpl extends ActionSupport implements CardAction {
 		this.cardNo = cardNo;
 	}
 
-	public String getPhone() {
-		return phone;
+	public String getStatus() {
+		return status;
 	}
 
-	public void setPhone(String phone) {
-		this.phone = phone;
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	public int getPage() {
@@ -222,22 +189,6 @@ public class CardActionImpl extends ActionSupport implements CardAction {
 		this.cardService = cardService;
 	}
 
-	public Integer getClientId() {
-		return clientId;
-	}
-
-	public void setClientId(Integer clientId) {
-		this.clientId = clientId;
-	}
-
-	public Client getClient() {
-		return client;
-	}
-
-	public void setClient(Client client) {
-		this.client = client;
-	}
-
 	public Map<String, Object> getJsonResult() {
 		return jsonResult;
 	}
@@ -256,8 +207,6 @@ public class CardActionImpl extends ActionSupport implements CardAction {
 
 	private static final String LIST = "list";
 	private static final String DETAILS = "details";
-	private static final String SAVE = "save";
-	private static final String UPDATE = "update";
 	private static final String RECODE = "recode";
 
 }

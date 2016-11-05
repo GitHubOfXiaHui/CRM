@@ -7,7 +7,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,31 +28,30 @@ public class RecodeServiceImpl implements RecodeService {
 
 	@Override
 	@Transactional(readOnly = true)
-	public List<Recode> findRecodeByCompanyOrNameWithPage(String company, String name, int page, int pageSize) {
-		return recodeDao.findRecodeByCompanyOrNameWithPage(company, name, page, pageSize);
+	public List<Recode> findRecodeByFltNoOrRouteWithPage(String fltNo, String route, int page, int pageSize) {
+		return recodeDao.findRecodeByFltNoOrRouteWithPage(fltNo, route, page, pageSize);
 	}
 
 	@Override
 	@Transactional(readOnly = true)
-	public int countUserWithCompanyOrName(String company, String name) {
-		return recodeDao.countUserWithCompanyOrName(company, name);
+	public int countRecodeWithFltNoOrRoute(String fltNo, String route) {
+		return recodeDao.countRecodeWithFltNoOrRoute(fltNo, route);
 	}
 
 	@Override
 	@Transactional(readOnly = true)
-	public Recode loadRecode(Integer id) {
-		Recode recode = recodeDao.loadRecode(id);
-		return recode;
+	public Recode loadRecode(Integer recodeId) {
+		return recodeDao.loadRecode(recodeId);
 	}
 
 	@Override
 	@Transactional
-	public void deleteRecode(Integer recodeId) {
-		Recode recode = recodeDao.loadRecode(recodeId);
+	public void deleteRecode(Recode recode) {
+		recode = recodeDao.loadRecode(recode.getRecodeId());
 		// 恢复对应会员卡的余额
 		cardDao.updateCardBalance(recode.getCard(), recode.getConsumption());
 		// 删除消费记录
-		recodeDao.deleteRecode(recodeId);
+		recodeDao.deleteRecode(recode);
 	}
 
 	@Override
@@ -68,8 +66,8 @@ public class RecodeServiceImpl implements RecodeService {
 		for (Recode recode : recodes) {
 			table.add(new String[] { recode.getFltNo(), recode.getRoute(), sdf.format(recode.getFlightDate()),
 					sdf.format(recode.getBookingDate()), df.format(recode.getConsumption()), recode.getComment(),
-					recode.getClient().getCompany(), recode.getClient().getClientName(),
-					recode.getClient().getClientEnglishName(), recode.getCard().getCardNo(),
+					recode.getCard().getClient().getCompany(), recode.getCard().getClient().getClientName(),
+					recode.getCard().getClient().getClientEnglishName(), recode.getCard().getCardNo(),
 					recode.getUser().getUsername() });
 		}
 		ExportExcelUtil.xlsx(out, table);

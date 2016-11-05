@@ -168,7 +168,7 @@ footer {
 	<div id="main"></div>
 	<footer class="container-fluid bg-footer text-center">
 		<p>
-			Copyright &copy; 2016 <a href="http://www.airwxtx.com">airwxtx.com</a>
+			Copyright &copy; 2016 <a href="http://www.airwxtx.com" target="_blank">airwxtx.com</a>
 		</p>
 	</footer>
 </body>

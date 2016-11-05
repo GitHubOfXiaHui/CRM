@@ -15,8 +15,9 @@
 
 <style type="text/css">
 .container {
-	width: 800px;
 	padding-top: 20px;
+	padding-right: 20%;
+	padding-left: 20%;
 }
 </style>
 
@@ -56,7 +57,7 @@
 					</div>
 					<div class="form-group">
 						<label class="control-label col-md-2" for="role">角色：</label>
-						<div class="col-md-3">
+						<div class="col-md-4">
 							<select class="form-control" id="role" name="user.role">
 								<s:iterator value="allRoles" var="role">
 									<option value="<s:property value='#role' />" <s:if test="user.role == #role">selected</s:if>><s:property value="#role" /></option>

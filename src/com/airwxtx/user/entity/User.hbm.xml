@@ -6,7 +6,7 @@
 <hibernate-mapping>
 	<class name="com.airwxtx.user.entity.User" table="用户表">
 		<!-- 映射ID -->
-		<id name="id" column="用户ID" type="integer">
+		<id name="userId" column="用户ID" type="integer">
 			<!-- 主键采用MySQL的自增长策略 -->
 			<generator class="identity" />
 		</id>
@@ -19,7 +19,7 @@
 		<property name="freezeCount" column="冻结次数" />
 
 		<!-- 映射关联属性 -->
-		<set name="recodes" inverse="true">
+		<set name="recodes" inverse="true" lazy="false">
 			<key column="操作员" />
 			<one-to-many class="com.airwxtx.recode.entity.Recode" />
 		</set>

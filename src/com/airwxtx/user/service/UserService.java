@@ -8,12 +8,20 @@ import com.airwxtx.user.entity.User;
 public interface UserService {
 
 	/**
+	 * 验证用户是否合法
+	 * 
+	 * @param user
+	 * @return
+	 */
+	public boolean canLogin(User user);
+
+	/**
 	 * 创建用户
 	 * 
 	 * @param user
 	 * @param authorityNumbers
 	 */
-	public void createUser(User user, Set<Long> authorityNumbers);
+	public void saveUser(User user, Set<Long> authorityNumbers);
 
 	/**
 	 * 编辑用户
@@ -21,7 +29,7 @@ public interface UserService {
 	 * @param user
 	 * @param authorityNumbers
 	 */
-	public void editUser(User user, Set<Long> authorityNumbers);
+	public void updateUser(User user, Set<Long> authorityNumbers);
 
 	/**
 	 * 根据用户名，查找用户
@@ -65,10 +73,11 @@ public interface UserService {
 	public boolean hasUsername(String username);
 
 	/**
-	 * 重置对应用户的密码
+	 * 修改对应用户的密码
 	 * 
 	 * @param username
+	 * @param newPassword
 	 */
-	public void resetPasswordByName(String username);
+	public void updatePasswordWithUsername(String username, String newPassword);
 
 }

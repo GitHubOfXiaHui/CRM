@@ -22,23 +22,20 @@
 		<property name="passportNumber" column="护照号" />
 		<property name="accessNumber" column="通行证号" />
 		<property name="passportValidTime" column="护照有效期" type="date" />
-		<property name="accsessValidTime" column="通行证有效期" type="date" />
+		<property name="accessValidTime" column="通行证有效期" type="date" />
 		<property name="preferSeat" column="座位喜好" />
 		<property name="recommend" column="推荐客户来源" />
 		<property name="like" column="特别喜好" />
-		<set name="frequentFlyers" table="常旅客表">
+		<list name="frequentFlyers" table="常旅客表" lazy="false">
 			<key column="会员ID" not-null="true" />
+			<list-index column="常旅客编号" />
 			<element column="常旅客" type="string" not-null="true" />
-		</set>
+		</list>
 
 		<!-- 映射关联属性 -->
-		<set name="cards" inverse="true">
+		<set name="cards" inverse="true" lazy="false">
 			<key column="会员" />
 			<one-to-many class="com.airwxtx.card.entity.Card" />
-		</set>
-		<set name="recodes" inverse="true">
-			<key column="会员" />
-			<one-to-many class="com.airwxtx.recode.entity.Recode" />
 		</set>
 	</class>
 </hibernate-mapping>

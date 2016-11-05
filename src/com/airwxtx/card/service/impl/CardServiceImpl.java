@@ -34,38 +34,30 @@ public class CardServiceImpl implements CardService {
 
 	@Override
 	@Transactional(readOnly = true)
-	public List<Card> findCardByCardNoOrPhoneWithPage(String cardNo, String phone, int page, int pageSize) {
+	public List<Card> findCardByCardNoOrStatusWithPage(String cardNo, String status, int page, int pageSize) {
 		// TODO Auto-generated method stub
-		return cardDao.findCardByCardNoOrPhoneWithPage(cardNo, phone, page, pageSize);
+		return cardDao.findCardByCardNoOrPhoneWithPage(cardNo, status, page, pageSize);
 	}
 
 	@Override
 	@Transactional(readOnly = true)
-	public int countUserWithCardNoOrPhone(String cardNo, String phone) {
+	public int countCardWithCardNoOrStatus(String cardNo, String status) {
 		// TODO Auto-generated method stub
-		return cardDao.countUserWithCardNoOrPhone(cardNo, phone);
+		return cardDao.countUserWithCardNoOrPhone(cardNo, status);
 	}
 
 	@Override
 	@Transactional(readOnly = true)
-	public Card loadCard(Integer id) {
+	public Card loadCard(Integer cardId) {
 		// TODO Auto-generated method stub
-		Card card = cardDao.loadCard(id);
-		return card;
+		return cardDao.loadCard(cardId);
 	}
 
 	@Override
 	@Transactional
 	public void saveCard(Card card) {
 		// TODO Auto-generated method stub
-		this.cardDao.saveCard(card);
-	}
-
-	@Override
-	@Transactional
-	public void updateCard(Card card) {
-		// TODO Auto-generated method stub
-		this.cardDao.updateCard(card);
+		cardDao.saveCard(card);
 	}
 
 	@SuppressWarnings("unchecked")

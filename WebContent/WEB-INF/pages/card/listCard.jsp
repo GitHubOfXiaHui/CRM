@@ -10,11 +10,16 @@
 		 style="padding-top:10px;padding-bottom:10px;">
 		<div class="form-group">
 			<label for="cardNo">卡号：</label>
-			<input class="form-control" name="cardNo" type="text" value="<s:property value='cardNo' />">
+			<input class="form-control" id="cardNo" name="cardNo" type="text" value="<s:property value='cardNo' />">
 		</div>
 		<div class="form-group">
-			<label for="phone">手机号：</label>
-			<input class="form-control" name="phone" type="text" value="<s:property value='client.mobilePhoneNumber' />">
+			<label for="status">卡状态：</label>
+			<select class="form-control" id="status" name="status">
+				<option value="">请选择</option>
+				<s:iterator value="allCardStautses" var="status">
+					<option value="<s:property value='#status' />" <s:if test="status == #status">selected</s:if>><s:property value="#status" /></option>
+				</s:iterator>
+			</select>
 		</div>
 		<button class="btn btn-primary" type="submit">
 			<span class="glyphicon glyphicon-search"></span> 搜索
@@ -25,9 +30,8 @@
 			<tr>
 				<th class="text-center">#</th>
 				<th class="text-center">卡号</th>
-				<th class="text-center">状态</th>
-				<th class="text-center">手机号</th>
 				<th class="text-center">卡校验码</th>
+				<th class="text-center">卡状态</th>
 				<th class="text-center">余额（元）</th>
 				<th class="text-center">操作</th>
 			</tr>
@@ -37,31 +41,30 @@
 				<tr>
 					<td><s:property value="#st.index + 1" /></td>
 					<td><s:property value="cardNo" /></td>
-					<td><s:property value="status" /></td>
-					<td><s:property value="phone" /></td>
 					<td><s:property value="checkCode" /></td>
+					<td><s:property value="status" /></td>
 					<td>
 						<s:text name="global.format.money">
 							<s:param value="balance" />
 						</s:text>
 					</td>
 					<td>
-						<a href="/CRM/card/loadCardAction?id=<s:property value='id' />" target="_blank">详情</a>
+						<a href="/CRM/card/cardDetailsAction?card.cardId=<s:property value='cardId' />" target="_blank">详情</a>
 						<s:if test="status == @com.airwxtx.card.entity.CardStatus@NORMAL">
 							<s:if test="(@com.airwxtx.authority.entity.AuthorityNumber@FREEZE_CARD_UNLIMITED in #userAuthority) || (@com.airwxtx.authority.entity.AuthorityNumber@FREEZE_CARD_LIMITED in #userAuthority)">
-								&nbsp;/&nbsp;<a class="js-freeze" href="/CRM/card/freezeCardAction?cardId=<s:property value='id' />">冻结</a>
+								&nbsp;/&nbsp;<a class="js-freeze" href="/CRM/card/freezeCardAction?card.cardId=<s:property value='cardId' />">冻结</a>
 							</s:if>
 							<s:if test="@com.airwxtx.authority.entity.AuthorityNumber@CHARGE in #userAuthority">
-								&nbsp;/&nbsp;<a class="js-charge" href="/CRM/card/cardChargeAction?cardId=<s:property value='id' />&money=">充值</a>
+								&nbsp;/&nbsp;<a class="js-charge" href="/CRM/card/cardChargeAction?card.cardId=<s:property value='cardId' />&money=">充值</a>
 							</s:if>
 							
 							<s:if test="@com.airwxtx.authority.entity.AuthorityNumber@PAY in #userAuthority">
-								&nbsp;/&nbsp;<a class="js-pay" href="/CRM/card/preCardPayAction?cardId=<s:property value='id' />" target="_blank">扣款</a>
+								&nbsp;/&nbsp;<a class="js-pay" href="/CRM/card/preCardPayAction?card.cardId=<s:property value='cardId' />" target="_blank">扣款</a>
 							</s:if>
 						</s:if>
 						<s:else>
 							<s:if test="@com.airwxtx.authority.entity.AuthorityNumber@UNFREEZE_CARD in #userAuthority">
-								&nbsp;/&nbsp;<a class="js-unfreeze" href="/CRM/card/unfreezeCardAction?cardId=<s:property value='id' />">解冻</a>
+								&nbsp;/&nbsp;<a class="js-unfreeze" href="/CRM/card/unfreezeCardAction?card.cardId=<s:property value='cardId' />">解冻</a>
 							</s:if>
 						</s:else>
 					</td>
@@ -82,8 +85,8 @@
 			$("form").submit(function(){
 				var url = $(this).attr("action");
 				var params = {
-					cardNo: $("[name='cardNo']").val(),
-					phone: $("[name='phone']").val()
+					cardNo: $("#cardNo").val(),
+					status: $("#status").val()
 				};
 				onsearch(url, params);
 						

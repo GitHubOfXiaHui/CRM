@@ -10,14 +10,21 @@ import org.springframework.transaction.annotation.Transactional;
 import com.airwxtx.user.dao.UserDao;
 import com.airwxtx.user.entity.User;
 import com.airwxtx.user.service.UserService;
-import com.airwxtx.utils.Constants;
 
 @Service
 public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserDao userDao;
-	
+
+	@Override
+	@Transactional(readOnly = true)
+	public boolean canLogin(User user) {
+		// TODO Auto-generated method stub
+		List<User> usr = userDao.findUserByName(user.getUsername());
+		return !usr.isEmpty() && usr.get(0).getPassword().equals(user.getPassword());
+	}
+
 	@Override
 	public boolean hasUsername(String username) {
 		// TODO Auto-generated method stub
@@ -27,16 +34,15 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	@Transactional
-	public void createUser(User user, Set<Long> authorityNumbers) {
+	public void saveUser(User user, Set<Long> authorityNumbers) {
 		// TODO Auto-generated method stub
-		user.setPassword(Constants.PASSWORD);
 		user.setAuthority(sumAuthority(authorityNumbers));
 		userDao.saveOrUpdateUser(user);
 	}
 
 	@Override
 	@Transactional
-	public void editUser(User user, Set<Long> authorityNumbers) {
+	public void updateUser(User user, Set<Long> authorityNumbers) {
 		// TODO Auto-generated method stub
 		User usr = userDao.findUserByName(user.getUsername()).get(0);
 		usr.setAuthority(sumAuthority(authorityNumbers));
@@ -53,8 +59,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void resetPasswordByName(String username) {
-		userDao.resetPasswordByName(username);
+	public void updatePasswordWithUsername(String username, String password) {
+		userDao.updatePasswordWithUsername(username, password);
 	}
 	
 	@Override

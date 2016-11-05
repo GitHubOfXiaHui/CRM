@@ -38,17 +38,10 @@
 <script src="/CRM/js/respond.min.js" type="text/javascript"></script>
 
 <style type="text/css">
-body {
-	font-size: 16px;
-}
-
 .container {
-	width: 800px;
 	padding-top: 20px;
-}
-
-.row {
-	margin-bottom: 10px;
+	padding-right: 20%;
+	padding-left: 20%;
 }
 </style>
 
@@ -63,24 +56,7 @@ body {
 					method="post">
 					<s:fielderror />
 					<div class="form-group">
-						<label class="control-label col-md-2">会员单位：</label>
-						<div class="col-md-4">
-							<p class="form-control-static"><s:property value="card.client.company" /></p>
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="control-label col-md-2">会员中文名：</label>
-						<div class="col-md-4">
-							<p class="form-control-static"><s:property value="card.client.clientName" /></p>
-						</div>
-						<label class="control-label col-md-2">会员英文名：</label>
-						<div class="col-md-4">
-							<p class="form-control-static"><s:property value="card.client.clientEnglishName" /></p>
-						</div>
-					</div>
-					<hr>
-					<div class="form-group">
-						<input name="card.id" value="<s:property value='card.id' />" type="hidden">
+						<input name="card.cardId" value="<s:property value='card.cardId' />" type="hidden">
 						<label class="control-label col-md-2">卡号：</label>
 						<div class="col-md-4">
 							<p class="form-control-static"><s:property value="card.cardNo" /></p>
@@ -96,31 +72,36 @@ body {
 						</div>
 					</div>
 					<hr>
+					
 					<div class="form-group">
-						<label class="control-label col-md-2" for="card-no">航班号：</label>
-						<div class="col-md-4">
-							<input class="form-control" id="card-no" name="recode.fltNo" type="text" value="<s:property value='recode.fltNo' />">
+						<label class="control-label col-md-2" for="fltNo">航班号：</label>
+						<div class="col-md-5">
+							<input class="form-control" id="fltNo" name="recode.fltNo" type="text" value="<s:property value='recode.fltNo' />">
 						</div>
 					</div>
+					
 					<div class="form-group">
 						<label class="control-label col-md-2" for="route">行程：</label>
-						<div class="col-md-4">
+						<div class="col-md-5">
 							<input class="form-control" id="route" name="recode.route" type="text" value="<s:property value='recode.route' />">
 						</div>
 					</div>
+					
 					<div class="form-group">
-						<label class="control-label col-md-2" for="flight-date">航班日期：</label>
-						<div class="input-group date form_date col-md-4" id="flight-date" data-date-format="yyyy-mm-dd" style="width:240px;padding-left:15px;">
+						<label class="control-label col-md-2" for="flightDate">航班日期：</label>
+						<div class="input-group date form_date col-md-5" id="flightDate" data-date-format="yyyy-mm-dd" style="padding-right: 15px;padding-left: 15px;">
                     		<input class="form-control" name="recode.flightDate" type="text" readonly>
                     		<span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                 		</div>
 					</div>
+					
 					<div class="form-group">
 						<label class="control-label col-md-2" for="consumption">消费金额：</label>
-						<div class="col-md-4">
+						<div class="col-md-5">
 							<input class="form-control" id="consumption" name="recode.consumption" type="text" value="<s:property value='recode.consumption' />">
 						</div>
 					</div>
+					
 					<div class="form-group">
 						<label class="control-label col-md-2" for=comment>备注：</label>
 						<div class="col-md-10">
@@ -129,10 +110,10 @@ body {
 							</textarea>
 						</div>
 					</div>
+					
 					<div class="form-group">
-						<div class="col-md-offset-2 col-md-4">
-							<input class="btn btn-success" type="submit" value="确定"
-								style="width: 100px;">
+						<div class="col-md-offset-2 col-md-5">
+							<input class="btn btn-success" type="submit" value="确定">
 						</div>
 					</div>
 				</form>

@@ -23,9 +23,11 @@
 		<!-- 定义拦截器/拦截器栈 -->
 		<interceptors>
 			<!-- 定义拦截器 -->
-			<interceptor name="loginInterceptor" class="com.airwxtx.interceptor.LoginInterceptor" />
-			<interceptor name="authorityInterceptor" class="com.airwxtx.interceptor.AuthorityInterceptor" />
-			
+			<interceptor name="loginInterceptor"
+				class="com.airwxtx.interceptor.LoginInterceptor" />
+			<interceptor name="authorityInterceptor"
+				class="com.airwxtx.interceptor.AuthorityInterceptor" />
+
 			<!-- 拦截器栈 -->
 			<interceptor-stack name="airwxtxDefaultStack">
 				<interceptor-ref name="loginInterceptor" />
@@ -41,17 +43,19 @@
 			<result name="login">/WEB-INF/pages/login/login.jsp</result>
 			<result name="error">/WEB-INF/pages/error/error.jsp</result>
 		</global-results>
-		
-		<!-- <global-exception-mappings>
+
+		<global-exception-mappings>
 			<exception-mapping result="error" exception="java.lang.Exception" />
-		</global-exception-mappings> -->
+		</global-exception-mappings>
 	</package>
 
 	<include file="com/airwxtx/login/action/login.action.xml" />
+	<include file="com/airwxtx/home/action/home.action.xml" />
 	<include file="com/airwxtx/settings/action/settings.action.xml" />
+	
 	<include file="com/airwxtx/client/action/client.action.xml" />
 	<include file="com/airwxtx/user/action/user.action.xml" />
 	<include file="com/airwxtx/recode/action/recode.action.xml" />
 	<include file="com/airwxtx/card/action/card.action.xml" />
-	<include file="com/airwxtx/home/action/home.action.xml" />
+	
 </struts>

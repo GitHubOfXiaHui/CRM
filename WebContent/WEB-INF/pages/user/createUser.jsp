@@ -15,8 +15,9 @@
 
 <style type="text/css">
 .container {
-	width: 800px;
 	padding-top: 20px;
+	padding-right: 20%;
+	padding-left: 20%;
 }
 </style>
 
@@ -49,7 +50,7 @@
 					<s:fielderror />
 					<div class="form-group">
 						<label class="control-label col-md-2" for="username">用户名：</label>
-						<div class="col-md-5">
+						<div class="col-md-4">
 							<input class="form-control" id="username" name="user.username"
 								type="text" placeholder="Enter username"
 								value="<s:property value='user.username' />">
@@ -57,7 +58,7 @@
 					</div>
 					<div class="form-group">
 						<label class="control-label col-md-2" for="role">角色：</label>
-						<div class="col-md-3">
+						<div class="col-md-4">
 							<select class="form-control" id="role" name="user.role">
 								<s:iterator value="allRoles">
 									<option value="<s:property />"><s:property /></option>
@@ -84,8 +85,7 @@
 					</div>
 					<div class="form-group">
 						<div class="col-md-offset-2 col-md-5">
-							<input class="btn btn-success" type="submit" value="确定"
-								style="width: 100px;">
+							<input class="btn btn-success" type="submit" value="确定">
 						</div>
 					</div>
 				</form>
