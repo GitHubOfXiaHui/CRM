@@ -107,6 +107,11 @@ body {
 							</s:iterator>
 						</div>
 					</div>
+					
+					<div class="row">
+						<label class="col-md-2"><strong>备注：</strong></label>
+						<div class="col-md-10"><s:property value="client.comment" /></div>
+					</div>
 				</div>
 			</div>
 			

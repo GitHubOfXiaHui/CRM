@@ -17,6 +17,7 @@ import com.airwxtx.recode.action.RecodeAction;
 import com.airwxtx.recode.entity.Recode;
 import com.airwxtx.recode.service.RecodeService;
 import com.airwxtx.utils.Constants;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 @SuppressWarnings("serial")
@@ -50,8 +51,14 @@ public class RecodeActionImpl extends ActionSupport implements RecodeAction {
 
 	@Override
 	public String delete() throws Exception {
-		recodeService.deleteRecode(recode);
-		jsonResult.put("resultInfo", "消费记录删除成功");
+		String username = (String) ActionContext.getContext().getSession().get("user");
+		if (recodeService.canDeleteRecode(recode, username)) {
+			recodeService.deleteRecode(recode);
+			jsonResult.put("resultInfo", "消费记录删除成功");
+		} else {
+			jsonResult.put("resultInfo", "超过10分钟，无法删除消费记录");
+		}
+
 		return SUCCESS;
 	}
 

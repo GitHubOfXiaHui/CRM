@@ -57,9 +57,9 @@
 					<s:fielderror />
 					<div class="form-group">
 						<input name="card.cardId" value="<s:property value='card.cardId' />" type="hidden">
-						<label class="control-label col-md-2">卡号：</label>
+						<label class="control-label col-md-2">会员：</label>
 						<div class="col-md-4">
-							<p class="form-control-static"><s:property value="card.cardNo" /></p>
+							<p class="form-control-static"><s:property value="card.client.clientName" /></p>
 						</div>
 						<label class="control-label col-md-2">余额：</label>
 						<div class="col-md-4">

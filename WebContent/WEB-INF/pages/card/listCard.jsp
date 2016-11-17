@@ -54,6 +54,7 @@
 							<s:if test="(@com.airwxtx.authority.entity.AuthorityNumber@FREEZE_CARD_UNLIMITED in #userAuthority) || (@com.airwxtx.authority.entity.AuthorityNumber@FREEZE_CARD_LIMITED in #userAuthority)">
 								&nbsp;/&nbsp;<a class="js-freeze" href="/CRM/card/freezeCardAction?card.cardId=<s:property value='cardId' />">冻结</a>
 							</s:if>
+							
 							<s:if test="@com.airwxtx.authority.entity.AuthorityNumber@CHARGE in #userAuthority">
 								&nbsp;/&nbsp;<a class="js-charge" href="/CRM/card/cardChargeAction?card.cardId=<s:property value='cardId' />&money=">充值</a>
 							</s:if>

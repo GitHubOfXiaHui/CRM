@@ -30,6 +30,8 @@ public class ClientActionImpl extends ActionSupport implements ClientAction {
 	private Client client;
 	// 会员卡信息
 	private Card card;
+	// 是否设为主卡
+	private boolean mainCard;
 
 	// 查询条件（姓名，单位，手机号，卡号）
 	private String name;
@@ -124,8 +126,7 @@ public class ClientActionImpl extends ActionSupport implements ClientAction {
 	@Override
 	public String addCard() throws Exception {
 		// TODO Auto-generated method stub
-		card.setClient(client);
-		cardService.saveCard(card);
+		cardService.createCard(card, client, mainCard);
 		return CARD_DETAILS;
 	}
 
@@ -143,6 +144,14 @@ public class ClientActionImpl extends ActionSupport implements ClientAction {
 
 	public void setCard(Card card) {
 		this.card = card;
+	}
+
+	public boolean isMainCard() {
+		return mainCard;
+	}
+
+	public void setMainCard(boolean mainCard) {
+		this.mainCard = mainCard;
 	}
 
 	public String getName() {

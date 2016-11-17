@@ -3,6 +3,7 @@ package com.airwxtx.card.service;
 import java.util.List;
 
 import com.airwxtx.card.entity.Card;
+import com.airwxtx.client.entity.Client;
 import com.airwxtx.recode.entity.Recode;
 
 public interface CardService {
@@ -34,13 +35,6 @@ public interface CardService {
 	 * @return
 	 */
 	public Card loadCard(Integer cardId);
-
-	/**
-	 * 创建会员卡
-	 * 
-	 * @param card
-	 */
-	public void saveCard(Card card);
 
 	/**
 	 * 判断该用户是否具有冻结权限
@@ -80,5 +74,14 @@ public interface CardService {
 	 * @param recode
 	 */
 	public void pay(Card card, Recode recode);
+
+	/**
+	 * 创建会员卡
+	 * 
+	 * @param card
+	 * @param client
+	 * @param mainCard
+	 */
+	public void createCard(Card card, Client client, boolean mainCard);
 
 }

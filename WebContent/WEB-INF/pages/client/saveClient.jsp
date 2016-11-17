@@ -146,6 +146,15 @@ $(function(){
 						</div>
 					</div>
 					
+					<div class="form-group">
+						<label class="control-label col-md-2" for=comment>备注：</label>
+						<div class="col-md-10">
+							<textarea class="form-control" id="comment" name="client.comment" rows="5">
+								<s:property value="client.comment" />
+							</textarea>
+						</div>
+					</div>
+					
 				 	<div id="freqs" class="form-group">
 				    	<label class="control-label col-md-2" for="freqs">常旅客：</label>
 					    <div class="col-md-9">

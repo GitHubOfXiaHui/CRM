@@ -26,6 +26,7 @@
 		<property name="preferSeat" column="座位喜好" />
 		<property name="recommend" column="推荐客户来源" />
 		<property name="like" column="特别喜好" />
+		<property name="comment" column="备注" />
 		<list name="frequentFlyers" table="常旅客表" lazy="false">
 			<key column="会员ID" not-null="true" />
 			<list-index column="常旅客编号" />
@@ -33,6 +34,8 @@
 		</list>
 
 		<!-- 映射关联属性 -->
+		<many-to-one unique="true" name="mainCard" column="主卡"
+			class="com.airwxtx.card.entity.Card" lazy="false" />
 		<set name="cards" inverse="true" lazy="false">
 			<key column="会员" />
 			<one-to-many class="com.airwxtx.card.entity.Card" />

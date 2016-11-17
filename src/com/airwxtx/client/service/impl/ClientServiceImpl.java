@@ -63,7 +63,7 @@ public class ClientServiceImpl implements ClientService {
 		// TODO Auto-generated method stub
 		List<Client> clients = clientDao.loadAll();
 		List<String[]> table = new ArrayList<>();
-		table.add(new String[] { "单位", "职位", "中文名", "英文名", "手机号", "身份证", "地址", "护照", "护照有效期", "通行证", "通行证有效期", "推荐客户来源",
+		table.add(new String[] { "单位", "职位", "英文名", "中文名", "身份证", "手机号", "地址", "护照", "护照有效期", "通行证", "通行证有效期", "推荐客户来源",
 				"座位喜好", "特别喜好", "常旅客" });
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 		for (Client client : clients) {
@@ -76,11 +76,11 @@ public class ClientServiceImpl implements ClientService {
 				freqs.append(freq);
 				first = false;
 			}
-			table.add(new String[] { client.getCompany(), client.getTitle(), client.getClientName(),
-					client.getClientEnglishName(), client.getMobilePhoneNumber(), client.getIdNumber(),
-					client.getAddress(), client.getPassportNumber(), sdf.format(client.getPassportValidTime()),
-					client.getAccessNumber(), sdf.format(client.getAccessValidTime()), client.getRecommend(),
-					client.getPreferSeat(), client.getLike(), freqs.toString() });
+			table.add(new String[] { client.getCompany(), client.getTitle(), client.getClientEnglishName(),
+					client.getClientName(), client.getIdNumber(), client.getMobilePhoneNumber(), client.getAddress(),
+					client.getPassportNumber(), sdf.format(client.getPassportValidTime()), client.getAccessNumber(),
+					sdf.format(client.getAccessValidTime()), client.getRecommend(), client.getPreferSeat(),
+					client.getLike(), freqs.toString() });
 		}
 		ExportExcelUtil.xlsx(out, table);
 	}

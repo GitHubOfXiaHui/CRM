@@ -6,16 +6,21 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.airwxtx.authority.entity.AuthorityNumber;
 import com.airwxtx.card.dao.CardDao;
 import com.airwxtx.recode.dao.RecodeDao;
 import com.airwxtx.recode.entity.Recode;
 import com.airwxtx.recode.service.RecodeService;
+import com.airwxtx.utils.Constants;
 import com.airwxtx.utils.ExportExcelUtil;
+import com.opensymphony.xwork2.ActionContext;
 
 @Service
 public class RecodeServiceImpl implements RecodeService {
@@ -44,6 +49,22 @@ public class RecodeServiceImpl implements RecodeService {
 		return recodeDao.loadRecode(recodeId);
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	@Transactional(readOnly = true)
+	public boolean canDeleteRecode(Recode recode, String username) {
+		// TODO Auto-generated method stub
+		Set<Long> userAuthority = ((Map<String, Set<Long>>) ActionContext.getContext().getApplication()
+				.get("authority")).get(username);
+		if (userAuthority.contains(AuthorityNumber.DELETE_RECORD_UNLIMITED)) {
+			return true;
+		} else if (userAuthority.contains(AuthorityNumber.DELETE_RECORD_LIMITED)) {
+			recode = recodeDao.loadRecode(recode.getRecodeId());
+			return System.currentTimeMillis() - recode.getBookingDate().getTime() < Constants.DELETE_RECORD_UPPER_LIMIT;
+		}
+		return false;
+	}
+
 	@Override
 	@Transactional
 	public void deleteRecode(Recode recode) {
@@ -59,16 +80,12 @@ public class RecodeServiceImpl implements RecodeService {
 	public void exportXlsx(OutputStream out) throws IOException {
 		List<Recode> recodes = recodeDao.loadAllRecodes();
 		List<String[]> table = new ArrayList<>();
-		table.add(
-				new String[] { "航班号", "行程", "航班日期", "订票日期", "消费金额（元）", "备注", "会员单位", "会员中文名", "会员英文名", "会员卡号", "操作员" });
+		table.add(new String[] { "航班号", "行程", "航班日期", "订票日期", "消费金额（元）", "备注" });
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 		DecimalFormat df = new DecimalFormat("#,##0.00");
 		for (Recode recode : recodes) {
 			table.add(new String[] { recode.getFltNo(), recode.getRoute(), sdf.format(recode.getFlightDate()),
-					sdf.format(recode.getBookingDate()), df.format(recode.getConsumption()), recode.getComment(),
-					recode.getCard().getClient().getCompany(), recode.getCard().getClient().getClientName(),
-					recode.getCard().getClient().getClientEnglishName(), recode.getCard().getCardNo(),
-					recode.getUser().getUsername() });
+					sdf.format(recode.getBookingDate()), df.format(recode.getConsumption()), recode.getComment() });
 		}
 		ExportExcelUtil.xlsx(out, table);
 	}

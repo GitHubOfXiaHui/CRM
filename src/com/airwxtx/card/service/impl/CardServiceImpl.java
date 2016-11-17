@@ -13,6 +13,7 @@ import com.airwxtx.card.dao.CardDao;
 import com.airwxtx.card.entity.Card;
 import com.airwxtx.card.entity.CardStatus;
 import com.airwxtx.card.service.CardService;
+import com.airwxtx.client.entity.Client;
 import com.airwxtx.recode.dao.RecodeDao;
 import com.airwxtx.recode.entity.Recode;
 import com.airwxtx.user.dao.UserDao;
@@ -28,7 +29,7 @@ public class CardServiceImpl implements CardService {
 
 	@Autowired
 	private UserDao userDao;
-	
+
 	@Autowired
 	private RecodeDao recodeDao;
 
@@ -55,9 +56,14 @@ public class CardServiceImpl implements CardService {
 
 	@Override
 	@Transactional
-	public void saveCard(Card card) {
+	public void createCard(Card card, Client client, boolean mainCard) {
 		// TODO Auto-generated method stub
-		cardDao.saveCard(card);
+		card.setClient(client);
+		Integer cardId = cardDao.saveCard(card);
+		if (mainCard) {
+			card = cardDao.loadCard(cardId);
+			client.setMainCard(card);
+		}
 	}
 
 	@SuppressWarnings("unchecked")
@@ -71,7 +77,7 @@ public class CardServiceImpl implements CardService {
 			return true;
 		} else if (userAuthority.contains(AuthorityNumber.FREEZE_CARD_LIMITED)) {
 			int freezeCount = userDao.findUserFreezeCount(username);
-			return freezeCount < Constants.FREEZE_UPPER_LIMIT;
+			return freezeCount < Constants.FREEZE_CARD_UPPER_LIMIT;
 		}
 		return false;
 	}

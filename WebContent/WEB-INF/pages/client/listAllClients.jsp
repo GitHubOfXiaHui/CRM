@@ -51,10 +51,11 @@
 			<tr>
 				<th class="text-center">#</th>
 				<th class="text-center">单位</th>
-				<th class="text-center">中文名</th>
 				<th class="text-center">英文名</th>
-				<th class="text-center">手机号</th>
+				<th class="text-center">中文名</th>
 				<th class="text-center">身份证</th>
+				<th class="text-center">手机号</th>
+				<th class="text-center">主卡</th>
 				<th class="text-center">操作</th>
 			</tr>
 		</thead>
@@ -63,10 +64,11 @@
 			<tr>
 				<td><s:property value="#i.index+1" /></td>
 				<td><s:property value="company" /></td>
-				<td><s:property value="clientName" /></td>
 				<td><s:property value="clientEnglishName" /></td>
-				<td><s:property value="mobilePhoneNumber" /></td>
+				<td><s:property value="clientName" /></td>
 				<td><s:property value="idNumber" /></td>
+				<td><s:property value="mobilePhoneNumber" /></td>
+				<td><s:property value="mainCard.cardNo" /></td>
 				<td>
 					<a href="/CRM/client/showClientDetailsAction?client.clientId=<s:property value='clientId' />" target="_blank">详情</a>
 					<s:if test="@com.airwxtx.authority.entity.AuthorityNumber@UPDATE_CLIENT in #userAuthority">

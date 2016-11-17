@@ -50,7 +50,7 @@
 					</td>
 					<td>
 						<a href="/CRM/recode/detailAction?recode.recodeId=<s:property value='recodeId' />" target="_blank">详情</a>
-						<s:if test="@com.airwxtx.authority.entity.AuthorityNumber@DELETE_RECORD in #userAuthority">
+						<s:if test="(@com.airwxtx.authority.entity.AuthorityNumber@DELETE_RECORD_UNLIMITED in #userAuthority) || (@com.airwxtx.authority.entity.AuthorityNumber@DELETE_RECORD_LIMITED in #userAuthority)">
 							&nbsp;/&nbsp;<a class="js-delete" href="/CRM/recode/deleteAction?recode.recodeId=<s:property value='recodeId' />">删除</a>
 						</s:if>
 					</td>

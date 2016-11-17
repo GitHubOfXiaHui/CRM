@@ -47,7 +47,7 @@ public interface CardDao {
 	 * 
 	 * @param card
 	 */
-	public void saveCard(Card card);
+	public Integer saveCard(Card card);
 
 	/**
 	 * ╪сть

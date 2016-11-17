@@ -20,7 +20,7 @@ public class Recode {
 	// 订票日期
 	private Date bookingDate = new Date();
 	// 消费金额
-	private Double consumption;
+	private double consumption = 0.0;
 	// 备注
 	private String comment;
 	
@@ -70,11 +70,11 @@ public class Recode {
 		this.bookingDate = bookingDate;
 	}
 	
-	public Double getConsumption() {
+	public double getConsumption() {
 		return consumption;
 	}
 	
-	public void setConsumption(Double consumption) {
+	public void setConsumption(double consumption) {
 		this.consumption = consumption;
 	}
 	

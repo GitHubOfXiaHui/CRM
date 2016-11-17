@@ -11,7 +11,7 @@ public class RefreshFreeze {
 	private UserService userService;
 
 	/**
-	 * 每晚12点刷新冻结权限
+	 * 每天6点刷新冻结权限
 	 * 
 	 * @throws Exception
 	 */

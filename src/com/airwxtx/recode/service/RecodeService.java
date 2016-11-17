@@ -50,4 +50,13 @@ public interface RecodeService {
 	 */
 	public void exportXlsx(OutputStream out) throws IOException;
 
+	/**
+	 * 判断能否删除消费记录
+	 * 
+	 * @param recode
+	 * @param username
+	 * @return
+	 */
+	public boolean canDeleteRecode(Recode recode, String username);
+
 }

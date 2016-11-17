@@ -40,10 +40,14 @@ public class Client {
 	private String recommend;
 	// 特别喜好
 	private String like;
+	// 备注
+	private String comment;
 	// 常旅客列表
 	private List<String> frequentFlyers;
 	
 	/* 关联属性 */
+	// 主卡
+	private Card mainCard;
 	// 会员卡
 	private Set<Card> cards;
 
@@ -167,12 +171,28 @@ public class Client {
 		this.like = like;
 	}
 
+	public String getComment() {
+		return comment;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
+
 	public List<String> getFrequentFlyers() {
 		return frequentFlyers;
 	}
 
 	public void setFrequentFlyers(List<String> frequentFlyers) {
 		this.frequentFlyers = frequentFlyers;
+	}
+
+	public Card getMainCard() {
+		return mainCard;
+	}
+
+	public void setMainCard(Card mainCard) {
+		this.mainCard = mainCard;
 	}
 
 	public Set<Card> getCards() {

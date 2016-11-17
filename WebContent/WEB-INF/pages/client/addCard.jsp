@@ -79,6 +79,14 @@
 						</div>
 					</div>
 
+					<div class="form-group"> 
+					    <div class="col-sm-offset-2 col-sm-10">
+					        <div class="checkbox">
+					        	<label><input type="checkbox" name="mainCard" value="true"> 设为主卡</label>
+					        </div>
+					    </div>
+					</div>
+
 					<div class="form-group">
 						<div class="col-sm-offset-2 col-sm-10">
 							<button type="submit" class="btn btn-success">添加</button>

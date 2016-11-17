@@ -32,53 +32,53 @@
 				<div class="panel-heading">会员信息</div>
 				<div class="panel-body">
 					<div class="row">
-						<div class="col-md-2 text-right"><strong>单位：</strong></div>
+						<div class="col-md-2"><strong>单位：</strong></div>
 						<div class="col-md-4"><s:property value="client.company" /></div>
-						<div class="col-md-2 text-right"><strong>职位：</strong></div>
+						<div class="col-md-2"><strong>职位：</strong></div>
 						<div class="col-md-4"><s:property value="client.title" /></div>
 					</div>
 					<div class="row">
-						<div class="col-md-2 text-right"><strong>中文名：</strong></div>
+						<div class="col-md-2"><strong>中文名：</strong></div>
 						<div class="col-md-4"><s:property value="client.clientName" /></div>
-						<div class="col-md-2 text-right"><strong>英文名：</strong></div>
+						<div class="col-md-2"><strong>英文名：</strong></div>
 						<div class="col-md-4"><s:property value="client.clientEnglishName" /></div>
 					</div>
 					<div class="row">
-						<div class="col-md-2 text-right"><strong>手机号：</strong></div>
+						<div class="col-md-2"><strong>手机号：</strong></div>
 						<div class="col-md-4"><s:property value="client.mobilePhoneNumber" /></div>
-						<div class="col-md-2 text-right"><strong>身份证：</strong></div>
+						<div class="col-md-2"><strong>身份证：</strong></div>
 						<div class="col-md-4"><s:property value="client.idNumber" /></div>
 					</div>
 					<div class="row">
-						<div class="col-md-2 text-right"><strong>地址：</strong></div>
+						<div class="col-md-2"><strong>地址：</strong></div>
 						<div class="col-md-10"><s:property value="client.address" /></div>
 					</div>
 					<div class="row">
-						<div class="col-md-2 text-right"><strong>护照：</strong></div>
+						<div class="col-md-2"><strong>护照：</strong></div>
 						<div class="col-md-4"><s:property value="client.passportNumber" /></div>
-						<div class="col-md-2 text-right"><strong>护照有效期：</strong></div>
+						<div class="col-md-2"><strong>护照有效期：</strong></div>
 						<div class="col-md-4"><s:date name="client.passportValidTime" format="yyyy-MM-dd" /></div>
 					</div>
 					<div class="row">
-						<div class="col-md-2 text-right"><strong>通行证：</strong></div>
+						<div class="col-md-2"><strong>通行证：</strong></div>
 						<div class="col-md-4"><s:property value="client.accessNumber" /></div>
-						<div class="col-md-2 text-right"><strong>通行证有效期：</strong></div>
+						<div class="col-md-2"><strong>通行证有效期：</strong></div>
 						<div class="col-md-4"><s:date name="client.accessValidTime" format="yyyy-MM-dd" /></div>
 					</div>
 					<div class="row">
-						<div class="col-md-2 text-right"><strong>推荐客户来源：</strong></div>
+						<div class="col-md-2"><strong>推荐客户来源：</strong></div>
 						<div class="col-md-10"><s:property value="client.recommend" /></div>
 					</div>
 					<div class="row">
-						<div class="col-md-2 text-right"><strong>座位喜好：</strong></div>
+						<div class="col-md-2"><strong>座位喜好：</strong></div>
 						<div class="col-md-10"><s:property value="client.preferSeat" /></div>
 					</div>
 					<div class="row">
-						<div class="col-md-2 text-right"><strong>特别喜好：</strong></div>
+						<div class="col-md-2"><strong>特别喜好：</strong></div>
 						<div class="col-md-10"><s:property value="client.like" /></div>
 					</div>
 					<div class="row">
-						<div class="col-md-2 text-right"><strong>常旅客：</strong></div>
+						<div class="col-md-2"><strong>常旅客：</strong></div>
 						<div class="col-md-10">
 							<s:iterator value="client.frequentFlyers" status="st">
 								<s:if test="#st.first">
@@ -89,6 +89,10 @@
 								</s:else>
 							</s:iterator>
 						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-2"><strong>备注：</strong></div>
+						<div class="col-md-10"><s:property value="client.comment" /></div>
 					</div>
 				</div>
 			</div>
